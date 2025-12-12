@@ -1,0 +1,17 @@
+{
+  "cliente1": {
+    "dpi": "2933870952212",
+    "email": "cliente1@test.com",
+    "numeroCelular": "55551234",
+    "nit": "1122",
+    "fecha": "05/11/1990",
+    "Alias": "Mynor"
+  },
+  "cliente2": {
+    "dpi": "1234567890123",
+    "email": "cliente2@test.com",
+    "numeroCelular": "55559876",
+    "nit": "1234567-8",
+    "fecha": "22/07/1985"
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "correosInvalidos": [
+    {
+      "email": "correo_sin_arroba.com",
+      "descripcion": "sin arroba"
+    },
+    {
+      "email": "correo@.com",
+      "descripcion": "sin dominio antes del punto"
+    },
+    {
+      "email": "@dominio.com",
+      "descripcion": "sin usuario"
+    },
+    {
+      "email": "correo@dominio",
+      "descripcion": "sin extension"
+    },
+    {
+      "email": "correo espacios@dominio.com",
+      "descripcion": "con espacios"
+    },
+    {
+      "email": "correo..doble@dominio.com",
+      "descripcion": "puntos consecutivos"
+    },
+    {
+      "email": "correo@dominio..com",
+      "descripcion": "puntos consecutivos en dominio"
+    },
+    {
+      "email": "correo@",
+      "descripcion": "sin dominio"
+    },
+    {
+      "email": "correo@dominio.",
+      "descripcion": "sin extension despues del punto"
+    }
+  ],
+  "correosValidos": [
+    {
+      "email": "usuario@dominio.com",
+      "descripcion": "formato estandar"
+    },
+    {
+      "email": "usuario.nombre@dominio.com",
+      "descripcion": "con punto en usuario"
+    },
+    {
+      "email": "usuario+etiqueta@dominio.com",
+      "descripcion": "con mas en usuario"
+    },
+    {
+      "email": "usuario_nombre@dominio.com",
+      "descripcion": "con guion bajo"
+    },
+    {
+      "email": "usuario123@dominio.com",
+      "descripcion": "con numeros"
+    },
+    {
+      "email": "usuario@subdominio.dominio.com",
+      "descripcion": "con subdominio"
+    },
+    {
+      "email": "u@dominio.com",
+      "descripcion": "usuario de una letra"
+    },
+    {
+      "email": "usuario-nombre@dominio.com",
+      "descripcion": "con guion"
+    }
+  ]
+}
