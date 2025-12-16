@@ -1,14 +1,14 @@
 # =============================
 # Set BrowserStack Credentials
 # =============================
-userName: mynorestuardoest_bDUtoQ
-accessKey: gBgP9kt8xMxbUJtuth3P
+userName: 
+accessKey: 
 
 # ======================
 # BrowserStack Reporting
 # ======================
-projectName: TDCGT
-buildName: '[QA] Automatitation - TCGT'
+projectName: 'Your Project Name'
+buildName: 'Your Build Name'
 # `buildIdentifier` is a unique id to differentiate every execution that gets appended to
 # buildName. Choose your buildIdentifier format from the available expressions:
 # ${BUILD_NUMBER} (Default): Generates an incremental counter with every execution
