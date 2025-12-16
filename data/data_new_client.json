@@ -3,9 +3,11 @@
     "dpi": "2933870952212",
     "email": "cliente1@test.com",
     "numeroCelular": "55551234",
-    "nit": "1122",
+    "nit": "112288758",
     "fecha": "05/11/1990",
-    "Alias": "Mynor"
+    "Alias": "Mynor",
+    "IngresoMensual": "3500",
+    "GastoMensual": "1200"
   },
   "cliente2": {
     "dpi": "1234567890123",
