@@ -21,33 +21,39 @@ export default defineConfig({
   use: {
     baseURL: process.env.BASE_URL || 'https://qa-tarjetadigital.incubadorabi.com',
     headless: false,
-    screenshot: 'only-on-failure', // Screenshots manuales en cada test.step()
-    video: 'off', // Deshabilitado por certificado SSL
-    trace: 'retain-on-failure', // 'on' | 'off' | 'retain-on-failure' | 'on-first-retry'
+    screenshot: 'only-on-failure',
+    video: 'off',
+    trace: 'retain-on-failure',
     viewport: null,
 
-    // ✅ Enviar HTTP Basic solo si hay credenciales válidas
     httpCredentials:
       process.env.BASIC_AUTH_USER && process.env.BASIC_AUTH_PASS
         ? {
-          username: process.env.BASIC_AUTH_USER,
-          password: process.env.BASIC_AUTH_PASS,
-        }
+            username: process.env.BASIC_AUTH_USER,
+            password: process.env.BASIC_AUTH_PASS,
+          }
         : undefined,
 
-    // QA suele tener TLS internos
     ignoreHTTPSErrors: true,
-
   },
 
   projects: [
     {
-      name: 'Google Chrome',
+      name: 'Chrome',
       use: {
         channel: 'chrome',
         viewport: null,
         launchOptions: {
-          args: ['--start-maximized']
+          args: ['--start-maximized'],
+        },
+      },
+    },
+    {
+      name: 'Firefox',
+      use: {
+        browserName: 'firefox',
+        launchOptions: {
+          args: ['--start-maximized'],
         },
       },
     },

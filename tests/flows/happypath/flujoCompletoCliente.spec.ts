@@ -119,7 +119,7 @@ test('flujo completo Cliente Existente', async ({ page, context }, testInfo) => 
       bestImagePath,
       apiRequestContext
     );
-    await onboarding.validarRedireccionFormulario();
+    await onboarding.irAFormularioOferta();
     const screenshot = await page.screenshot({ fullPage: true });
     await testInfo.attach('Onboarding biométrico completado', { body: screenshot, contentType: 'image/png' });
   });
