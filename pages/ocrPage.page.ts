@@ -25,8 +25,9 @@ export class ocrPage {
     const backFile = fs.readFileSync(backPath);
 
     // 3. Consumir el endpoint OCR con los nombres de campo correctos
+    const ocrApiUrl = process.env.OCR_API_URL || 'https://d1a0xvknet1ite.cloudfront.net/api/customer/v1/biometric/ocr';
     const response = await requestContext.post(
-      'https://d1a0xvknet1ite.cloudfront.net/api/customer/v1/biometric/ocr',
+      ocrApiUrl,
       {
         headers: {
           'recaptcha-token': ''
@@ -46,6 +47,7 @@ export class ocrPage {
       sessionStorage.setItem('ocr-done', '"true"');
     });
     // Redireccionar a la URL indicada
-    await this.page.goto('https://qa-tarjetadigital.incubadorabi.com/cliente-digital/rostro-autenticacion');
+    const redirectUrl = process.env.OCR_REDIRECT_URL || 'https://qa-tarjetadigital.incubadorabi.com/cliente-digital/rostro-autenticacion';
+    await this.page.goto(redirectUrl);
   }
 }

@@ -1,3 +1,6 @@
 # Ignorar archivos de configuración de entorno
 .env
 *.env
+
+# Ignorar configuración de BrowserStack con credenciales
+browserstack.yml

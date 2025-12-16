@@ -11,13 +11,19 @@ export default defineConfig({
     timeout: 30_000,
   },
   retries: 0,
-  reporter: [['html', { open: 'never' }], ['line']],
+  reporter: [
+    ['html', { open: 'never', outputFolder: 'playwright-report' }],
+    ['json', { outputFile: 'test-results/results.json' }],
+    ['junit', { outputFile: 'test-results/results.xml' }],
+    ['list']
+  ],
 
   use: {
     baseURL: process.env.BASE_URL || 'https://qa-tarjetadigital.incubadorabi.com',
     headless: false,
-    screenshot: 'only-on-failure',
-    video: 'off',
+    screenshot: 'on', // 'on' | 'off' | 'only-on-failure'
+    video: 'retain-on-failure', // 'on' | 'off' | 'retain-on-failure' | 'on-first-retry'
+    trace: 'retain-on-failure', // 'on' | 'off' | 'retain-on-failure' | 'on-first-retry'
     viewport: null,
 
     // ✅ Enviar HTTP Basic solo si hay credenciales válidas
