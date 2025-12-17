@@ -15,6 +15,7 @@ import { DatosEconomicosPage } from '../../../pages/datosEconomicos.page';
 import { DatosEconomicosOtrosIngresosPage } from '../../../pages/otrosIngresos.page';
 import { DatosEnviosPage } from '../../../pages/datosDeEnvio.page';
 import { EncuestaSatisfaccionPage } from '../../../pages/encuestaSatisfaccion.page';
+import { FooterComponent } from '../../../components/footer.component';
 
 // Configuración de Jira desde variables de entorno
 const JIRA_TEST_RUN_ID = process.env.JIRA_TEST_RUN_ID || '';
@@ -54,13 +55,14 @@ test('flujo completo Cliente Existente', async ({ page, context }, testInfo) => 
   const datosEconomicosOtrosIngresosPage = new DatosEconomicosOtrosIngresosPage(page);
   const datosEnviosPage = new DatosEnviosPage(page);
   const encuestaSatisfaccionPage = new EncuestaSatisfaccionPage(page);
+  const footer = new FooterComponent(page, context);
 
   // --- Flujo de Cliente Existente ---
 
   await test.step('1. Navegar a página de inicio', async () => {
     await home.goto();
-    await page.waitForTimeout(2000);
     await home.validarPortal();
+    await home.esperarHeroCargado();
     const screenshot = await page.screenshot({ fullPage: true });
     await testInfo.attach('Página de inicio', { body: screenshot, contentType: 'image/png' });
   });
@@ -78,6 +80,7 @@ test('flujo completo Cliente Existente', async ({ page, context }, testInfo) => 
     await inicio.ingresarDPI(datos.cliente1.dpi);
     await inicio.clicContinuar();
     await inicio.validarRedireccionFormulario();
+    await footer.validateVisible();
     const screenshot = await page.screenshot({ fullPage: true });
     await testInfo.attach('DPI ingresado', { body: screenshot, contentType: 'image/png' });
   });
@@ -86,6 +89,7 @@ test('flujo completo Cliente Existente', async ({ page, context }, testInfo) => 
     await seleccion.seleccionarMC();
     await seleccion.clickSiguiente();
     await seleccion.validarRedireccionFormulario();
+    await footer.validateVisible();
     const screenshot = await page.screenshot({ fullPage: true });
     await testInfo.attach('Tipo de tarjeta seleccionado', { body: screenshot, contentType: 'image/png' });
   });
@@ -100,6 +104,7 @@ test('flujo completo Cliente Existente', async ({ page, context }, testInfo) => 
     });
     await datosGenerales.clickContinuar();
     await datosGenerales.validarRedireccionFormulario();
+    await footer.validateVisible();
     const screenshot = await page.screenshot({ fullPage: true });
     await testInfo.attach('Datos generales completados', { body: screenshot, contentType: 'image/png' });
   });
@@ -107,6 +112,7 @@ test('flujo completo Cliente Existente', async ({ page, context }, testInfo) => 
   await test.step('6. Iniciar escaneo biométrico', async () => {
     await instruccionOnboarding.clickIniciarEscaneo();
     await instruccionOnboarding.validarRedireccionFormulario();
+    await footer.validateVisible();
     const screenshot = await page.screenshot({ fullPage: true });
     await testInfo.attach('Escaneo biométrico iniciado', { body: screenshot, contentType: 'image/png' });
   });
@@ -120,6 +126,7 @@ test('flujo completo Cliente Existente', async ({ page, context }, testInfo) => 
       apiRequestContext
     );
     await onboarding.irAFormularioOferta();
+    await footer.validateVisible();
     const screenshot = await page.screenshot({ fullPage: true });
     await testInfo.attach('Onboarding biométrico completado', { body: screenshot, contentType: 'image/png' });
   });
@@ -128,6 +135,7 @@ test('flujo completo Cliente Existente', async ({ page, context }, testInfo) => 
     await aceptarOfertaPage.aceptarTerminos();
     await aceptarOfertaPage.clickAceptarOferta();
     await aceptarOfertaPage.validarRedireccionFormulario();
+    await footer.validateVisible();
     const screenshot = await page.screenshot({ fullPage: true });
     await testInfo.attach('Oferta aceptada', { body: screenshot, contentType: 'image/png' });
   });
@@ -136,6 +144,7 @@ test('flujo completo Cliente Existente', async ({ page, context }, testInfo) => 
     await personalizacionTcPage.llenarFormulario({ alias: datos.cliente1.Alias });
     await personalizacionTcPage.clickContinuar();
     await personalizacionTcPage.validarRedireccionFormulario();
+    await footer.validateVisible();
     const screenshot = await page.screenshot({ fullPage: true });
     await testInfo.attach('Tarjeta personalizada', { body: screenshot, contentType: 'image/png' });
   });
@@ -149,6 +158,7 @@ test('flujo completo Cliente Existente', async ({ page, context }, testInfo) => 
     await datosPersonalesPage.ingresarZona('1');
     await datosPersonalesPage.ingresarDireccion('Ciudad de Guatemala');
     await datosPersonalesPage.clickGuardarContinuar();
+    await footer.validateVisible();
     const screenshot = await page.screenshot({ fullPage: true });
     await testInfo.attach('Datos personales completados', { body: screenshot, contentType: 'image/png' });
   });
@@ -158,6 +168,7 @@ test('flujo completo Cliente Existente', async ({ page, context }, testInfo) => 
     await datosEconomicosPage.gastosMensuales(datos.cliente1.GastoMensual);
     await datosEconomicosPage.seleccionarOtrosIngresos();
     await datosEconomicosPage.clickGuardarContinuar();
+    await footer.validateVisible();
     const screenshot = await page.screenshot({ fullPage: true });
     await testInfo.attach('Datos económicos completados', { body: screenshot, contentType: 'image/png' });
   });
@@ -165,12 +176,14 @@ test('flujo completo Cliente Existente', async ({ page, context }, testInfo) => 
   await test.step('12. Ingresar otros ingresos', async () => {
     await datosEconomicosOtrosIngresosPage.tipoDeFuenteOtros('Actividades profesionales');
     await datosEconomicosOtrosIngresosPage.clickGuardarOtrosIngresos();
+    await footer.validateVisible();
     const screenshot = await page.screenshot({ fullPage: true });
     await testInfo.attach('Otros ingresos completados', { body: screenshot, contentType: 'image/png' });
   });
 
   await test.step('13. Confirmar datos de envío', async () => {
     await datosEnviosPage.clickContinuarEnvio();
+    await footer.validateVisible();
     const screenshot = await page.screenshot({ fullPage: true });
     await testInfo.attach('Datos de envío confirmados', { body: screenshot, contentType: 'image/png' });
   });
@@ -178,6 +191,7 @@ test('flujo completo Cliente Existente', async ({ page, context }, testInfo) => 
   await test.step('14. Completar encuesta de satisfacción', async () => {
     await encuestaSatisfaccionPage.clickOmitirFinalizar();
     await page.waitForTimeout(2000);
+    await footer.validateVisible();
     const screenshot = await page.screenshot({ fullPage: true });
     await testInfo.attach('Encuesta completada', { body: screenshot, contentType: 'image/png' });
   });

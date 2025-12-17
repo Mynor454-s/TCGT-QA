@@ -17,6 +17,24 @@ export class HomePage {
     await expect(this.page).toHaveTitle(/Tarjeta/i);
   }
 
+  async esperarHeroCargado() {
+    const heroImage = this.page.locator('img[alt="home-principal"]');
+
+    // Asegura que está en el DOM y visible
+    await expect(heroImage).toBeVisible();
+
+    // Esperar a que la imagen termine de cargar
+    await heroImage.evaluate((img: HTMLImageElement) => {
+      if (!img.complete) {
+        return new Promise((resolve) => {
+          img.addEventListener('load', () => resolve(true));
+          img.addEventListener('error', () => resolve(false));
+        });
+      }
+      return img.complete;
+    });
+  }
+
 
 
   async empezarSolicitud() {
