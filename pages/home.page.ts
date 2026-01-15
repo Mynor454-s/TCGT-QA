@@ -9,7 +9,6 @@ export class HomePage {
   }
 
   async goto() {
-    // Si el 401 ocurre aquí, con httpCredentials ya no verás Unauthorized
     await this.page.goto('/cliente-digital/inicio');
   }
 
@@ -38,7 +37,7 @@ export class HomePage {
 
 
   async empezarSolicitud() {
-    await this.page.locator('#e2e_id_btn_empezarsol_header').click();
+    await this.page.locator('#e2e_id_btn_empezarsol1').click();
   }
 
   async validarRedireccionFormulario() {

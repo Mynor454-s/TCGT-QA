@@ -46,6 +46,8 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   const templateRawPath = 'assets/mynor/templateraw_1760545131.txt';
   const bestImageTokenizedPath = 'assets/mynor/imagetokenized_1760545130.txt';
   const bestImagePath = 'assets/mynor/facialcontent_1760545127.jpeg';
+  const ofertaUrl = process.env.OFFER_FORM_URL ||
+    'https://qa-tarjetadigital.incubadorabi.com/cliente-digital/oferta';
   
   // API Request Context con ignoreHTTPSErrors
   const apiRequestContext = await request.newContext({
@@ -78,7 +80,7 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   });
 
   await test.step('4. Seleccionar tipo de tarjeta', async () => {
-    await seleccionPage.seleccionarMC();
+    await seleccionPage.seleccionarTCJ();
     await seleccionPage.clickSiguiente();
     await seleccionPage.validarRedireccionFormulario();
     await footerComponent.validateVisible();
@@ -112,9 +114,9 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
       templateRawPath,
       bestImageTokenizedPath,
       bestImagePath,
-      apiRequestContext
+      apiRequestContext,
     );
-    await onboardingPage.irAFormularioOferta();
+    await onboardingPage.irAFormularioOferta(ofertaUrl);
     await footerComponent.validateVisible();
     await ScreenshotHelper.takeAndAttach(page, testInfo, 'Onboarding biométrico completado');
   });
@@ -127,6 +129,7 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
     await ScreenshotHelper.takeAndAttach(page, testInfo, 'Oferta aceptada');
   });
 
+  await page.pause();
   await test.step('9. Personalizar tarjeta', async () => {
     await personalizacionTcPage.llenarFormulario({ alias: datos.cliente1.Alias });
     await personalizacionTcPage.clickContinuar();

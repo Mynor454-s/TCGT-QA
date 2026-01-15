@@ -11,8 +11,12 @@ export class seleccionTc {
         await this.page.getByText("Visa").click();
     }
 
-        async seleccionarMC() {
+    async seleccionarMC() {
         await this.page.getByText("MasterCard").click();
+    }
+
+    async seleccionarTCJ() {
+        await this.page.getByText("Mastercard Liv").click();
     }
 
     async clickSiguiente() {

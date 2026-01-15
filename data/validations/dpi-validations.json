@@ -1,0 +1,76 @@
+{
+  "description": "Casos de prueba para validaciones del campo DPI",
+  "field": "DPI",
+  "page": "inicio-flujo",
+  
+  "dpiCases": [
+    {
+      "name": "DPI vacío",
+      "testId": "DPI-VAL-001",
+      "input": "",
+      "expectedError": "Este campo es obligatorio.",
+      "errorTestId": "new-request-form-dpi-required-error",
+      "shouldFail": true,
+      "priority": "P0",
+      "notes": "Campo obligatorio - no debe permitir continuar"
+    },
+    {
+      "name": "DPI con menos de 13 dígitos",
+      "testId": "DPI-VAL-002",
+      "input": "1234",
+      "expectedError": "El DPI no es válido.",
+      "errorTestId": "new-request-form-dpi-error",
+      "shouldFail": true,
+      "priority": "P0",
+      "notes": "Validación de longitud mínima"
+    },
+    {
+      "name": "DPI con más de 13 dígitos",
+      "testId": "DPI-VAL-003",
+      "input": "12345678901234",
+      "expectedError": "El DPI no es válido.",
+      "errorTestId": "new-request-form-dpi-error",
+      "shouldFail": true,
+      "priority": "P1",
+      "notes": "Validación de longitud máxima"
+    },
+    {
+      "name": "DPI con letras",
+      "testId": "DPI-VAL-004",
+      "input": "abcdefghijklm",
+      "expectedError": "Este campo es obligatorio.",
+      "errorTestId": "new-request-form-dpi-required-error",
+      "shouldFail": true,
+      "priority": "P0",
+      "notes": "Validación de tipo numérico"
+    },
+    {
+      "name": "DPI con caracteres especiales",
+      "testId": "DPI-VAL-005",
+      "input": "1234-5678-901",
+      "expectedError": "El DPI no es válido.",
+      "errorTestId": "new-request-form-dpi-error",
+      "shouldFail": true,
+      "priority": "P1",
+      "notes": "No debe aceptar guiones u otros caracteres"
+    },
+    {
+      "name": "DPI con espacios",
+      "testId": "DPI-VAL-006",
+      "input": "1234 5678 9010",
+      "expectedError": "El DPI no es válido.",
+      "errorTestId": "new-request-form-dpi-error",
+      "shouldFail": true,
+      "priority": "P2",
+      "notes": "No debe aceptar espacios"
+    },
+    {
+      "name": "DPI válido - 13 dígitos",
+      "testId": "DPI-VAL-007",
+      "input": "2933870952212",
+      "shouldFail": false,
+      "priority": "P0",
+      "notes": "Caso de éxito - debe permitir continuar"
+    }
+  ]
+}

@@ -29,8 +29,12 @@ export class OnboardingPage {
     const bestImageTokenized = fs.readFileSync(bestImageTokenizedPath);
     const bestImage = fs.readFileSync(bestImagePath);
 
+    // URL dinámica según el ambiente (QA o STG)
+    const onboardingUrl = process.env.API_ONBOARDING_URL || 
+      'https://api-qa-tarjetadigital.incubadorabi.com/api/customer/v1/biometric/onboarding';
+
     const response = await requestContext.post(
-      'https://d1a0xvknet1ite.cloudfront.net/api/customer/v1/biometric/onboarding',
+      onboardingUrl,
       {
         headers: { 'recaptcha-token': '' },
         multipart: {
@@ -86,11 +90,12 @@ export class OnboardingPage {
     }
   }
 
-async irAFormularioOferta() {
-  await this.page.evaluate(() => {
-    window.location.href =
-      'https://qa-tarjetadigital.incubadorabi.com/cliente-digital/oferta';
-  });
+async irAFormularioOferta(ofertaUrl: string) {
+  const ofertaUrlFinal = ofertaUrl ||
+    'https://qa-tarjetadigital.incubadorabi.com/cliente-digital/oferta';
+  await this.page.evaluate((url) => {
+    window.location.href = url;
+  }, ofertaUrlFinal);
 
   // 🔑 sincronización REAL (no evento de navegador)
   await this.page.waitForURL(/cliente-digital\/oferta/, {

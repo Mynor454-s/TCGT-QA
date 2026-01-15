@@ -170,7 +170,6 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
     await ScreenshotHelper.takeAndAttach(page, testInfo, 'Datos de envío confirmados');
   });
 
-  await page.pause();
   await test.step('14. Completar encuesta de satisfacción', async () => {
     await encuestaSatisfaccionPage.clickOmitirFinalizar();
     await page.waitForTimeout(2000);

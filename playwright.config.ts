@@ -1,8 +1,14 @@
 // playwright.config.ts
 import { defineConfig, devices } from '@playwright/test';
 import dotenv from 'dotenv';
+import path from 'path';
 
-dotenv.config();
+// Determinar qué archivo .env cargar según la variable ENV
+const environment = process.env.ENV || 'qa';
+const envFile = `.env.${environment}`;
+
+console.log(`🔧 Cargando configuración desde: ${envFile}`);
+dotenv.config({ path: path.resolve(process.cwd(), envFile) });
 
 export default defineConfig({
   testDir: './tests',
@@ -23,7 +29,8 @@ export default defineConfig({
     headless: false,
     screenshot: 'only-on-failure',
     video: 'off',
-    trace: 'retain-on-failure',
+    // BrowserStack iOS no soporta tracing
+    trace: process.env.BROWSERSTACK_USERNAME ? 'off' : 'retain-on-failure',
     viewport: null,
 
     httpCredentials:
@@ -34,7 +41,8 @@ export default defineConfig({
           }
         : undefined,
 
-    ignoreHTTPSErrors: true,
+    // BrowserStack mobile requiere ignoreHTTPSErrors: false
+    ignoreHTTPSErrors: process.env.BROWSERSTACK_USERNAME ? false : true,
   },
 
   projects: [
@@ -43,15 +51,6 @@ export default defineConfig({
       use: {
         channel: 'chrome',
         viewport: null,
-        launchOptions: {
-          args: ['--start-maximized'],
-        },
-      },
-    },
-    {
-      name: 'Firefox',
-      use: {
-        browserName: 'firefox',
         launchOptions: {
           args: ['--start-maximized'],
         },

@@ -1,19 +1,26 @@
 {
   "cliente1": {
+    "UsuarioB2C": "2933870952212",
+    "PasswordB2C": "23.Digital24.",
     "dpi": "2933870952212",
     "email": "cliente1@test.com",
     "numeroCelular": "55551234",
     "nit": "112288758",
     "fecha": "05/11/1990",
+    "fechaInicioTrabajo": "15/01/2020",
     "Alias": "Mynor",
     "IngresoMensual": "3500",
     "GastoMensual": "1200"
   },
   "cliente2": {
-    "dpi": "1234567890123",
-    "email": "cliente2@test.com",
-    "numeroCelular": "55559876",
-    "nit": "1234567-8",
-    "fecha": "22/07/1985"
+    "dpi": "3004818880101",
+    "email": "eestrada@bi.com.gt",
+    "numeroCelular": "55551234",
+    "nit": "107821567",
+    "fecha": "05/11/1990",
+    "fechaInicioTrabajo": "15/01/2020",
+    "Alias": "Mynor",
+    "IngresoMensual": "3500",
+    "GastoMensual": "1200"
   }
 }
