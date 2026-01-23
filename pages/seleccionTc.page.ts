@@ -8,15 +8,16 @@ export class seleccionTc {
     }
 
     async seleccionarVisa() {
-        await this.page.getByText("Visa").click();
+        await this.page.getByText("Visa", { exact: true }).click();
     }
 
     async seleccionarMC() {
-        await this.page.getByText("MasterCard").click();
+        // Usar exact: true para evitar seleccionar "Mastercard Liv"
+        await this.page.getByRole('button', { name: /^Mastercard card card$/ }).click();
     }
 
     async seleccionarTCJ() {
-        await this.page.getByText("Mastercard Liv").click();
+        await this.page.getByRole('button', { name: 'Mastercard Liv card card' }).click();
     }
 
     async clickSiguiente() {

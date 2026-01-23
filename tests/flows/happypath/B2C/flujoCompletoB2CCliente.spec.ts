@@ -41,15 +41,15 @@ test('flujo completo B2C Cliente @smoke @e2e @P0', async ({
   // --- Flujo de B2C (Business to Consumer) ---
 
   await test.step('1. Navegar a página de login B2C', async () => {
-    const loginPath = process.env.B2C_LOGIN_PATH || '/cliente-digital/negocios/login';
+    const loginPath = process.env.B2C_LOGIN_PATH || 'comercio/sitio/inicio-sesion';
     await page.goto(loginPath);
     await page.waitForLoadState('domcontentloaded');
     await ScreenshotHelper.takeAndAttach(page, testInfo, 'Página de login B2C');
   });
 
   await test.step('2. Ingresar credenciales y hacer login', async () => {
-    await homePageBusiness.IngresarUsuarioB2C(datos.cliente1.UsuarioB2C);
-    await homePageBusiness.IngresarPasswordB2C(datos.cliente1.PasswordB2C);
+    await homePageBusiness.IngresarUsuarioB2C(datos.Mynor.UsuarioB2C);
+    await homePageBusiness.IngresarPasswordB2C(datos.Mynor.PasswordB2C);
     await ScreenshotHelper.takeAndAttach(page, testInfo, 'Credenciales ingresadas');
     await homePageBusiness.ClicBotonIngresarB2C();
     await page.waitForTimeout(3000);
@@ -64,14 +64,14 @@ test('flujo completo B2C Cliente @smoke @e2e @P0', async ({
 
     await test.step('4. Empezar solicitud de tarjeta desde B2C', async () => {
     await empezarSolicitudBusinessPage.validarEmpezarSolicitudB2C();
-    await empezarSolicitudBusinessPage.ingresarDPI(datos.cliente2.dpi);
+    await empezarSolicitudBusinessPage.ingresarDPI(datos.Marcos.dpi);
     await empezarSolicitudBusinessPage.clickEmpezarSolicitudB2C();
     await ScreenshotHelper.takeAndAttach(page, testInfo, 'Solicitud de tarjeta iniciada desde B2C');
     });
 
     await test.step('5. Completar formulario de datos generales B2C', async () => {
     await formDatosGeneralesPage.validarFDG();
-    await formDatosGeneralesPage.llenadorFormulario(datos.cliente2);
+    await formDatosGeneralesPage.llenadorFormulario(datos.Marcos);
     await formDatosGeneralesPage.clickContinuarFDG();
     await ScreenshotHelper.takeAndAttach(page, testInfo, 'Formulario de datos generales B2C completado');
     });

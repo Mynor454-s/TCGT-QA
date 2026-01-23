@@ -1,26 +1,39 @@
 {
-  "cliente1": {
+  "Mynor": {
     "UsuarioB2C": "2933870952212",
-    "PasswordB2C": "23.Digital24.",
+    "PasswordB2C": "21.Digital24.",
     "dpi": "2933870952212",
     "email": "cliente1@test.com",
     "numeroCelular": "55551234",
     "nit": "112288758",
-    "fecha": "05/11/1990",
     "fechaInicioTrabajo": "15/01/2020",
     "Alias": "Mynor",
     "IngresoMensual": "3500",
-    "GastoMensual": "1200"
+    "GastoMensual": "1200",
+    "tipoTarjeta": "MC",
+    "assets": {
+      "templateRaw": "assets/mynor/templateraw_1760545131.txt",
+      "bestImageTokenized": "assets/mynor/imagetokenized_1760545130.txt",
+      "bestImage": "assets/mynor/facialcontent_1760545127.jpeg",
+      "urlVideo": "https://regional-shared-test.s3.us-east-1.amazonaws.com/gtm/individual/a0f4ffc5-4795-45a7-b9a8-48631b0550ee/passiveliveness/passivelivenessvideo_1764773558.mp4?response-content-disposition=inline&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEO7%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEaCXVzLWVhc3QtMSJGMEQCICKMqBcbodE98bYtNSX2FdqrQ1yxXiri5pjt8iMmhzlWAiBJhsGZPFsU%2B6%2BU4L%2FjCJAMzQp0WA5lEOjsLBoe6NkUUirKBAi3%2F%2F%2F%2F%2F%2F%2F%2F%2F%2F8BEAEaDDM2MjU3MTU4OTQyNyIM1BYMeL2cvSYJ8pW6Kp4EGRIzIQhqKqk7TgHvyoykDrSUx9k1B4IPCJ7uAYablo10LgortnDl%2FwaRcN1zFGMysKgVeKbKw2%2B98f%2BjIINuWGGOVtU5c6RjoRzt3rIGTWj%2FyMp%2F6Hf5iBekmMUxYyUhdlwzjYoSU0Nur8aOrear9ORd2VJxDs2Rm75TnZoW6ftnlAioOpl5t9ZVmCodaaxQGIU17yXeNO5ahQhpqG5GN3kEAjA%2Fs%2F2%2BKlfC5PLiyMrKX4FecSEOCJV7MaCpj9agbHu1%2FyWam%2BtRb36mvg1194q3pOCIx69oSXyNbzLL7foxYC5wZAZW2gxGT%2Flm5wZyq1qFMT%2FXvZ3YwYvKmHGc3fgf2pInDMTB%2BQxnF2Yf8oqyuUQbrgOMuZlqiGoMSjVO%2FQJV2qBj7dm2oAHstZlYNr4vLaFg6wfSo3r7mNoUJK1d4UxCzGsPz94PLpCX7%2BTvQV3hWd9xCD5axy3uEH7JkO8ZsZIoJtSUT%2B45QLfvxKANxZ%2F%2BMG3q2kBdX8Tye0vPwD2%2B2LYxpDiuhMDujQ07Jca1D8QvdgZAdkqaUiQgIObQoM6lJ0eupCTEcZ8seqqKfDsvEpRO%2B0We7%2BuexznQNlW8Wqjau5fQcykGywms03xeaSR0VpotRNbAUmRc50Jd0ZYqtYx%2BiChz6yVGmGaIVjyhXgdfkeyy3jjl5GFuWA3p8qr0xE%2BC2Pr9L2Wq2hZXAd7nRqQjblfmuFF%2FLmUwuee%2FywY6xALbtKOCD0cyM2VVa%2Beue4z6hcZeiYzoYweluiCo8uaTQbhti6cb6JK0F2Y%2F%2BDJRMpRTfFjmT4Qk9iHvywuhtJT07NtufJYtdrNhbuEBViGfcySBpoqc0Tk83eaapP6zCLZl4U3VsR4PxFap%2B97m70yp2rbNBsHu6bN%2FUtCIxQiLbJ5Kc8Zhg8je6M1ZfmI90VXwguons5Q5xfbUpD%2BfkvzX4utWCqBlwluS5X8y%2FyqHQSYP03f8I2gaH6U0OTl8zSODaNP3I3bMgQ2%2FIVnaPI3PDOChpjN898RQBnUnEgVg5oi7pHTY0WQjFFOf497W6cvVgDLHfxY9o2GYXjwkgY8EQJByBDlEpjZwz6bRkZRIJIEyqDiR4s2jCoumS%2Ff6AS8pdewrt4MqC6JFKtgrS7Sjxhh1SbiCcMFStmcjDgjXKue4nBE%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAVI2XTM4ZRU4JQ27K%2F20260120%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260120T213554Z&X-Amz-Expires=43200&X-Amz-SignedHeaders=host&X-Amz-Signature=b5a2492a53504c91d1cecad4c6d65fae04f3855bb8bafd0372749ab00e6ec0a6"
+    }
   },
-  "cliente2": {
+  "Marcos": {
+    "UsuarioB2C": "2933870952212",
+    "PasswordB2C": "21.Digital24.",
     "dpi": "3004818880101",
     "email": "eestrada@bi.com.gt",
-    "numeroCelular": "55551234",
+    "numeroCelular": "41584741",
     "nit": "107821567",
-    "fecha": "05/11/1990",
-    "fechaInicioTrabajo": "15/01/2020",
-    "Alias": "Mynor",
-    "IngresoMensual": "3500",
-    "GastoMensual": "1200"
+    "fechaInicioTrabajo": "20/06/2018",
+    "Alias": "Marcos",
+    "IngresoMensual": "4500",
+    "GastoMensual": "1500",
+    "assets": {
+      "templateRaw": "assets/marcos/templateraw_1766501174.txt",
+      "bestImageTokenized": "assets/marcos/imagetokenized_1766501171.txt",
+      "bestImage": "assets/marcos/imagetokenized_1766501171.txt",
+      "urlVideo": "https://regional-shared-test.s3.us-east-1.amazonaws.com/gtm/individual/19b7b3e5-bb37-4a70-be47-9fb31930f9c4/passiveliveness/passivelivenessvideo_1768992587.mp4?response-content-disposition=inline&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEB0aCXVzLWVhc3QtMSJIMEYCIQD2znUAm1wljUCM0%2FNyBUzgY8Vu6Y32AUid7IjD3DdBkwIhAP0BXmweqFNwGNTQ89%2Fb1Pf18GuDZrWqIamaFdVxSIaFKsoECOb%2F%2F%2F%2F%2F%2F%2F%2F%2F%2FwEQARoMMzYyNTcxNTg5NDI3Igyg1bUwgtAE8aVxBCYqngTOsyYp%2FrzB6IkONtUWznqPTFST9jbigR1AE%2Fxe8AcbwM%2FN0FJi1l9Ecgp6kgKfAwlpM45IyWvKpJnxXkc81jRH7Oe2zoIlvrLVu2fOmQuLv%2BPkcPtAqDi8uiQSGdQldvPnoQTU%2FOaNA7mlouGxSS%2BwKtp9kio7ViEBv9jdJZPEzDg5qMGv7wckveXOxksTZZ89hKID%2FI%2FfhbfhKN5Lj0YXq9vlxYFAMZMJgwDkq%2BdyncA8tx%2BsdKtdhe4ZlNgHlrZLn7VIsy3wKLRlrWV%2F2LXxM%2BQzKWYIDfvx%2BPmr80Ej8T7%2BPI%2BQPmFQg77KZcAY%2BSsJj8OgcJCT2Ax%2Bm2wQEN1qc0tohtIpG4VFnHHAAtyIbgMb%2BZ0fW%2B6xOmyqlcmE3pRX0PUQD3HWyUUoGiTPY1wbOZ%2BGSZPqe%2BbTyrvvLNguBmFNXNldbC2AEBG4NM7uMtW5y%2BFMnlN6%2F39yAF%2BvSGs8spfsDHPM2CdPOQymQWzWMFRCyHA1R1ZWI%2Bv2JflmAU5wpv2xC7guDWe95nWi%2Bzx01tHfj6LSMukWnbgc%2F6htePLwSXB1aHewvCSYWcUzyK3w18zH7FSBgSCQ5FhMeU%2B07TEyEMSgPzHkb6MbtOKw6POOsqKcswc6jpe77%2BhWyukubtNFARzMTMyNROoudO7KVS7zIXlMWGEl%2BMu%2F3AXTVnR4Mb1YpuoVHR%2B860cmhuXCzlr6y5l6C169cU71CDCXisrLBjrCAjVrYyfXV1WLUtqwg%2Bi3OZ1cd6%2FF55u%2Bz4yFVub75VAP27Rrhr2O3om%2FUzqgZZY%2BUGsgmK05uoaks2GtO7bbgO8L8AuUXt7ggVOCoqrU2TkEijzK%2BG2KYV5e3YdBrnewyrxjzI1F3sA3k%2BUHSQGIhyjYKJzDMgCqKMMKCHmvtw%2BYlFBGz7dANk7IsHXaCHrtpgKOZBAPmnCecUuJD0qe7UXUbBPXHUigwT2Mb4lW1mcgTJQ1nxZ824ozeZPke0bPFMj%2Bij6WlaeLknMQ7TiLbbsJeEFmFL3ufvQ24Ms5E7VS6PFYTWqxEQXBVO9OtyovoNyOAKikFjiECFRJ9U1hfv%2B4XOsdne0fmNWGlU2%2B4P3eWfQeLFzjv8jV5VLOSs3WcJtPmYhrfRWFBX4xRi2%2BLG8u%2B%2FsQ6%2F9Pr09m9AgNtaHfSdM%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAVI2XTM4Z6RR53YK6%2F20260122%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260122T203510Z&X-Amz-Expires=43200&X-Amz-SignedHeaders=host&X-Amz-Signature=356b1ddcc39097df9e3959e4b9316172729bbc6c0c1594bb6bf72a1e9c764576"
+    }
   }
 }

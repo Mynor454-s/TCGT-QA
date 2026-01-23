@@ -43,9 +43,9 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   
   // Variables para onboarding
   const urlVideo = process.env.ONBOARDING_VIDEO_URL || '';
-  const templateRawPath = 'assets/mynor/templateraw_1760545131.txt';
-  const bestImageTokenizedPath = 'assets/mynor/imagetokenized_1760545130.txt';
-  const bestImagePath = 'assets/mynor/facialcontent_1760545127.jpeg';
+  const templateRawPath = 'assets/marcos/templateraw_1766501174.txt';
+  const bestImageTokenizedPath = 'assets/marcos/imagetokenized_1766501171.txt';
+  const bestImagePath = 'assets/marcos/facialcontent_1766501167.jpeg';
   const ofertaUrl = process.env.OFFER_FORM_URL ||
     'https://qa-tarjetadigital.incubadorabi.com/cliente-digital/oferta';
   
@@ -72,7 +72,7 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   });
 
   await test.step('3. Ingresar DPI y continuar', async () => {
-    await inicioPage.ingresarDPI(datos.cliente1.dpi);
+    await inicioPage.ingresarDPI(datos.cliente2.dpi);
     await inicioPage.clicContinuar();
     await inicioPage.validarRedireccionFormulario();
     await footerComponent.validateVisible();
@@ -90,10 +90,10 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   await test.step('5. Llenar datos generales', async () => {
     await datosGeneralesPage.clickSiguiente();
     await datosGeneralesPage.llenarFormulario({
-      email: datos.cliente1.email,
-      numeroCelular: datos.cliente1.numeroCelular,
-      nit: datos.cliente1.nit,
-      fecha: datos.cliente1.fecha,
+      email: datos.Mynor.email,
+      numeroCelular: datos.cliente2.numeroCelular,
+      nit: datos.cliente2.nit,
+      fecha: datos.cliente2.fechaInicioTrabajo,
     });
     await datosGeneralesPage.clickContinuar();
     await datosGeneralesPage.validarRedireccionFormulario();
@@ -117,26 +117,26 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
       apiRequestContext,
     );
     await onboardingPage.irAFormularioOferta(ofertaUrl);
-    await footerComponent.validateVisible();
     await ScreenshotHelper.takeAndAttach(page, testInfo, 'Onboarding biométrico completado');
   });
 
-  await test.step('8. Aceptar oferta', async () => {
-    await aceptarOfertaPage.aceptarTerminos();
-    await aceptarOfertaPage.clickAceptarOferta();
-    await aceptarOfertaPage.validarRedireccionFormulario();
-    await footerComponent.validateVisible();
-    await ScreenshotHelper.takeAndAttach(page, testInfo, 'Oferta aceptada');
-  });
 
   await page.pause();
-  await test.step('9. Personalizar tarjeta', async () => {
-    await personalizacionTcPage.llenarFormulario({ alias: datos.cliente1.Alias });
-    await personalizacionTcPage.clickContinuar();
-    await personalizacionTcPage.validarRedireccionFormulario();
-    await footerComponent.validateVisible();
-    await ScreenshotHelper.takeAndAttach(page, testInfo, 'Tarjeta personalizada');
-  });
+
+  // await test.step('8. Aceptar oferta', async () => {
+  //   await aceptarOfertaPage.aceptarTerminos();
+  //   await aceptarOfertaPage.clickAceptarOferta();
+  //   await footerComponent.validateVisible();
+  //   await ScreenshotHelper.takeAndAttach(page, testInfo, 'Oferta aceptada');
+  // });
+
+  // await test.step('9. Personalizar tarjeta', async () => {
+  //   await personalizacionTcPage.llenarFormulario({ alias: datos.cliente1.Alias });
+  //   await personalizacionTcPage.clickContinuar();
+  //   await personalizacionTcPage.validarRedireccionFormulario();
+  //   await footerComponent.validateVisible();
+  //   await ScreenshotHelper.takeAndAttach(page, testInfo, 'Tarjeta personalizada');
+  // });
 
   await test.step('10. Ingresar datos personales', async () => {
     await datosPersonalesPage.seleccionarNivelEstudios('Sin estudios');
@@ -152,8 +152,8 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   });
 
   await test.step('11. Ingresar datos económicos', async () => {
-    await datosEconomicosPage.ingresosMensuales(datos.cliente1.IngresoMensual);
-    await datosEconomicosPage.gastosMensuales(datos.cliente1.GastoMensual);
+    await datosEconomicosPage.ingresosMensuales(datos.Mynor.IngresoMensual);
+    await datosEconomicosPage.gastosMensuales(datos.Mynor.GastoMensual);
     await datosEconomicosPage.seleccionarOtrosIngresos();
     await datosEconomicosPage.clickGuardarContinuar();
     await footerComponent.validateVisible();

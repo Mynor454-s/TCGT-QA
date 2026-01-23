@@ -8,6 +8,8 @@ Proyecto de automatización de pruebas E2E para Tarjeta Digital usando Playwrigh
 - [Instalación](#instalación)
 - [Configuración de Ambientes](#configuración-de-ambientes)
 - [Ejecución de Tests](#ejecución-de-tests)
+- [Data-Driven Testing](#data-driven-testing)
+- [Test Matrix](#test-matrix)
 - [Estructura del Proyecto](#estructura-del-proyecto)
 - [Buenas Prácticas](#buenas-prácticas)
 
@@ -87,6 +89,80 @@ $env:ENV="stg"; npx playwright test
 # Test específico
 $env:ENV="stg"; npx playwright test flujoCompletoB2CCliente.spec.ts --project=Chrome
 ```
+
+---
+
+## 📊 Data-Driven Testing
+
+El proyecto usa **Test Matrix** para gestionar datos de prueba de forma centralizada y escalable.
+
+### ¿Qué es Data-Driven Testing?
+
+Ejecutar el mismo test con diferentes conjuntos de datos sin duplicar código.
+
+### Ejemplo Rápido
+
+```typescript
+import { getTestDatasets } from '../../../utils/testMatrixRunner';
+
+// Obtiene todos los datasets configurados para E2E-001
+const datasets = getTestDatasets('E2E-001');
+
+// Crea un test por cada dataset
+datasets.forEach(({ name, data }) => {
+  test(`flujo completo - ${name}`, async ({ page }) => {
+    await homePage.IngresarUsuario(data.Usuario);
+    await homePage.IngresarPassword(data.Password);
+    // ...
+  });
+});
+```
+
+### Ventajas
+
+✅ **Sin datos hardcodeados** - Todo configurado en JSON
+✅ **Fácil mantenimiento** - Agregar datos sin tocar código
+✅ **Centralizado** - Una sola fuente de verdad
+✅ **Escalable** - Cientos de casos sin duplicar tests
+
+Ver [docs/TEST_MATRIX_GUIDE.md](docs/TEST_MATRIX_GUIDE.md) para documentación completa.
+
+---
+
+## 🗂️ Test Matrix
+
+Archivo central para organizar y escalar tests: `data/test-matrix.json`
+
+### Configuración de DataProvider
+
+```json
+{
+  "id": "E2E-001",
+  "name": "Flujo completo - Cliente nuevo exitoso",
+  "dataProvider": "data/data_new_client.json:*",
+  "tags": ["@smoke", "@P0"]
+}
+```
+
+### Formatos Soportados
+
+| Formato | Descripción | Ejemplo |
+|---------|-------------|---------|
+| `file.json:key` | Dataset específico | `data_new_client.json:cliente1` |
+| `file.json:*` | Todos los datasets | `data_new_client.json:*` |
+| `null` | Sin datos | N/A |
+
+### Tests por Tags
+
+```bash
+# Solo tests de smoke
+npx playwright test --grep "@smoke"
+
+# Tests prioritarios (P0 + P1)
+npx playwright test --grep "@P0|@P1"
+```
+
+---
 
 ### 🎯 Tests Disponibles
 

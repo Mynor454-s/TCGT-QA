@@ -51,21 +51,34 @@
   "scenarios": {
     "e2e-flows": {
       "description": "Flujos completos de extremo a extremo",
-      "total": 3,
-      "implemented": 1,
+      "total": 4,
+      "implemented": 2,
       "scenarios": [
         {
           "id": "E2E-001",
-          "name": "Flujo completo - Cliente nuevo exitoso",
+          "name": "Flujo completo B2B - Cliente nuevo exitoso",
           "priority": "P0",
-          "file": "tests/flows/happypath/flujoCompletoCliente.spec.ts",
-          "dataProvider": "data/data_new_client.json:cliente1",
-          "tags": ["@smoke", "@e2e", "@critical", "@P0"],
+          "file": "tests/flows/happypath/flujoCompletoClienteMatrixDriven.spec.ts",
+          "dataProvider": "data/data_new_client.json:*",
+          "tags": ["@smoke", "@e2e", "@critical", "@P0", "@E2E-001", "@B2B"],
           "estimatedTime": "3min",
           "browsers": ["chrome", "firefox"],
           "status": "implemented",
           "lastRun": "2025-12-18",
-          "notes": "Test principal - Cubre todo el flujo happy path"
+          "notes": "Test principal B2B - Cubre todo el flujo happy path. Usa * para ejecutar con todos los clientes del archivo"
+        },
+        {
+          "id": "E2E-B2C-001",
+          "name": "Flujo completo B2C - Cliente comercio exitoso",
+          "priority": "P0",
+          "file": "tests/flows/happypath/B2C/flujoCompletoB2CClienteMatrixDriven.spec.ts",
+          "dataProvider": "data/data_new_client.json:Marcos",
+          "tags": ["@smoke", "@e2e", "@critical", "@P0", "@E2E-B2C-001", "@B2C"],
+          "estimatedTime": "2min",
+          "browsers": ["chrome"],
+          "status": "implemented",
+          "lastRun": "2026-01-22",
+          "notes": "Test principal B2C - Login comercio, formulario datos generales y onboarding biométrico"
         },
         {
           "id": "E2E-002",

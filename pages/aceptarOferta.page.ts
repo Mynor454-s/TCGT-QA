@@ -6,7 +6,8 @@ export class AceptarOfertaPage {
     }
 
     async aceptarTerminos() {
-        const checkbox = this.page.locator('#credit-application-term-and-conditions-checkbox.border-aqua-digital-300').first();
+        // Usar .first() porque hay 2 checkboxes con el mismo testId
+        const checkbox = this.page.getByTestId('offer-terms-checkbox').first();
         await checkbox.waitFor({ state: 'visible', timeout: 20000 });
         await checkbox.click();
     }
@@ -16,5 +17,8 @@ export class AceptarOfertaPage {
     }
     async validarRedireccionFormulario() {
         await expect(this.page).toHaveURL(/.*\/personalizar-tarjeta$/);
+    }
+    async validarRedireccionTCJ() {
+        await expect(this.page).toHaveURL(/.*\/cliente-digital\/tcj\/instruccion-onboarding$/);
     }
 }
