@@ -51,7 +51,7 @@
   "scenarios": {
     "e2e-flows": {
       "description": "Flujos completos de extremo a extremo",
-      "total": 4,
+      "total": 2,
       "implemented": 2,
       "scenarios": [
         {
@@ -79,224 +79,100 @@
           "status": "implemented",
           "lastRun": "2026-01-22",
           "notes": "Test principal B2C - Login comercio, formulario datos generales y onboarding biométrico"
-        },
-        {
-          "id": "E2E-002",
-          "name": "Flujo completo - Cliente con múltiples ingresos",
-          "priority": "P1",
-          "file": "tests/flows/alternative/flujoMultiplesIngresos.spec.ts",
-          "dataProvider": "data/clients/multiple-income.json",
-          "tags": ["@e2e", "@alternative", "@P1"],
-          "estimatedTime": "4min",
-          "browsers": ["chrome"],
-          "status": "pending",
-          "notes": "Validar flujo con dependencia + negocio + otros ingresos"
-        },
-        {
-          "id": "E2E-003",
-          "name": "Flujo completo - Sin personalización de tarjeta",
-          "priority": "P2",
-          "file": "tests/flows/alternative/flujoSinPersonalizacion.spec.ts",
-          "dataProvider": "data/clients/no-customization.json",
-          "tags": ["@e2e", "@alternative", "@P2"],
-          "estimatedTime": "2.5min",
-          "browsers": ["chrome"],
-          "status": "pending",
-          "notes": "Usuario omite paso de personalización"
         }
       ]
     },
 
     "validations": {
       "description": "Validaciones de campos y formularios (data-driven)",
-      "total": 8,
-      "implemented": 0,
-      "scenarios": [
-        {
-          "id": "VAL-001",
-          "name": "Validaciones de DPI",
-          "priority": "P0",
-          "file": "tests/validations/datosGenerales/dpiValidation.spec.ts",
-          "dataProvider": "data/validations/dpi-validations.json",
-          "cases": 5,
-          "tags": ["@validation", "@dpi", "@P0"],
-          "estimatedTime": "1min",
-          "status": "pending",
-          "validations": [
-            "Campo vacío",
-            "Menos de 13 dígitos",
-            "Con letras",
-            "Con caracteres especiales",
-            "Formato válido"
-          ]
-        },
-        {
-          "id": "VAL-002",
-          "name": "Validaciones de Email",
-          "priority": "P0",
-          "file": "tests/validations/datosGenerales/emailValidation.spec.ts",
-          "dataProvider": "data/validations/email-validations.json",
-          "cases": 4,
-          "tags": ["@validation", "@email", "@P0"],
-          "estimatedTime": "1min",
-          "status": "pending",
-          "validations": [
-            "Campo vacío",
-            "Sin @",
-            "Sin dominio",
-            "Formato válido"
-          ]
-        },
-        {
-          "id": "VAL-003",
-          "name": "Validaciones de Teléfono",
-          "priority": "P1",
-          "file": "tests/validations/datosGenerales/telefonoValidation.spec.ts",
-          "dataProvider": "data/validations/telefono-validations.json",
-          "cases": 4,
-          "tags": ["@validation", "@telefono", "@P1"],
-          "estimatedTime": "1min",
-          "status": "pending"
-        },
-        {
-          "id": "VAL-004",
-          "name": "Validaciones de NIT",
-          "priority": "P1",
-          "file": "tests/validations/datosGenerales/nitValidation.spec.ts",
-          "dataProvider": "data/validations/nit-validations.json",
-          "cases": 3,
-          "tags": ["@validation", "@nit", "@P1"],
-          "estimatedTime": "30s",
-          "status": "pending"
-        }
-      ]
-    },
-
-    "economic-combinations": {
-      "description": "Combinaciones de fuentes de ingresos",
-      "total": 7,
-      "implemented": 0,
-      "scenarios": [
-        {
-          "id": "EC-001",
-          "name": "Solo relación de dependencia",
-          "priority": "P0",
-          "file": "tests/integration/economicData/incomeSourcesCombinations.spec.ts",
-          "config": {
-            "employmentRelationship": true,
-            "ownBusiness": false,
-            "otherIncome": false
-          },
-          "dataProvider": "data/economic-sources.json:employment",
-          "tags": ["@income", "@employment", "@P0"],
-          "status": "pending"
-        },
-        {
-          "id": "EC-002",
-          "name": "Solo negocio propio",
-          "priority": "P0",
-          "file": "tests/integration/economicData/incomeSourcesCombinations.spec.ts",
-          "config": {
-            "employmentRelationship": false,
-            "ownBusiness": true,
-            "otherIncome": false
-          },
-          "dataProvider": "data/economic-sources.json:business",
-          "tags": ["@income", "@business", "@P0"],
-          "status": "pending"
-        },
-        {
-          "id": "EC-003",
-          "name": "Solo otros ingresos",
-          "priority": "P1",
-          "file": "tests/integration/economicData/incomeSourcesCombinations.spec.ts",
-          "config": {
-            "employmentRelationship": false,
-            "ownBusiness": false,
-            "otherIncome": true
-          },
-          "dataProvider": "data/economic-sources.json:other",
-          "tags": ["@income", "@other", "@P1"],
-          "status": "pending"
-        }
-      ]
-    },
-
-    "component-tests": {
-      "description": "Tests de componentes reutilizables",
       "total": 2,
-      "implemented": 0,
+      "implemented": 2,
       "scenarios": [
         {
-          "id": "COMP-001",
-          "name": "Footer visible en todas las páginas",
-          "priority": "P0",
-          "file": "tests/components/footer/footerVisibility.spec.ts",
-          "tags": ["@component", "@footer", "@P0"],
-          "status": "pending",
-          "notes": "Validar presencia del footer en todas las pantallas del flujo"
+          "id": "VAL-UI-B2C-001",
+          "name": "Validaciones UI - Login B2C",
+          "priority": "P1",
+          "file": "tests/validations/ui/validateLabelsB2C.spec.ts",
+          "dataProvider": "data/ui-expected-values.json",
+          "cases": 6,
+          "tags": ["@validation", "@ui", "@B2C", "@P1"],
+          "estimatedTime": "30s",
+          "status": "implemented",
+          "lastRun": "2026-01-23",
+          "validations": [
+            "Label campo Usuario",
+            "Placeholder campo Usuario",
+            "Label campo Contraseña",
+            "Placeholder campo Contraseña",
+            "Texto botón Login",
+            "Mensaje error - Usuario requerido",
+            "Mensaje error - Contraseña requerida",
+            "Mensaje error - Usuario formato inválido"
+          ],
+          "notes": "Valida labels, placeholders y mensajes de error del formulario de login B2C"
         },
         {
-          "id": "COMP-002",
-          "name": "Link términos abre en nueva pestaña",
+          "id": "VAL-UI-DPI-001",
+          "name": "Validaciones UI - DPI B2C",
           "priority": "P1",
-          "file": "tests/components/footer/termsLinkNewTab.spec.ts",
-          "tags": ["@component", "@footer", "@P1"],
-          "status": "pending",
-          "notes": "Validar que términos y condiciones se abre en nueva pestaña"
+          "file": "tests/validations/ui/validateDpiB2C.spec.ts",
+          "dataProvider": "data/ui-expected-values.json",
+          "cases": 3,
+          "tags": ["@validation", "@ui", "@B2C", "@dpi", "@P1"],
+          "estimatedTime": "45s",
+          "status": "implemented",
+          "lastRun": "2026-01-23",
+          "validations": [
+            "Label campo DPI",
+            "Placeholder campo DPI",
+            "Mensaje error - DPI requerido",
+            "Mensaje error - DPI formato inválido"
+          ],
+          "notes": "Valida labels, placeholders y mensajes de error del campo DPI en nueva solicitud B2C"
         }
       ]
     }
   },
 
   "summary": {
-    "totalScenarios": 20,
-    "implemented": 1,
-    "pending": 19,
+    "totalScenarios": 4,
+    "implemented": 4,
+    "pending": 0,
     "byPriority": {
-      "P0": 7,
-      "P1": 8,
-      "P2": 5,
+      "P0": 2,
+      "P1": 2,
+      "P2": 0,
       "P3": 0
     },
     "byType": {
-      "e2e-flows": 3,
-      "validations": 8,
-      "economic-combinations": 7,
-      "component-tests": 2
+      "e2e-flows": 2,
+      "validations": 2
     },
     "estimatedTimes": {
-      "smoke": "10 min (P0 only)",
-      "regression": "45 min (P0 + P1)",
-      "full": "120 min (all scenarios)"
+      "smoke": "5.5 min (P0 only)",
+      "regression": "6.75 min (P0 + P1)",
+      "full": "6.75 min (all scenarios)"
     }
   },
 
   "roadmap": {
-    "phase1": {
-      "name": "Fundación (Semana 1-2)",
+    "completed": {
+      "name": "Fase Inicial - Completada",
       "goals": [
-        "Crear fixtures y helpers",
-        "Implementar 3 tests de validaciones P0",
-        "Refactorizar test actual con fixtures"
+        "✅ Crear fixtures y page objects",
+        "✅ Implementar flujos E2E B2B y B2C",
+        "✅ Configurar arquitectura data-driven con test-matrix",
+        "✅ Implementar validaciones UI para Login B2C"
       ],
-      "scenarios": ["VAL-001", "VAL-002", "COMP-001"]
+      "scenarios": ["E2E-001", "E2E-B2C-001", "VAL-UI-B2C-001"]
     },
-    "phase2": {
-      "name": "Expansión (Semana 3-4)",
-      "goals": [
-        "Implementar combinaciones económicas P0",
-        "Agregar tests de validaciones P1",
-        "Crear primer flujo alternativo"
-      ],
-      "scenarios": ["EC-001", "EC-002", "E2E-002", "VAL-003", "VAL-004"]
-    },
-    "phase3": {
-      "name": "Consolidación (Semana 5+)",
-      "goals": [
-        "Completar P2 scenarios",
-        "Configurar CI/CD",
-        "Documentación completa"
+    "nextSteps": {
+      "name": "Próximos pasos sugeridos",
+      "options": [
+        "Expandir validaciones UI a otras pantallas (DPI, Formulario)",
+        "Implementar validaciones de campos (DPI, Email, Teléfono)",
+        "Crear flujos alternativos (TCJ, múltiples ingresos)",
+        "Agregar tests de componentes (Footer, Links)"
       ]
     }
   }

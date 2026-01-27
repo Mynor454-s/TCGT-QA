@@ -1,0 +1,95 @@
+{
+    "loginB2C": {
+        "usuario": {
+            "label": "Usuario",
+            "placeholder": "Ingresa tu DPI o correo electrónico",
+            "testId": "login-page-business-card-form-user",
+            "errorTestId": "login-page-business-card-form-user-required-error",
+            "invalidErrorTestId": "login-page-business-card-form-user-error",
+            "errorMessages": {
+                "required": "Este campo es obligatorio.",
+                "invalid": "Formato inválido",
+                "maxLength": "El campo debe tener como máximo 30 caracteres."
+            }
+        },
+        "password": {
+            "label": "Contraseña",
+            "placeholder": "Ingresa tu contraseña",
+            "testId": "login-page-business-card-form-password",
+            "errorTestId": "login-page-business-card-form-password-required-error",
+            "errorMessages": {
+                "required": "Este campo es obligatorio."
+            }
+        },
+        "loginButton": {
+            "text": "Iniciar Sesión",
+            "testId": "login-page-business-form-btn-login"
+        }
+    },
+    "NewApplicationB2C": {
+        "startButton": {
+            "text": "Nueva solicitud",
+            "testId": "panel-card-btn-new-request"
+        }
+    },
+    "dpi": {
+        "dpiInput": {
+            "label": "DPI",
+            "placeholder": "0000 00000 0000",
+            "testId": "new-request-form-dpi",
+            "errorTestId": "new-request-form-dpi-required-error",
+            "invalidErrorTestId": "new-request-form-dpi-error",
+            "errorMessages": {
+                "required": " Este campo es obligatorio. ",
+                "invalid": " El DPI no es válido. "
+            }
+        }
+    },
+    "datosGenerales": {
+        "email": {
+            "label": "Correo electrónico",
+            "placeholder": "Ej: correo@ejemplo.com",
+            "testId": "general-information-form-email",
+            "errorTestId": "general-information-form-email-required-error",
+            "invalidErrorTestId": "general-information-form-email-error",
+            "errorMessages": {
+                "required": "Este campo es obligatorio.",
+                "invalid": "El correo electrónico no es válido."
+            }
+        },
+        "telefono": {
+            "label": "Número de celular",
+            "placeholder": "0000 0000",
+            "testId": "general-information-form-phone-number",
+            "errorTestId": "general-information-form-phone-number-required-error",
+            "invalidErrorTestId": "general-information-form-phone-number-error",
+            "errorMessages": {
+                "required": "Este campo es obligatorio.",
+                "invalid": "El número de celular no es válido.",
+                "length": "El número de celular debe tener 8 dígitos"
+            }
+        },
+        "nit": {
+            "label": "N.I.T",
+            "placeholder": "Ingresa tu N.I.T sin guiones",
+            "testId": "general-information-form-nit",
+            "errorTestId": "general-information-form-nit-required-error",
+            "invalidErrorTestId": "general-information-form-nit-error",
+            "errorMessages": {
+                "required": "Este campo es obligatorio.",
+                "invalid": "El N.I.T. no es válido."
+            }
+        },
+        "fechaInicioTrabajo": {
+            "label": "¿Cuándo comenzaste a trabajar?",
+            "placeholder": "DD/MM/AAAA",
+            "testId": "general-information-form-start-date",
+            "errorTestId": "general-information-form-start-date-required-error",
+            "invalidErrorTestId": "general-information-form-start-date-error",
+            "errorMessages": {
+                "required": "Este campo es obligatorio.",
+                "invalid": "La fecha no es válida."
+            }
+        }
+    }
+}
