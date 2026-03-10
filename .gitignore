@@ -1,5 +1,6 @@
 # Archivos de configuración de entorno
 .env
+.env.stg
 *.env
 
 # Configuración de BrowserStack con credenciales
