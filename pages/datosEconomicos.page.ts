@@ -19,10 +19,28 @@ export class DatosEconomicosPage {
         await input.fill(gasto);
     }
 
+
+
+    /**
+     * Marca uno o varios checkboxes en la sección de datos económicos.
+     * Recibe un array de textos tal y como aparecen en pantalla.
+     * Esto permite alimentar la selección desde el data provider.
+     */
+    async seleccionarCheckboxes(labels: string[]) {
+        for (const label of labels) {
+            const checkbox = this.page.getByText(label);
+            await checkbox.waitFor({ state: 'visible', timeout: 10000 });
+            await checkbox.click();
+        }
+    }
+
+    // métodos antiguos mantenidos por compatibilidad, delegan en el genérico
     async seleccionarOtrosIngresos() {
-        const checkbox = this.page.getByText('Percibo otros ingresos');
-        await checkbox.waitFor({ state: 'visible', timeout: 10000 });
-        await checkbox.click();
+        await this.seleccionarCheckboxes(['Percibo otros ingresos']);
+    }
+
+    async seleccionarTrabajoEmpresa() {
+        await this.seleccionarCheckboxes(['Trabajo en una empresa']);
     }
 
     async clickGuardarContinuar() {

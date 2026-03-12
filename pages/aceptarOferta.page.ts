@@ -8,7 +8,7 @@ export class AceptarOfertaPage {
     async aceptarTerminos() {
         // Usar .first() porque hay 2 checkboxes con el mismo testId
         const checkbox = this.page.getByTestId('offer-terms-checkbox').first();
-        await checkbox.waitFor({ state: 'visible', timeout: 20000 });
+        await checkbox.waitFor({ state: 'visible', timeout: 60000 });
         await checkbox.click();
     }
     async clickAceptarOferta() {

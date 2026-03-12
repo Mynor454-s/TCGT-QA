@@ -19,6 +19,8 @@ import { EmpezarSolicitudBusinessPage } from '../pages/B2C/empezarSolicitud.page
 import { FormDatosGeneralesPage } from '../pages/B2C/formDatosGenerales.page';
 import { InstruccionOnboardingBusinessPage } from '../pages/B2C/instruccionOnboardingBusiness.page';
 import { OnboardingBusinessPage } from '../pages/B2C/onboardingBusiness.page';
+import { ColoresPage } from '../pages/TCJ/colores.page';
+import { EmpresaIngresosPage } from '../pages/empresaIngresos.page';
 
 /**
  * Fixtures personalizados para inyectar automáticamente las páginas
@@ -53,6 +55,8 @@ type CustomFixtures = {
   empezarSolicitudBusinessPage: EmpezarSolicitudBusinessPage;
   instruccionOnboardingBusinessPage: InstruccionOnboardingBusinessPage;
   onboardingBusinessPage: OnboardingBusinessPage;
+  colorsPage: ColoresPage;
+  empresaIngresosPage: EmpresaIngresosPage;
 };
 
 export const test = base.extend<CustomFixtures>({
@@ -131,7 +135,14 @@ export const test = base.extend<CustomFixtures>({
   },
   onboardingBusinessPage: async ({ page }, use) => {
     await use(new OnboardingBusinessPage(page));
+  },
+  colorsPage: async ({ page }, use) => {
+    await use(new ColoresPage(page));
+  },
+  empresaIngresosPage: async ({ page }, use) => {
+    await use(new EmpresaIngresosPage(page));
   }
+
 });
 
 
