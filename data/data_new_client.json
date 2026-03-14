@@ -3,6 +3,7 @@
     "UsuarioB2C": "2933870952212",
     "PasswordB2C": "21.Digital24.",
     "dpi": "3007445600101",
+    "tipoTarjeta": "VISA",
     "email": "mynorestrada454@gmail.com",
     "numeroCelular": "48387422",
     "nit": "113001118",
@@ -25,6 +26,10 @@
       "templateRaw": "assets/mynor/templateraw_1760545131.txt",
       "bestImageTokenized": "assets/mynor/imagetokenized_1760545130.txt",
       "bestImage": "assets/mynor/facialcontent_1760545127.jpeg",
+      "videoS3": {
+        "bucket": "storage-tdcgt-test",
+        "key": "TestDocument/passivelivenessvideo_1766501171.mp4"
+      },
       "urlVideo": "https://regional-shared-stg.s3.us-east-1.amazonaws.com/gtm/individual/c34cb26c-1fec-47a1-b83c-2fca5527327e/passiveliveness/passivelivenessvideo_1729849531.mp4?response-content-disposition=inline&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHgaCXVzLWVhc3QtMSJHMEUCIQC4y9bfOooweZVw5Qule4waOG8veWZ%2BNOr519h6BTM95gIgJg9Gmf%2FXqcL3lDqvSD7XknodfSw3k%2F%2FyNWZHdFtx0mEqwQQIQRABGgwzNjI1NzE1ODk0MjciDNk9Azm4hkPJRXT1OCqeBI1qMLVSo1Tck11WbcNKgmuFt2XAtLCx0tVjq6xI5UpBnTKlzH9gJ6k8baTEtOvLF%2FyK0Gc0egYcfqs3eqIadbZjpRmKOX2VEs9n%2BfhAP%2BhJnbGPXFhJb%2F8OxjCwCookbMnSLUWPJExYULKMUa4X2BuV9QtUCUnEYxlPyzSIaMKhx4VqIMpAfL9gb6CS%2FgXmyH6NTMJSRlaMt3HR1pobDZJZU2FiRaMucB%2FaLEysftoL%2FtqSm373c6jKwFHuPXtI0JHtXb5iogsktzdvpxRE7bhR87Iny6WfHRxTIXlbn6fY4j8SCzzDoHy0k973Ler7nclgl7EDXTLX7owZwqMSDi9FA2ApPZYMfFjE9wMfN0FIymBtKEfsfpJutDgn1kV5rJWGizyKPioZYfOn0JXzBEp9KngSdFUXxNYCrEfEsRLMyl5stc49CxxCtH5efAtUucufUty8XiWj6nnvBZFQM8hZnQ565oCLOCSaUaCOD56pgWWAFkUso1anVWLNwNo8xUhKs06MQC2RiUbKVBuUVFrwZldQtBiDja1WCJS7PH6%2FYZ1h5xc4yCPogJ3BbKUrsZfHQqxgnbVxOMIB5KuOaKaKMRKOQjzKeHJeyV8QrAUB0bkNtsOHkvsKp92PS%2BIlFn8ppd41XOIbOQ7Df9WhHcnDfb9Xg%2BKdaJd%2B5Erb2VRgRTxFbdZTsJq%2FWW%2FU15ibvjyEI9PUrf3dHXEL5N%2B1MM7ths0GOsMC0LUDKnH0Gj6jWsvKxP%2BTmLKyQGVsoDZcUXJ%2FHPfqNZa3MhN4%2FjMEuWwsa4cEetMJC7tMqq9U6Qtll9vovx9Zw1%2F0gxjs%2BjjsyBUAKhQKgzpMBzgjGBUqdtgxKyKkre9KwBYz2rBuVs%2B6KUMaiOG8EaLQUANwWUh8frfch5scn6HkjFnv8ve8%2BPAdN1VXp0NyZPw9gDDOh9Degn3DLD0EAzj77WiuKsnKj9Pb37cEVT7BUzIUeIvk5xLpOkweT8Ot1WeQcDuPne8NIUzXrHlr4FwgYrPaV1clcnloG32BgtjDYOuJLTysOGD8duw%2FN6dznEMOwa2dHnt1eq4f4xJB7GxHjI%2BPf1NMrlQkMecYSNUuDh2nObChxaj%2FcfBGHcjWBu4A5f87vj9ftA4NBYP310oZvCdCDXPOSeJeH8DfaTxuqTY%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAVI2XTM4ZRBVI7H2I%2F20260227%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260227T152345Z&X-Amz-Expires=43200&X-Amz-SignedHeaders=host&X-Amz-Signature=a6f26e060f4d67bd5f8a184cd3de6033f25bc0ed38fc2691a6b439fca836d694"
     }
   },
@@ -32,6 +37,8 @@
     "UsuarioB2C": "2933870952212",
     "PasswordB2C": "21.Digital24.",
     "dpi": "3004818880101",
+        "tipoTarjeta": "VISA",
+
     "email": "eestrada@bi.com.gt",
     "numeroCelular": "41584741",
     "nit": "107821567",
@@ -58,9 +65,13 @@
       "direccion": "Av. Reforma 9-60 zona 10"
     },
     "assets": {
-      "templateRaw": "assets/mynor/templateraw_1760545131.txt",
-      "bestImageTokenized": "assets/mynor/imagetokenized_1760545130.txt",
-      "bestImage": "assets/mynor/facialcontent_1760545127.jpeg",
+      "templateRaw": "assets/marcos/templateraw_1766501174.txt",
+      "bestImageTokenized": "assets/marcos/imagetokenized_1766501171.txt",
+      "bestImage": "assets/marcos/facialcontent_1766501167.jpeg",
+      "videoS3": {
+        "bucket": "regional-shared-stg",
+        "key": "gtm/individual/c34cb26c-1fec-47a1-b83c-2fca5527327e/passiveliveness/passivelivenessvideo_1729849531.mp4"
+      },
       "urlVideo": "https://regional-shared-stg.s3.us-east-1.amazonaws.com/gtm/individual/c34cb26c-1fec-47a1-b83c-2fca5527327e/passiveliveness/passivelivenessvideo_1729849531.mp4?response-content-disposition=inline&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Security-Token=IQoJb3JpZ2luX2VjEHgaCXVzLWVhc3QtMSJHMEUCIQC4y9bfOooweZVw5Qule4waOG8veWZ%2BNOr519h6BTM95gIgJg9Gmf%2FXqcL3lDqvSD7XknodfSw3k%2F%2FyNWZHdFtx0mEqwQQIQRABGgwzNjI1NzE1ODk0MjciDNk9Azm4hkPJRXT1OCqeBI1qMLVSo1Tck11WbcNKgmuFt2XAtLCx0tVjq6xI5UpBnTKlzH9gJ6k8baTEtOvLF%2FyK0Gc0egYcfqs3eqIadbZjpRmKOX2VEs9n%2BfhAP%2BhJnbGPXFhJb%2F8OxjCwCookbMnSLUWPJExYULKMUa4X2BuV9QtUCUnEYxlPyzSIaMKhx4VqIMpAfL9gb6CS%2FgXmyH6NTMJSRlaMt3HR1pobDZJZU2FiRaMucB%2FaLEysftoL%2FtqSm373c6jKwFHuPXtI0JHtXb5iogsktzdvpxRE7bhR87Iny6WfHRxTIXlbn6fY4j8SCzzDoHy0k973Ler7nclgl7EDXTLX7owZwqMSDi9FA2ApPZYMfFjE9wMfN0FIymBtKEfsfpJutDgn1kV5rJWGizyKPioZYfOn0JXzBEp9KngSdFUXxNYCrEfEsRLMyl5stc49CxxCtH5efAtUucufUty8XiWj6nnvBZFQM8hZnQ565oCLOCSaUaCOD56pgWWAFkUso1anVWLNwNo8xUhKs06MQC2RiUbKVBuUVFrwZldQtBiDja1WCJS7PH6%2FYZ1h5xc4yCPogJ3BbKUrsZfHQqxgnbVxOMIB5KuOaKaKMRKOQjzKeHJeyV8QrAUB0bkNtsOHkvsKp92PS%2BIlFn8ppd41XOIbOQ7Df9WhHcnDfb9Xg%2BKdaJd%2B5Erb2VRgRTxFbdZTsJq%2FWW%2FU15ibvjyEI9PUrf3dHXEL5N%2B1MM7ths0GOsMC0LUDKnH0Gj6jWsvKxP%2BTmLKyQGVsoDZcUXJ%2FHPfqNZa3MhN4%2FjMEuWwsa4cEetMJC7tMqq9U6Qtll9vovx9Zw1%2F0gxjs%2BjjsyBUAKhQKgzpMBzgjGBUqdtgxKyKkre9KwBYz2rBuVs%2B6KUMaiOG8EaLQUANwWUh8frfch5scn6HkjFnv8ve8%2BPAdN1VXp0NyZPw9gDDOh9Degn3DLD0EAzj77WiuKsnKj9Pb37cEVT7BUzIUeIvk5xLpOkweT8Ot1WeQcDuPne8NIUzXrHlr4FwgYrPaV1clcnloG32BgtjDYOuJLTysOGD8duw%2FN6dznEMOwa2dHnt1eq4f4xJB7GxHjI%2BPf1NMrlQkMecYSNUuDh2nObChxaj%2FcfBGHcjWBu4A5f87vj9ftA4NBYP310oZvCdCDXPOSeJeH8DfaTxuqTY%3D&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=ASIAVI2XTM4ZRBVI7H2I%2F20260227%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260227T152345Z&X-Amz-Expires=43200&X-Amz-SignedHeaders=host&X-Amz-Signature=a6f26e060f4d67bd5f8a184cd3de6033f25bc0ed38fc2691a6b439fca836d694"
     }
   }

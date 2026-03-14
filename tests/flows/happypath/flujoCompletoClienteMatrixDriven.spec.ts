@@ -2,6 +2,7 @@ import { test, expect } from '../../../fixtures/baseTest';
 import { request } from '@playwright/test';
 import { ScreenshotHelper } from '../../../fixtures/testHelpers';
 import { getTestDatasets } from '../../../utils/testMatrixRunner';
+import { resolveOnboardingVideoUrl } from '../../../utils/s3SignedUrl';
 
 /**
  * Test data-driven usando test-matrix.json
@@ -36,12 +37,26 @@ datasets.forEach(({ name, data }) => {
     footerComponent
   }, testInfo) => {
     // Variables para onboarding
-    const urlVideo = data.assets?.urlVideo || '';
-    const templateRawPath = data.assets?.templateRaw ;
-    const bestImageTokenizedPath = data.assets?.bestImageTokenized ;
-    const bestImagePath = data.assets?.bestImage ;
+    const templateRawPath = data.assets?.templateRaw;
+    const bestImageTokenizedPath = data.assets?.bestImageTokenized;
+    const bestImagePath = data.assets?.bestImage;
     const ofertaUrl = process.env.OFFER_FORM_URL ||
       'https://qa-tarjetadigital.incubadorabi.com/cliente-digital/oferta';
+
+    const urlVideo = await resolveOnboardingVideoUrl({
+      videoS3: data.assets?.videoS3,
+      sourceVideoUrl: data.assets?.urlVideo,
+      fallbackUrl: process.env.ONBOARDING_VIDEO_URL || '',
+      defaultExpiresInSeconds: Number(process.env.S3_PRESIGN_EXPIRES_IN || 3600),
+    });
+
+    if (!urlVideo) {
+      throw new Error(`[${name}] No se pudo resolver URL de video para onboarding`);
+    }
+
+    if (!templateRawPath || !bestImageTokenizedPath || !bestImagePath) {
+      throw new Error(`[${name}] Faltan rutas de assets biométricos en el dataset`);
+    }
     
     // API Request Context
     const apiRequestContext = await request.newContext({

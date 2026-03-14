@@ -60,7 +60,12 @@ export class OnboardingPage {
     );
 
     if (!response.ok()) {
-      throw new Error('Error en la petición de onboarding biométrico');
+      const errorBody = await response.text();
+      throw new Error(
+        'Error en la petición de onboarding biométrico\n' +
+        `Status: ${response.status()} ${response.statusText()}\n` +
+        `Response: ${errorBody}`
+      );
     }
 
     const onboardingData = await response.json();

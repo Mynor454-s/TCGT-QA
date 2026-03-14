@@ -3,6 +3,7 @@ import { request } from '@playwright/test';
 import { ScreenshotHelper } from '../../../fixtures/testHelpers';
 import datos from '../../../data/data_new_client.json';
 import { updateJiraTestStatus } from '../../../utils/jiraHelper';
+import { resolveOnboardingVideoUrl } from '../../../utils/s3SignedUrl';
 
 // Configuración de Jira desde variables de entorno
 const JIRA_TEST_RUN_ID = process.env.JIRA_TEST_RUN_ID || '';
@@ -38,14 +39,33 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   encuestaSatisfaccionPage,
   footerComponent
 }, testInfo) => {
+  const clienteData: any =
+    (datos as any).Monther || (datos as any).cliente1 || Object.values(datos as any)[0];
+
   // Actualizar estado a EXECUTING al iniciar
   // await updateJiraTestStatus(JIRA_TEST_RUN_ID, 'EXECUTING', JIRA_URL, JIRA_AUTH_TOKEN);
   
   // Variables para onboarding
-  const urlVideo = process.env.ONBOARDING_VIDEO_URL || '';
-  const templateRawPath = 'assets/mynor/templateraw_1760545131.txt';
-  const bestImageTokenizedPath = 'assets/mynor/imagetokenized_1760545130.txt';
-  const bestImagePath = 'assets/mynor/facialcontent_1760545127.jpeg';
+  const templateRawPath = clienteData?.assets?.templateRaw;
+  const bestImageTokenizedPath = clienteData?.assets?.bestImageTokenized;
+  const bestImagePath = clienteData?.assets?.bestImage;
+  const ofertaUrl = process.env.OFFER_FORM_URL ||
+    'https://qa-tarjetadigital.incubadorabi.com/cliente-digital/oferta';
+
+  const urlVideo = await resolveOnboardingVideoUrl({
+    videoS3: clienteData?.assets?.videoS3,
+    sourceVideoUrl: clienteData?.assets?.urlVideo,
+    fallbackUrl: process.env.ONBOARDING_VIDEO_URL || '',
+    defaultExpiresInSeconds: Number(process.env.S3_PRESIGN_EXPIRES_IN || 3600),
+  });
+
+  if (!urlVideo) {
+    throw new Error('No se pudo resolver URL de video para onboarding');
+  }
+
+  if (!templateRawPath || !bestImageTokenizedPath || !bestImagePath) {
+    throw new Error('Faltan rutas de assets biométricos en el dataset de cliente');
+  }
   
   // API Request Context con ignoreHTTPSErrors
   const apiRequestContext = await request.newContext({
@@ -70,7 +90,7 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   });
 
   await test.step('3. Ingresar DPI y continuar', async () => {
-    await inicioPage.ingresarDPI(datos.cliente1.dpi);
+    await inicioPage.ingresarDPI(clienteData.dpi);
     await inicioPage.clicContinuar();
     await inicioPage.validarRedireccionFormulario();
     await footerComponent.validateVisible();
@@ -88,10 +108,10 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   await test.step('5. Llenar datos generales', async () => {
     await datosGeneralesPage.clickSiguiente();
     await datosGeneralesPage.llenarFormulario({
-      email: datos.cliente1.email,
-      numeroCelular: datos.cliente1.numeroCelular,
-      nit: datos.cliente1.nit,
-      fecha: datos.cliente1.fecha,
+      email: clienteData.email,
+      numeroCelular: clienteData.numeroCelular,
+      nit: clienteData.nit,
+      fecha: clienteData.fechaInicioTrabajo || clienteData.fecha,
     });
     await datosGeneralesPage.clickContinuar();
     await datosGeneralesPage.validarRedireccionFormulario();
@@ -114,7 +134,7 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
       bestImagePath,
       apiRequestContext
     );
-    await onboardingPage.irAFormularioOferta();
+    await onboardingPage.irAFormularioOferta(ofertaUrl);
     await footerComponent.validateVisible();
     await ScreenshotHelper.takeAndAttach(page, testInfo, 'Onboarding biométrico completado');
   });
@@ -128,7 +148,7 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   });
 
   await test.step('9. Personalizar tarjeta', async () => {
-    await personalizacionTcPage.llenarFormulario({ alias: datos.cliente1.Alias });
+    await personalizacionTcPage.llenarFormulario({ alias: clienteData.Alias });
     await personalizacionTcPage.clickContinuar();
     await personalizacionTcPage.validarRedireccionFormulario();
     await footerComponent.validateVisible();
@@ -149,8 +169,8 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   });
 
   await test.step('11. Ingresar datos económicos', async () => {
-    await datosEconomicosPage.ingresosMensuales(datos.cliente1.IngresoMensual);
-    await datosEconomicosPage.gastosMensuales(datos.cliente1.GastoMensual);
+    await datosEconomicosPage.ingresosMensuales(clienteData.IngresoMensual);
+    await datosEconomicosPage.gastosMensuales(clienteData.GastoMensual);
     await datosEconomicosPage.seleccionarOtrosIngresos();
     await datosEconomicosPage.clickGuardarContinuar();
     await footerComponent.validateVisible();
