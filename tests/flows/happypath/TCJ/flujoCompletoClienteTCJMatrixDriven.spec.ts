@@ -17,7 +17,6 @@ import { getTestDatasets } from '../../../../utils/testMatrixRunner';
 const datasets = getTestDatasets('E2E-002');
 
 // Permite que cada dataset (cada test generado) se ejecute en paralelo dentro de este archivo.
-test.describe.configure({ mode: 'parallel' });
 
 // Ejecutar el test para cada dataset
 datasets.forEach(({ name, data }) => {

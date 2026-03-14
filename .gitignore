@@ -11,7 +11,10 @@ node_modules/
 
 # Resultados de tests de Playwright
 test-results/
+test-results/**
+test-results/.last-run.json
 playwright-report/
+playwright-report/**
 playwright-report/index.html
 playwright/.cache/
 
