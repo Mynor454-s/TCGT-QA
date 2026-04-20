@@ -8,6 +8,7 @@ assets/
 
 # Configuración de BrowserStack con credenciales
 browserstack.yml
+browserstack_example.yml
 
 # Node modules
 node_modules/

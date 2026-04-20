@@ -29,8 +29,7 @@ export default defineConfig({
     headless: false,
     screenshot: 'only-on-failure',
     video: 'off',
-    // BrowserStack iOS no soporta tracing
-    trace: process.env.BROWSERSTACK_USERNAME ? 'off' : 'retain-on-failure',
+    trace: 'retain-on-failure',
     viewport: null,
 
     httpCredentials:
@@ -41,8 +40,7 @@ export default defineConfig({
           }
         : undefined,
 
-    // BrowserStack mobile requiere ignoreHTTPSErrors: false
-    ignoreHTTPSErrors: process.env.BROWSERSTACK_USERNAME ? false : true,
+    ignoreHTTPSErrors: true,
   },
 
   projects: [
