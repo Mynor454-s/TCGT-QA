@@ -2,6 +2,7 @@ import { test, expect } from '../../../../fixtures/baseTest';
 import { request } from '@playwright/test';
 import { ScreenshotHelper } from '../../../../fixtures/testHelpers';
 import { getTestDatasets } from '../../../../utils/testMatrixRunner';
+import { resolveOnboardingVideoUrl } from '../../../../utils/s3SignedUrl';
 
 /**
  * Test data-driven usando test-matrix.json
@@ -40,12 +41,26 @@ datasets.forEach(({ name, data }) => {
     empresaIngresosPage
   }, testInfo) => {
     // Variables para onboarding
-    const urlVideo = data.assets?.urlVideo || '';
     const templateRawPath = data.assets?.templateRaw ;
     const bestImageTokenizedPath = data.assets?.bestImageTokenized ;
     const bestImagePath = data.assets?.bestImage ;
     const ofertaUrl = process.env.OFFER_FORM_URL ||
       'https://qa-tarjetadigital.incubadorabi.com/cliente-digital/oferta';
+
+    const urlVideo = await resolveOnboardingVideoUrl({
+      videoS3: data.assets?.videoS3,
+      sourceVideoUrl: data.assets?.urlVideo,
+      fallbackUrl: process.env.ONBOARDING_VIDEO_URL || '',
+      defaultExpiresInSeconds: Number(process.env.S3_PRESIGN_EXPIRES_IN || 3600),
+    });
+
+    if (!urlVideo) {
+      throw new Error(`[${name}] No se pudo resolver URL de video para onboarding`);
+    }
+
+    if (!templateRawPath || !bestImageTokenizedPath || !bestImagePath) {
+      throw new Error(`[${name}] Faltan rutas de assets biométricos en el dataset`);
+    }
     
     // API Request Context
     const apiRequestContext = await request.newContext({
@@ -56,6 +71,7 @@ datasets.forEach(({ name, data }) => {
 
     await test.step('1. Navegar a página de inicio', async () => {
       await homePage.goto();
+      await homePage.setAppLive('"1154a4fbd048b28cf989da1e155cc27a031310a8ccc35d8fa4e6fe702d3d2bfd"');
       await homePage.validarPortal();
       await homePage.esperarHeroCargado();
       await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Página de inicio`);
@@ -145,8 +161,8 @@ datasets.forEach(({ name, data }) => {
       await datosPersonalesPage.seleccionarNivelEstudios('Sin estudios');
       await datosPersonalesPage.ingresarDependientes(1);
       await datosPersonalesPage.seleccionarOcupacion('Comercio Informal');
-      await datosPersonalesPage.seleccionarDepartamento('Guatemala');
-      await datosPersonalesPage.seleccionarMunicipio('Guatemala');
+      await datosPersonalesPage.seleccionarDepartamento('Jutiapa');
+      await datosPersonalesPage.seleccionarMunicipio('Quesada');
       await datosPersonalesPage.ingresarZona('1');
       await datosPersonalesPage.ingresarDireccion('Ciudad de Guatemala');
       await datosPersonalesPage.clickGuardarContinuar();
@@ -203,6 +219,7 @@ datasets.forEach(({ name, data }) => {
     });
 
     await test.step('14. Completar encuesta de satisfacción', async () => {
+      await page.pause();
       await encuestaSatisfaccionPage.clickOmitirFinalizar();
       await page.waitForTimeout(2000);
       await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Encuesta completada`);

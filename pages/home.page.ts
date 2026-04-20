@@ -8,6 +8,27 @@ export class HomePage {
     this.page = page;
   }
 
+  async setSessionStorageItem(key: string, value: string) {
+    // Lo inyectamos antes de navegar para que esté disponible desde el primer render.
+    await this.page.addInitScript(
+      ([k, v]) => sessionStorage.setItem(k, v),
+      [key, value]
+    );
+
+    // También lo seteamos en la página actual por si ya está cargada.
+    await this.page.evaluate(
+      ([k, v]) => sessionStorage.setItem(k, v),
+      [key, value]
+    );
+  }
+
+  async setAppMaintenance(value: '0' | '1' = '1') {
+    await this.setSessionStorageItem('app-maintenance', value);
+  }
+    async setAppLive(value: '0' | '1' | string = '1') {
+    await this.setSessionStorageItem('tc-liv', value);
+  }
+
   async goto() {
     await this.page.goto('/cliente-digital/inicio');
   }

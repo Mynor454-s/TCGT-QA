@@ -1,0 +1,45 @@
+{
+  "Ana": {
+    "UsuarioB2C": "2933870952212",
+    "PasswordB2C": "21.Digital24.",
+    "dpi": "2815822111201",
+    "tipoTarjeta": "TCJ",
+    "email": "test23@bi.com.gt",
+    "numeroCelular": "41111133",
+    "nit": "116601884",
+    "fechaInicioTrabajo": "01/01/2015",
+    "Alias": "Anacleto",
+    "IngresoMensual": "4500",
+    "GastoMensual": "1500",
+    "economicCheckboxes": [
+      "Trabajo en una empresa"
+    ],
+    "cardColor": "rgb(204, 211, 213)",
+    "opcionLealtad": "Reembolso",
+    "categorias": [
+      "Ropa y accesorios",
+      "Supermercados"
+    ],
+    "empresa": {
+      "nombre": "Banco Industrial S.A.",
+      "numero": "2222 - 3333",
+      "puesto": "Analista de sistemas",
+      "tipoEmpresa": "Comercio y servicios",
+      "actividad": "Servicios financieros",
+      "departamento": "Guatemala",
+      "municipio": "Guatemala",
+      "zona": "2",
+      "direccion": "Av. Reforma 9-60 zona 10"
+    },
+    "assets": {
+      "templateRaw": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/TemplateRaw.txt",
+      "bestImageTokenized": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/BestImageTokenized.txt",
+      "bestImage": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/BestImage.jpeg",
+      "videoS3": {
+        "bucket": "storage-tdcgt-test",
+        "key": "TestDocument/Biometric/PassiveLiveness.mp4"
+      },
+      "urlVideo": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/PassiveLiveness.mp4"
+    }
+  }
+}

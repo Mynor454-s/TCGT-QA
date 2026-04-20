@@ -34,7 +34,9 @@ datasets.forEach(({ name, data }) => {
     aceptarOfertaPage,
     personalizacionTcPage,
     encuestaSatisfaccionPage,
-    footerComponent
+    footerComponent,
+    empresaIngresosPage,
+    creacionBelPage
   }, testInfo) => {
     // Variables para onboarding
     const templateRawPath = data.assets?.templateRaw;
@@ -57,7 +59,7 @@ datasets.forEach(({ name, data }) => {
     if (!templateRawPath || !bestImageTokenizedPath || !bestImagePath) {
       throw new Error(`[${name}] Faltan rutas de assets biométricos en el dataset`);
     }
-    
+
     // API Request Context
     const apiRequestContext = await request.newContext({
       ignoreHTTPSErrors: true
@@ -67,6 +69,7 @@ datasets.forEach(({ name, data }) => {
 
     await test.step('1. Navegar a página de inicio', async () => {
       await homePage.goto();
+      await homePage.setAppMaintenance('1');
       await homePage.validarPortal();
       await homePage.esperarHeroCargado();
       await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Página de inicio`);
@@ -133,7 +136,6 @@ datasets.forEach(({ name, data }) => {
       await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Onboarding completado`);
     });
 
-    await page.pause();
     await test.step('8. Aceptar oferta', async () => {
       await aceptarOfertaPage.aceptarTerminos();
       await aceptarOfertaPage.clickAceptarOferta();
@@ -162,25 +164,65 @@ datasets.forEach(({ name, data }) => {
     await test.step('11. Ingresar datos económicos', async () => {
       await datosEconomicosPage.ingresosMensuales(data.IngresoMensual);
       await datosEconomicosPage.gastosMensuales(data.GastoMensual);
-      await datosEconomicosPage.seleccionarOtrosIngresos();
+      await datosEconomicosPage.seleccionarCheckboxes(data.economicCheckboxes);
       await datosEconomicosPage.clickGuardarContinuar();
       await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Datos económicos`);
     });
 
-    await test.step('12. Ingresar otros ingresos', async () => {
-      await datosEconomicosOtrosIngresosPage.tipoDeFuenteOtros('Actividades profesionales');
-      await datosEconomicosOtrosIngresosPage.clickGuardarOtrosIngresos();
-      await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Otros ingresos`);
-    });
+    // 12. dependiendo del tipo de cliente rellenamos el formulario correspondiente
+    if (data.empresa) {
+      await test.step('12. Datos de empresa', async () => {
+        const e = data.empresa;
+        await empresaIngresosPage.llenarNombreEmpresa(e.nombre);
+        await empresaIngresosPage.llenarNumeroEmpresa(e.numero);
+        await empresaIngresosPage.llenarPuesto(e.puesto);
+        // dropdowns ahora requieren el label del campo para ser únicos
+        await empresaIngresosPage.seleccionarCatalogo('Giro de negocio de la empresa', e.tipoEmpresa);
+        await empresaIngresosPage.llenarActividadEmpresa(e.actividad);
+        // zona y dirección son campos de texto simples
+        if (e.zona) {
+          await empresaIngresosPage.llenarZona(e.zona);
+        }
+        if (e.direccion) {
+          await empresaIngresosPage.llenarDireccion(e.direccion);
+        }
+        // campos de ubicación (departamento/municipio) siguen usando el helper
+        if (e.departamento) {
+          await empresaIngresosPage.seleccionarCatalogo('Departamento', e.departamento);
+        }
+        if (e.municipio) {
+          await empresaIngresosPage.seleccionarCatalogo('Municipio', e.municipio);
+        }
+        await empresaIngresosPage.clickGuardarEmpresa();
+        await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Datos empresa`);
+      });
+    } else if (data.otrosIngresos) {
+      await test.step('12. Ingresar otros ingresos', async () => {
+        const fuente = data.otrosIngresos.fuente || 'Actividades profesionales';
+        await datosEconomicosOtrosIngresosPage.tipoDeFuenteOtros(fuente);
+        await datosEconomicosOtrosIngresosPage.clickGuardarOtrosIngresos();
+        await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Otros ingresos`);
+      });
+    }
 
     await test.step('13. Confirmar datos de envío', async () => {
       await datosEnviosPage.clickContinuarEnvio();
       await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Datos de envío`);
     });
 
+    // Paso condicional: aparece solo para algunos clientes
+    if (await creacionBelPage.estaVisible()) {
+      await test.step('13b. Crear usuario Bi en línea (BEL)', async () => {
+        const belUsername = data.bel?.username ?? `usuario${Date.now()}`;
+        const belCompania: 'Tigo' | 'Claro' = data.bel?.compania ?? 'Tigo';
+        await creacionBelPage.llenarFormulario(belUsername, belCompania);
+        await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Usuario BEL creado`);
+      });
+    }
+
     await test.step('14. Completar encuesta de satisfacción', async () => {
       await encuestaSatisfaccionPage.clickOmitirFinalizar();
-      await page.waitForTimeout(2000);
+      await page.waitForTimeout(5000);
       await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Encuesta completada`);
     });
 

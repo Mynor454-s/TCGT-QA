@@ -1,7 +1,10 @@
 # Archivos de configuración de entorno
 .env
-.env.stg
+.env.*
 *.env
+
+# Assets biométricos locales (se usan desde S3 en producción)
+assets/
 
 # Configuración de BrowserStack con credenciales
 browserstack.yml

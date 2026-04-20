@@ -21,6 +21,7 @@ import { InstruccionOnboardingBusinessPage } from '../pages/B2C/instruccionOnboa
 import { OnboardingBusinessPage } from '../pages/B2C/onboardingBusiness.page';
 import { ColoresPage } from '../pages/TCJ/colores.page';
 import { EmpresaIngresosPage } from '../pages/empresaIngresos.page';
+import { CreacionBelPage } from '../pages/creacionBel.page';
 
 /**
  * Fixtures personalizados para inyectar automáticamente las páginas
@@ -57,6 +58,7 @@ type CustomFixtures = {
   onboardingBusinessPage: OnboardingBusinessPage;
   colorsPage: ColoresPage;
   empresaIngresosPage: EmpresaIngresosPage;
+  creacionBelPage: CreacionBelPage;
 };
 
 export const test = base.extend<CustomFixtures>({
@@ -141,6 +143,9 @@ export const test = base.extend<CustomFixtures>({
   },
   empresaIngresosPage: async ({ page }, use) => {
     await use(new EmpresaIngresosPage(page));
+  },
+  creacionBelPage: async ({ page }, use) => {
+    await use(new CreacionBelPage(page));
   }
 
 });

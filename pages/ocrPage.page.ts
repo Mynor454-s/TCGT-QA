@@ -1,11 +1,30 @@
 import { Page, expect } from "@playwright/test";
 import fs from 'fs';
+import { buildPresignedVideoUrl } from '../utils/s3SignedUrl';
 
 export class ocrPage {
   readonly page: Page;
     constructor(page: Page) {
     this.page = page;
     }
+
+  private async loadFileContent(filePath: string, requestContext: any): Promise<Buffer> {
+    // Si es una URL (comienza con http), hacer fetch desde S3
+    if (filePath.startsWith('http')) {
+      const expiresIn = Number(process.env.S3_PRESIGN_EXPIRES_IN || 3600);
+      const signedUrl = await buildPresignedVideoUrl(filePath, expiresIn);
+      const response = await requestContext.get(signedUrl || filePath);
+      if (!response.ok()) {
+        throw new Error(
+          `Error descargando archivo desde S3: ${filePath} - Status: ${response.status()}. ` +
+          'Verifica permisos del objeto o vigencia de credenciales AWS en .env.qa'
+        );
+      }
+      return await response.body();
+    }
+    // Si es una ruta local, leer con fs
+    return fs.readFileSync(filePath);
+  }
 
   /**
    * Realiza la petición OCR y actualiza sessionStorage con la respuesta.
@@ -21,8 +40,8 @@ export class ocrPage {
   applicationUuid = applicationUuid.replace(/^"|"$/g, '');
 
     // 2. Leer los archivos desde la carpeta assets
-    const frontFile = fs.readFileSync(frontPath);
-    const backFile = fs.readFileSync(backPath);
+    const frontFile = await this.loadFileContent(frontPath, requestContext);
+    const backFile = await this.loadFileContent(backPath, requestContext);
 
     // 3. Consumir el endpoint OCR con los nombres de campo correctos
     const ocrApiUrl = process.env.OCR_API_URL || 'https://d1a0xvknet1ite.cloudfront.net/api/customer/v1/biometric/ocr';

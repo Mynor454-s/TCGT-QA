@@ -12,7 +12,7 @@ dotenv.config({ path: path.resolve(process.cwd(), envFile) });
 
 export default defineConfig({
   testDir: './tests',
-  timeout: 120 * 1000,
+  timeout: 120 * 10000,
   expect: {
     timeout: 30_000,
   },

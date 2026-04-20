@@ -1,11 +1,30 @@
 import fs from 'fs';
 import { Page, expect } from '@playwright/test';
+import { buildPresignedVideoUrl } from '../../utils/s3SignedUrl';
 
 export class OnboardingBusinessPage {
   readonly page: Page;
 
   constructor(page: Page) {
     this.page = page;
+  }
+
+  private async loadFileContent(filePath: string, requestContext: any): Promise<Buffer> {
+    // Si es una URL (comienza con http), hacer fetch desde S3
+    if (filePath.startsWith('http')) {
+      const expiresIn = Number(process.env.S3_PRESIGN_EXPIRES_IN || 3600);
+      const signedUrl = await buildPresignedVideoUrl(filePath, expiresIn);
+      const response = await requestContext.get(signedUrl || filePath);
+      if (!response.ok()) {
+        throw new Error(
+          `Error descargando archivo desde S3: ${filePath} - Status: ${response.status()}. ` +
+          'Verifica permisos del objeto o vigencia de credenciales AWS en .env.qa'
+        );
+      }
+      return await response.body();
+    }
+    // Si es una ruta local, leer con fs
+    return fs.readFileSync(filePath);
   }
 
   async consumirOnboarding(
@@ -36,9 +55,9 @@ export class OnboardingBusinessPage {
     applicationUuid = applicationUuid.replace(/^"|"$/g, '');
     jwt = jwt.replace(/^"|"$/g, '');
 
-    const templateRaw = fs.readFileSync(templateRawPath);
-    const bestImageTokenized = fs.readFileSync(bestImageTokenizedPath);
-    const bestImage = fs.readFileSync(bestImagePath);
+    const templateRaw = await this.loadFileContent(templateRawPath, requestContext);
+    const bestImageTokenized = await this.loadFileContent(bestImageTokenizedPath, requestContext);
+    const bestImage = await this.loadFileContent(bestImagePath, requestContext);
 
     const response = await requestContext.post(
       'https://d3qkhb3w3dyw1r.cloudfront.net/api/business/v1/biometric/onboarding',

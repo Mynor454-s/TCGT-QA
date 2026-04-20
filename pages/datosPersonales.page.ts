@@ -5,6 +5,12 @@ export class DatosPersonalesPage {
         this.page = page;
     }
 
+    private async estaVacio(input: ReturnType<Page['locator']>) {
+        await input.waitFor({ state: 'visible', timeout: 10000 });
+        const valor = await input.inputValue();
+        return !valor.trim();
+    }
+
 
     async seleccionarNivelEstudios(textoOpcion: string) {
         const input = this.page.getByRole('textbox', { name: 'Nivel de estudios' });
@@ -24,6 +30,9 @@ export class DatosPersonalesPage {
 
     async seleccionarDepartamento(textoOpcion: string) {
         const input = this.page.getByRole('textbox', { name: 'Departamento de residencia' });
+        if (!(await this.estaVacio(input))) {
+            return;
+        }
         await input.click();
         await this.page.waitForTimeout(500);
         const opcion = this.page.getByRole('button', { name: textoOpcion, exact: true });
@@ -32,6 +41,9 @@ export class DatosPersonalesPage {
 
     async seleccionarMunicipio(textoOpcion: string) {
         const input = this.page.getByRole('textbox', { name: 'Municipio de residencia' });
+        if (!(await this.estaVacio(input))) {
+            return;
+        }
         await input.click();
         await this.page.waitForTimeout(500);
         const opcion = this.page.getByRole('button', { name: textoOpcion, exact: true });
@@ -46,12 +58,18 @@ export class DatosPersonalesPage {
     async ingresarZona(zona: string) {
         const input = this.page.getByTestId('general-information-form-zone');
         await input.waitFor({ state: 'visible', timeout: 10000 });
+        if (!(await this.estaVacio(input))) {
+            return;
+        }
         await input.fill(zona);
     }
 
     async ingresarDireccion(direccion: string) {
         const input = this.page.getByTestId('general-information-form-home-address');
         await input.waitFor({ state: 'visible', timeout: 10000 });
+        if (!(await this.estaVacio(input))) {
+            return;
+        }
         await input.fill(direccion);
     }
 

@@ -56,7 +56,7 @@
       "scenarios": [
         {
           "id": "E2E-001",
-          "name": "Flujo completo B2B - Cliente nuevo exitoso",
+          "name": "Flujo completo E2E - Cliente nuevo exitoso",
           "priority": "P0",
           "file": "tests/flows/happypath/flujoCompletoClienteMatrixDriven.spec.ts",
           "dataProvider": "data/data_new_client.json:Marcos",
@@ -72,7 +72,7 @@
           "name": "Flujo completo B2B - Cliente nuevo exitoso",
           "priority": "P0",
           "file": "tests/flows/happypath/TCJ/flujoCompletoTCJClienteMatrixDriven.spec.ts",
-          "dataProvider": "data/data_new_client.json:Monther",
+          "dataProvider": "data/data_new_client_TCJ.json:*",
           "tags": ["@smoke", "@e2e", "@critical", "@P0", "@E2E-002", "@B2B"],
           "estimatedTime": "3min",
           "browsers": ["chrome", "firefox"],

@@ -72,7 +72,7 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   });
 
   await test.step('3. Ingresar DPI y continuar', async () => {
-    await inicioPage.ingresarDPI(datos.cliente2.dpi);
+    await inicioPage.ingresarDPI(datos.Marcos.dpi);
     await inicioPage.clicContinuar();
     await inicioPage.validarRedireccionFormulario();
     await footerComponent.validateVisible();
@@ -90,10 +90,10 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   await test.step('5. Llenar datos generales', async () => {
     await datosGeneralesPage.clickSiguiente();
     await datosGeneralesPage.llenarFormulario({
-      email: datos.Mynor.email,
-      numeroCelular: datos.cliente2.numeroCelular,
-      nit: datos.cliente2.nit,
-      fecha: datos.cliente2.fechaInicioTrabajo,
+      email: datos.Marcos.email,
+      numeroCelular: datos.Marcos.numeroCelular,
+      nit: datos.Marcos.nit,
+      fecha: datos.Marcos.fechaInicioTrabajo,
     });
     await datosGeneralesPage.clickContinuar();
     await datosGeneralesPage.validarRedireccionFormulario();
@@ -131,7 +131,7 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   // });
 
   // await test.step('9. Personalizar tarjeta', async () => {
-  //   await personalizacionTcPage.llenarFormulario({ alias: datos.cliente1.Alias });
+  //   await personalizacionTcPage.llenarFormulario({ alias: datos.Marcos.Alias });
   //   await personalizacionTcPage.clickContinuar();
   //   await personalizacionTcPage.validarRedireccionFormulario();
   //   await footerComponent.validateVisible();
@@ -152,8 +152,8 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   });
 
   await test.step('11. Ingresar datos económicos', async () => {
-    await datosEconomicosPage.ingresosMensuales(datos.Mynor.IngresoMensual);
-    await datosEconomicosPage.gastosMensuales(datos.Mynor.GastoMensual);
+    await datosEconomicosPage.ingresosMensuales(datos.Marcos.IngresoMensual);
+    await datosEconomicosPage.gastosMensuales(datos.Marcos.GastoMensual);
     await datosEconomicosPage.seleccionarOtrosIngresos();
     await datosEconomicosPage.clickGuardarContinuar();
     await footerComponent.validateVisible();
