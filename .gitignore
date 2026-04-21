@@ -1,7 +1,7 @@
 # Archivos de configuración de entorno
 .env
 .env.*
-*.env
+!.env.example
 
 # Assets biométricos locales (se usan desde S3 en producción)
 assets/
@@ -15,16 +15,11 @@ node_modules/
 
 # Resultados de tests de Playwright
 test-results/
-test-results/**
-test-results/.last-run.json
 playwright-report/
-playwright-report/**
-playwright-report/index.html
 playwright/.cache/
 
 # Screenshots
 screenshots/
-
 
 # Traces y videos
 *.webm
@@ -48,7 +43,7 @@ Thumbs.db
 desktop.ini
 
 # IDE
-.vscode/settings.json
+.vscode/
 .idea/
 *.swp
 *.swo
@@ -57,3 +52,6 @@ desktop.ini
 # Coverage
 coverage/
 .nyc_output/
+
+# TypeScript
+*.tsbuildinfo
