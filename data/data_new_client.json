@@ -2,7 +2,7 @@
   "Marcos": {
     "UsuarioB2C": "2933870952212",
     "PasswordB2C": "21.Digital24.",
-    "dpi": "3004818880101",
+    "dpi": "2764563941901",
         "tipoTarjeta": "VISA",
 
     "email": "test7@bi.com.gt",
@@ -12,7 +12,7 @@
     "Alias": "Marcos",
     "IngresoMensual": "4500",
     "GastoMensual": "1500",
-    "economicCheckboxes": ["Trabajo en una empresa"],
+    "economicCheckboxes": ["Trabajo en una empresa", "Tengo negocio propio", "Percibo otros ingresos"],
     "cardColor": "rgb(204, 211, 213)",
     "opcionLealtad": "Puntos",
     "categorias": [
@@ -30,15 +30,28 @@
       "zona": "2",
       "direccion": "Av. Reforma 9-60 zona 10"
     },
+    "negocioPropio": {
+      "nombreComercial": "Tienda Marcos",
+      "fechaInscripcion": "15/03/2018",
+      "giroNegocio": "Comercio y servicios",
+      "actividad": "Venta de productos varios",
+      "departamento": "Guatemala",
+      "municipio": "Guatemala",
+      "zona": "1",
+      "direccion": "4ta Avenida 12-30 zona 1"
+    },
+    "otrosIngresos": {
+      "fuente": "Actividades profesionales"
+    },
     "assets": {
-      "templateRaw": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/3004818880101/templateraw_1766501174.txt",
-      "bestImageTokenized": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/3004818880101/imagetokenized_1766501171.txt",
-      "bestImage": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/3004818880101/facialcontent_1766501167.jpeg",
+      "templateRaw": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/2933870952212/TemplateRaw.txt",
+      "bestImageTokenized": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/2933870952212/BestImageTokenized.txt",
+      "bestImage": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/2933870952212/BestImage.jpeg",
       "videoS3": {
         "bucket": "storage-tdcgt-test",
-        "key": "TestDocument/Biometric/3004818880101/passivelivenessvideo_1766501171.mp4"
+        "key": "TestDocument/Biometric/2933870952212/PassiveLiveness.mp4"
       },
-      "urlVideo": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/3004818880101/passivelivenessvideo_1766501171.mp4"
+      "urlVideo": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/2933870952212/PassiveLiveness.mp4"
     },
     "bel": {
       "username": "marcos",
@@ -49,8 +62,7 @@
     "UsuarioB2C": "2933870952212",
     "PasswordB2C": "21.Digital24.",
     "dpi": "3007445600101",
-        "tipoTarjeta": "VISA",
-
+    "tipoTarjeta": "VISA",
     "email": "test8@bi.com.gt",
     "numeroCelular": "41111118",
     "nit": "107821567",

@@ -398,7 +398,7 @@ Para más información sobre el proyecto, contactar al equipo de QA.
 |----------|----|----|
 | **BASE_URL** | `qa-tarjetadigital.incubadorabi.com` | `stg-tarjetadigital.incubadorabi.com` |
 | **B2C_LOGIN_PATH** | `/cliente-digital/negocios/login` | `/comercio/sitio/inicio-sesion` |
-| **AUTH_PASS** | `_cA=2&8(Om};HW2\`` | `ePzyn47?<od+v.YF` |
+| **AUTH_PASS** | `[ver .env.qa]` | `[ver .env.stg]` |
 
 ---
 

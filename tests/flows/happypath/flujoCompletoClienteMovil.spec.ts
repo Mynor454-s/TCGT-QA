@@ -2,23 +2,7 @@ import { test, expect } from '../../../fixtures/baseTest';
 import { request } from '@playwright/test';
 import { ScreenshotHelper } from '../../../fixtures/testHelpers';
 import datos from '../../../data/data_new_client.json';
-import { updateJiraTestStatus } from '../../../utils/jiraHelper';
-
-// Configuración de Jira desde variables de entorno
-const JIRA_TEST_RUN_ID = process.env.JIRA_TEST_RUN_ID || '';
-const JIRA_URL = process.env.JIRA_URL || '';
-const JIRA_AUTH_TOKEN = process.env.JIRA_AUTH_TOKEN || '';
-
-// test.afterEach(async ({}, testInfo) => {
-//   Actualizar estado en Jira basado en el resultado del test
-//   if (testInfo.status === 'passed') {
-//     await updateJiraTestStatus(JIRA_TEST_RUN_ID, 'PASSED', JIRA_URL, JIRA_AUTH_TOKEN);
-//   } else if (testInfo.status === 'failed') {
-//     await updateJiraTestStatus(JIRA_TEST_RUN_ID, 'FAILED', JIRA_URL, JIRA_AUTH_TOKEN);
-//   } else if (testInfo.status === 'timedOut') {
-//     await updateJiraTestStatus(JIRA_TEST_RUN_ID, 'ABORTED', JIRA_URL, JIRA_AUTH_TOKEN);
-//   }
-// });
+import { OFERTA_URL } from '../../../utils/testConfig';
 
 test('flujo completo Cliente Existente @smoke @e2e @P0', async ({ 
   page, 
@@ -38,9 +22,6 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   encuestaSatisfaccionPage,
   footerComponent
 }, testInfo) => {
-  // Actualizar estado a EXECUTING al iniciar
-  // await updateJiraTestStatus(JIRA_TEST_RUN_ID, 'EXECUTING', JIRA_URL, JIRA_AUTH_TOKEN);
-  
   // Variables para onboarding
   const urlVideo = process.env.ONBOARDING_VIDEO_URL || '';
   const templateRawPath = 'assets/mynor/templateraw_1760545131.txt';
@@ -70,7 +51,7 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   });
 
   await test.step('3. Ingresar DPI y continuar', async () => {
-    await inicioPage.ingresarDPI(datos.cliente1.dpi);
+    await inicioPage.ingresarDPI(datos.Marcos.dpi);
     await inicioPage.clicContinuar();
     await inicioPage.validarRedireccionFormulario();
     await footerComponent.validateVisible();
@@ -88,10 +69,10 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   await test.step('5. Llenar datos generales', async () => {
     await datosGeneralesPage.clickSiguiente();
     await datosGeneralesPage.llenarFormulario({
-      email: datos.cliente1.email,
-      numeroCelular: datos.cliente1.numeroCelular,
-      nit: datos.cliente1.nit,
-      fecha: datos.cliente1.fecha,
+      email: datos.Marcos.email,
+      numeroCelular: datos.Marcos.numeroCelular,
+      nit: datos.Marcos.nit,
+      fecha: datos.Marcos.fechaInicioTrabajo,
     });
     await datosGeneralesPage.clickContinuar();
     await datosGeneralesPage.validarRedireccionFormulario();
@@ -114,7 +95,7 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
       bestImagePath,
       apiRequestContext
     );
-    await onboardingPage.irAFormularioOferta();
+    await onboardingPage.irAFormularioOferta(OFERTA_URL);
     await footerComponent.validateVisible();
     await ScreenshotHelper.takeAndAttach(page, testInfo, 'Onboarding biométrico completado');
   });
@@ -128,7 +109,7 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   });
 
   await test.step('9. Personalizar tarjeta', async () => {
-    await personalizacionTcPage.llenarFormulario({ alias: datos.cliente1.Alias });
+    await personalizacionTcPage.llenarFormulario({ alias: datos.Marcos.Alias });
     await personalizacionTcPage.clickContinuar();
     await personalizacionTcPage.validarRedireccionFormulario();
     await footerComponent.validateVisible();
@@ -149,8 +130,8 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   });
 
   await test.step('11. Ingresar datos económicos', async () => {
-    await datosEconomicosPage.ingresosMensuales(datos.cliente1.IngresoMensual);
-    await datosEconomicosPage.gastosMensuales(datos.cliente1.GastoMensual);
+    await datosEconomicosPage.ingresosMensuales(datos.Marcos.IngresoMensual);
+    await datosEconomicosPage.gastosMensuales(datos.Marcos.GastoMensual);
     await datosEconomicosPage.seleccionarOtrosIngresos();
     await datosEconomicosPage.clickGuardarContinuar();
     await footerComponent.validateVisible();

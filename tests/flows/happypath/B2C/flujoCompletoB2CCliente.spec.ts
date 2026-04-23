@@ -48,8 +48,8 @@ test('flujo completo B2C Cliente @smoke @e2e @P0', async ({
   });
 
   await test.step('2. Ingresar credenciales y hacer login', async () => {
-    await homePageBusiness.IngresarUsuarioB2C(datos.Mynor.UsuarioB2C);
-    await homePageBusiness.IngresarPasswordB2C(datos.Mynor.PasswordB2C);
+    await homePageBusiness.IngresarUsuarioB2C(datos.Marcos.UsuarioB2C);
+    await homePageBusiness.IngresarPasswordB2C(datos.Marcos.PasswordB2C);
     await ScreenshotHelper.takeAndAttach(page, testInfo, 'Credenciales ingresadas');
     await homePageBusiness.ClicBotonIngresarB2C();
     await page.waitForTimeout(3000);
@@ -82,7 +82,6 @@ test('flujo completo B2C Cliente @smoke @e2e @P0', async ({
     await ScreenshotHelper.takeAndAttach(page, testInfo, 'Instrucción de onboarding B2C completada');
     });
 
-    await page.pause();
     await test.step('7. Completar onboarding biométrico', async () => {
     await onboardingBusinessPage.consumirOnboarding(
       urlVideo,

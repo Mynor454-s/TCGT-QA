@@ -4,7 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "npx playwright test",
+    "test:smoke": "npx playwright test --grep @smoke",
+    "test:regression": "npx playwright test --grep \"@P0|@P1\"",
+    "test:chrome": "npx playwright test --project=Chrome",
+    "report": "npx playwright show-report"
   },
   "keywords": [],
   "author": "",

@@ -1,0 +1,83 @@
+Historia;Punto a validar;
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Verificar que el campo de input sea un campo requerido
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Verificar que el campo sea alfanumerico
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Verificar que el campo solo permita 30 caracteres
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Verificar que el campo sea alfanumerico
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Verificar que el campo solo permita 60 caracteres
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Verificar que el boton este deshabilitado por defecto
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Verificar que el boton cambie a estado habilitado cuando se completen los campos
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Verificar que el boton redireccione al dashboard cuando se inicie sesion de manera correcta
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Verificar que el input del DPI permita n?meros
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Verificar que el input del DPI no permita letras
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Verificar que el input del DPI no permita caracteres especiales
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Verificar que al hacer click en el input y luego click en otra zona el input se marque como requerido
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Verificar que cuando se haga click en el boton de continuar sin haber llenado el input de DPI este se marque con una advertencia de campo requerido
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Validar label y placeholder del campo usuario
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Validar label y placeholder del campo contrase?a
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Validar texto del bot?n Login
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Validar label y placeholder del campo DPI
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Verificar que el DPI con formato inv?lido muestre mensaje de error
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Verificar que un DPI v?lido no muestre mensajes de error
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Validar label y placeholder del campo correo electronico
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Validar un correo valido
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Validar un correo invalido
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Validar que el campo sea requerido
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Validar label y placeholder del campo NIT
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Validar Nit valido
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Validar Nit invalido
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Validar Nit campo requerido
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Validar label y placeholder del campo
+TDCGI-1649 [FE] Actualización de inputs en formularios B2C;;Validar que el campo sea requerido
+TDCGI-1650 [FE] Rediseño modal instructivo;;Validar que el texto anterior se haya removido 
+TDCGI-1650 [FE] Rediseño modal instructivo;;Validar que se haya actualizado el nuevo titutlo
+TDCGI-1650 [FE] Rediseño modal instructivo;;Validar que se haya actualizado el subtitulo
+TDCGI-1650 [FE] Rediseño modal instructivo;;Validar que la nueva imagen sea formato .svg
+TDCGI-1650 [FE] Rediseño modal instructivo;;Validar que los bullets se hayan actualzado 
+TDCGI-1676 [FE] Actualización de inputs B2C - Parte 2;;Verificar que el input sea del tipo alfanumerico
+TDCGI-1676 [FE] Actualización de inputs B2C - Parte 2;;Verificar que el input solo permita 60 caracteres
+TDCGI-1676 [FE] Actualización de inputs B2C - Parte 2;;Verificar que el input permita ingresar correo o CUI
+TDCGI-1676 [FE] Actualización de inputs B2C - Parte 2;;Verificar que el input maneje los estados de dise?o
+TDCGI-1676 [FE] Actualización de inputs B2C - Parte 2;;Validar lable y placeholder del input
+TDCGI-1676 [FE] Actualización de inputs B2C - Parte 2;;Validar ingresar letras
+TDCGI-1676 [FE] Actualización de inputs B2C - Parte 2;;Validar ingresar numeros
+TDCGI-1676 [FE] Actualización de inputs B2C - Parte 2;;Validar ingresar un solo numero
+TDCGI-1676 [FE] Actualización de inputs B2C - Parte 2;;Validar ingresar m?s de 6 numeros
+TDCGI-1676 [FE] Actualización de inputs B2C - Parte 2;;Validar que el campo sea requerido
+TDCGI-1645 [BE] Obtener oferta preautorizada TC VISA;;Ingresar un DPI con oferta Visa de RTM
+TDCGI-1645 [BE] Obtener oferta preautorizada TC VISA;;Validar un DPI sin oferta de RTM
+TDCGI-1645 [BE] Obtener oferta preautorizada TC VISA;;Validar que la oferta obtenida de RTM coincida con la oferta que se esta mostrando al cliente
+TDCGI-1641 [BE] Obtener oferta preautorizada TC Mastercard;;Ingresar un DPI con Oferta de RTM
+TDCGI-1641 [BE] Obtener oferta preautorizada TC Mastercard;;Ingresar un DPI sin oferta de RTM
+TDCGI-1641 [BE] Obtener oferta preautorizada TC Mastercard;;Validar que el monto de la oferta presentada coincida con el monto de la oferta ofrecido en RTM
+TDCGI-1698 [BE] Agregar columna para activar/desactivar producto preautorizado;;Validar que se haya agregado una nueva columna en la tabla de la marcas
+TDCGI-1698 [BE] Agregar columna para activar/desactivar producto preautorizado;;Validar que marcas van a estar activas para preautorizadas
+TDCGI-1698 [BE] Agregar columna para activar/desactivar producto preautorizado;;Validar que cuando una marca este desactivada no se consulte a RTM si tiene oferta
+TDCGI-1648 [FE] Actualización de selphi 5.51;;Validar que la parte del onboarding siga funcionando correctamente con el backend
+TDCGI-1651 [FE] Mejora la posición de formularios tengo negocio propio - Datos económicos (UI);;Validar que el input de fecha de inscripción de la empresa se encuentre en el mismo renglón que el de nombre comercial
+TDCGI-1651 [FE] Mejora la posición de formularios tengo negocio propio - Datos económicos (UI);;Validar que se vea igual al prototipo
+TDCGI-1656 Mostrar oferta preautorizada al usuario (Visa y MC);;Validar que se muestre la oferta de MC obtenida por RTM
+TDCGI-1656 Mostrar oferta preautorizada al usuario (Visa y MC);;Validar que se muestre la oferta de Visa obtenida por RTM
+TDCGI-1656 Mostrar oferta preautorizada al usuario (Visa y MC);;Validar que en el formato del mensaje se envíe al tipo de oferta a obtener 
+TDCGI-1656 Mostrar oferta preautorizada al usuario (Visa y MC);;Validar que cuando no se pueda obtener la oferta por RTM se envié al precalificador
+TDCGI-1640 [BE] Validar lógica de intentos oferta preautorizada y precalificador;;Validar que se haya creado la variable de entorno para el contador de intentos
+TDCGI-1640 [BE] Validar lógica de intentos oferta preautorizada y precalificador;;Validar que cuando se alcance el numero de intentos máximos de RTM se proceda a consultar la oferta por el precalificador
+TDCGI-1644 [BE] Agregar parametro CRM para indicar si es pre autorizada;;Validar que se haya agregado la nueva columna a la tabla de cat_offer_result
+TDCGI-1644 [BE] Agregar parametro CRM para indicar si es pre autorizada;;Validar que si la oferta viene por parte del precalificador en el parametro nuevo se envie el valor correspondiente
+TDCGI-1644 [BE] Agregar parametro CRM para indicar si es pre autorizada;;Validar que si la oferta viene por parte de una preautorizada en el parametro nuevo se envie el valor corrspondiente
+TDCGI-1644 [BE] Agregar parametro CRM para indicar si es pre autorizada;;Validar que se haya agregado el nuevo parámetro en la base de datos
+TDCGI-1763 [FE] Mostrar modal en FacePhi por errores de hardware;;Validar que la modal se despliegue en Movil
+TDCGI-1763 [FE] Mostrar modal en FacePhi por errores de hardware;;Validar que la modal se despliegue en Tablet
+TDCGI-1763 [FE] Mostrar modal en FacePhi por errores de hardware;;Validar que la modal se despliegue en desktop
+TDCGI-1763 [FE] Mostrar modal en FacePhi por errores de hardware;;Validar que la modal contenga el titulo correcto
+TDCGI-1763 [FE] Mostrar modal en FacePhi por errores de hardware;;"Validar que la modal contenga el texto correcto
+
+"
+TDCGI-1763 [FE] Mostrar modal en FacePhi por errores de hardware;;Validar que la modal solo salga cuando el dispositivo no cuente con la cámara o presente algún tipo de error
+TDCGI-1763 [FE] Mostrar modal en FacePhi por errores de hardware;;Validar que la modal contenga el boton con el texto correcto
+TDCGI-1763 [FE] Mostrar modal en FacePhi por errores de hardware;;Validar que al hacer click sobre el boton de listo de la modal redireccione a la pantalla del home
+TDCGI-1646 [BE] Validar cambio en header para obtener IP del cliente - SmartId;;Validar que la ip que se ve en las trazas se envie a smartid
+TDCGI-1646 [BE] Validar cambio en header para obtener IP del cliente - SmartId;;Validar que cuando se levante una alerta de SmartId se registre la misma ip
+TDCGI-1761 [FE] Mantenimiento de errores deprecadas;;Revisar código removido en github de rechazar oferta
+TDCGI-1761 [FE] Mantenimiento de errores deprecadas;;"Revisar la validacion de error de numeros telefonicos
+
+"

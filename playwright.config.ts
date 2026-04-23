@@ -19,7 +19,7 @@ export default defineConfig({
   retries: 0,
   reporter: [
     ['html', { open: 'never', outputFolder: 'playwright-report' }],
-    ['json', { outputFile: 'test-results/results.json' }],
+    ['json', { outputFile: 'test-results/results.json' }],  
     ['junit', { outputFile: 'test-results/results.xml' }],
     ['list']
   ],
@@ -27,8 +27,11 @@ export default defineConfig({
   use: {
     baseURL: process.env.BASE_URL || 'https://qa-tarjetadigital.incubadorabi.com',
     headless: false,
-    screenshot: 'only-on-failure',
-    video: 'off',
+    screenshot: 'on',
+    video: {
+      mode: 'on',
+      size: { width: 1920, height: 1080 },
+    },
     trace: 'retain-on-failure',
     viewport: null,
 

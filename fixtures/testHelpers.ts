@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test';
 import { HomePage } from '../pages/home.page';
 import { InicioFlujoPage } from '../pages/inicioFlujo.page';
-import { seleccionTc } from '../pages/seleccionTc.page';
+import { SeleccionTcPage } from '../pages/seleccionTc.page';
 import { DatosGeneralesPage } from '../pages/datosGenerales.page';
 import datos from '../data/data_new_client.json';
 
@@ -44,7 +44,7 @@ export class TestSetup {
     await this.irAInicioFormulario(page);
     
     const inicio = new InicioFlujoPage(page);
-    await inicio.ingresarDPI(dpi || datos.cliente1.dpi);
+    await inicio.ingresarDPI(dpi || datos.Marcos.dpi);
     await inicio.clicContinuar();
     await inicio.validarRedireccionFormulario();
   }
@@ -57,7 +57,7 @@ export class TestSetup {
   static async irADatosGenerales(page: Page, dpi?: string) {
     await this.irASeleccionTarjeta(page, dpi);
     
-    const seleccion = new seleccionTc(page);
+    const seleccion = new SeleccionTcPage(page);
     await seleccion.seleccionarMC();
     await seleccion.clickSiguiente();
     await seleccion.validarRedireccionFormulario();
@@ -69,7 +69,7 @@ export class TestSetup {
    * @param clienteData - Datos del cliente (opcional, usa datos por defecto)
    */
   static async irADatosEconomicos(page: Page, clienteData?: any) {
-    const data = clienteData || datos.cliente1;
+    const data = clienteData || datos.Marcos;
     
     await this.irADatosGenerales(page, data.dpi);
     
