@@ -91,5 +91,67 @@
                 "invalid": "La fecha no es válida."
             }
         }
+    },
+    "loginActualizado": {
+        "inputLogin": {
+            "label": "Usuario",
+            "placeholder": "Ingresa tu correo electrónico o CUI",
+            "testId": "login-page-business-card-form-user",
+            "errorTestId": "login-page-business-card-form-user-required-error",
+            "invalidErrorTestId": "login-page-business-card-form-user-error",
+            "maxLength": 60,
+            "errorMessages": {
+                "required": "Este campo es obligatorio.",
+                "maxLength": "El campo debe tener como máximo 60 caracteres."
+            }
+        }
+    },
+    "modalInstructivo": {
+        "titulo": {
+            "testId": "instruccion-onboarding-title",
+            "text": "Texto del título actualizado"
+        },
+        "subtitulo": {
+            "testId": "instruccion-onboarding-subtitle",
+            "text": "Texto del subtítulo actualizado"
+        },
+        "imagen": {
+            "testId": "instruccion-onboarding-image",
+            "srcPattern": ".svg"
+        },
+        "bullets": {
+            "testId": "instruccion-onboarding-bullets",
+            "items": [
+                "Bullet 1 actualizado",
+                "Bullet 2 actualizado",
+                "Bullet 3 actualizado"
+            ]
+        },
+        "textoAnterior": "Texto instructivo anterior que ya no debe aparecer"
+    },
+    "modalErrorFacePhi": {
+        "titulo": {
+            "testId": "facephi-error-modal-title",
+            "text": "¡Lo sentimos!"
+        },
+        "body": {
+            "testId": "facephi-error-modal-body",
+            "text": "Tu dispositivo o navegador no es compatible"
+        },
+        "boton": {
+            "testId": "facephi-error-modal-button",
+            "text": "¡Listo!"
+        },
+        "redirectPattern": "/comercio/sitio/inicio-sesion"
+    },
+    "negocioPropio": {
+        "nombreComercial": {
+            "testId": "negocio-propio-nombre-comercial",
+            "label": "Nombre comercial"
+        },
+        "fechaInscripcion": {
+            "testId": "negocio-propio-fecha-inscripcion",
+            "label": "Fecha de inscripción de la empresa"
+        }
     }
 }

@@ -1,0 +1,29 @@
+{
+  "description": "Casos de prueba para validaciones del campo usuario login B2C",
+  "field": "Usuario Login",
+  "page": "login-b2c",
+  "loginCases": [
+    {
+      "name": "Usuario alfanumérico válido",
+      "testId": "LOGIN-VAL-001",
+      "input": "usuario123",
+      "shouldFail": false,
+      "priority": "P1"
+    },
+    {
+      "name": "Usuario con 30 caracteres (límite)",
+      "testId": "LOGIN-VAL-002",
+      "input": "eestrada@bi.com.gtaaaaaaaaaaaa",
+      "shouldFail": false,
+      "priority": "P1"
+    },
+    {
+      "name": "Usuario con 31 caracteres (excede límite)",
+      "testId": "LOGIN-VAL-003",
+      "input": "eestrada@bi.com.gtaaaaaaaaaaaaa",
+      "expectedError": "El campo debe tener como máximo 30 caracteres.",
+      "shouldFail": true,
+      "priority": "P1"
+    }
+  ]
+}

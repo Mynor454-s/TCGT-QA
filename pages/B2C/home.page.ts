@@ -19,4 +19,45 @@ export class HomePageBusiness {
         await btn.waitFor({ state: 'visible', timeout: 10000 });
         await btn.click();
     }
+
+    async obtenerValorCampoUsuario(): Promise<string> {
+        const input = this.page.getByTestId('login-page-business-card-form-user');
+        return await input.inputValue();
+    }
+
+    async obtenerValorCampoPassword(): Promise<string> {
+        const input = this.page.getByTestId('login-page-business-card-form-password');
+        return await input.inputValue();
+    }
+
+    async obtenerPlaceholderUsuario(): Promise<string | null> {
+        const input = this.page.getByTestId('login-page-business-card-form-user');
+        return await input.getAttribute('placeholder');
+    }
+
+    async obtenerPlaceholderPassword(): Promise<string | null> {
+        const input = this.page.getByTestId('login-page-business-card-form-password');
+        return await input.getAttribute('placeholder');
+    }
+
+    async estaBotonLoginHabilitado(): Promise<boolean> {
+        const btn = this.page.getByTestId('login-page-business-form-btn-login');
+        return await btn.isEnabled();
+    }
+
+    async obtenerClasesCampoUsuario(): Promise<string | null> {
+        const input = this.page.getByTestId('login-page-business-card-form-user');
+        return await input.getAttribute('class');
+    }
+
+    async obtenerEstadoVisualCampo(testId: string): Promise<{ focused: boolean; filled: boolean; error: boolean }> {
+        const input = this.page.getByTestId(testId);
+        const classes = await input.getAttribute('class') || '';
+        const value = await input.inputValue();
+        return {
+            focused: await input.evaluate(el => el === document.activeElement),
+            filled: value.length > 0,
+            error: classes.includes('ng-invalid') || classes.includes('error')
+        };
+    }
 }
