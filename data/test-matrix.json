@@ -98,8 +98,8 @@
 
     "validations": {
       "description": "Validaciones de campos y formularios (data-driven)",
-      "total": 2,
-      "implemented": 2,
+      "total": 12,
+      "implemented": 12,
       "scenarios": [
         {
           "id": "VAL-UI-B2C-001",
@@ -142,29 +142,169 @@
             "Mensaje error - DPI formato inválido"
           ],
           "notes": "Valida labels, placeholders y mensajes de error del campo DPI en nueva solicitud B2C"
+        },
+        {
+          "id": "VAL-UI-PWD-001",
+          "name": "Validaciones UI - Contraseña B2C",
+          "priority": "P1",
+          "file": "tests/validations/ui/validatePasswordB2C.spec.ts",
+          "dataProvider": "data/ui-expected-values.json",
+          "cases": 3,
+          "tags": ["@validation", "@ui", "@B2C", "@P1"],
+          "estimatedTime": "15s",
+          "status": "implemented",
+          "lastRun": "2026-04-22",
+          "validations": ["Label campo Contraseña", "Aceptación alfanumérica", "Truncamiento 60 caracteres"],
+          "notes": "Valida campo contraseña del login B2C"
+        },
+        {
+          "id": "VAL-UI-BTN-001",
+          "name": "Validaciones UI - Botón Login B2C",
+          "priority": "P1",
+          "file": "tests/validations/ui/validateBotonLoginB2C.spec.ts",
+          "dataProvider": "data/ui-expected-values.json",
+          "cases": 4,
+          "tags": ["@validation", "@ui", "@B2C", "@P1"],
+          "estimatedTime": "20s",
+          "status": "implemented",
+          "lastRun": "2026-04-22",
+          "validations": ["Estado deshabilitado", "Estado habilitado", "Texto botón", "Redirección dashboard"],
+          "notes": "Valida estados y comportamiento del botón de login B2C"
+        },
+        {
+          "id": "VAL-UI-EMAIL-001",
+          "name": "Validaciones UI - Email B2C",
+          "priority": "P1",
+          "file": "tests/validations/ui/validateEmailB2C.spec.ts",
+          "dataProvider": "data/ui-expected-values.json",
+          "cases": 4,
+          "tags": ["@validation", "@ui", "@B2C", "@P1"],
+          "estimatedTime": "30s",
+          "status": "implemented",
+          "lastRun": "2026-04-22",
+          "validations": ["Label y placeholder", "Email válido", "Email inválido", "Campo requerido"],
+          "notes": "Valida campo email en formulario datos generales B2C"
+        },
+        {
+          "id": "VAL-UI-NIT-001",
+          "name": "Validaciones UI - NIT B2C",
+          "priority": "P1",
+          "file": "tests/validations/ui/validateNitB2C.spec.ts",
+          "dataProvider": "data/ui-expected-values.json",
+          "cases": 4,
+          "tags": ["@validation", "@ui", "@B2C", "@P1"],
+          "estimatedTime": "30s",
+          "status": "implemented",
+          "lastRun": "2026-04-22",
+          "validations": ["Label y placeholder", "NIT válido", "NIT inválido", "Campo requerido"],
+          "notes": "Valida campo NIT en formulario datos generales B2C"
+        },
+        {
+          "id": "VAL-UI-TEL-001",
+          "name": "Validaciones UI - Teléfono B2C",
+          "priority": "P1",
+          "file": "tests/validations/ui/validateTelefonoB2C.spec.ts",
+          "dataProvider": "data/ui-expected-values.json",
+          "cases": 3,
+          "tags": ["@validation", "@ui", "@B2C", "@P1"],
+          "estimatedTime": "30s",
+          "status": "implemented",
+          "lastRun": "2026-04-22",
+          "validations": ["Label y placeholder", "Campo requerido", "Teléfono inválido"],
+          "notes": "Valida campo teléfono en formulario datos generales B2C"
+        },
+        {
+          "id": "VAL-MODAL-INST-001",
+          "name": "Validaciones Modal Instructivo",
+          "priority": "P1",
+          "file": "tests/validations/modal/validateModalInstructivo.spec.ts",
+          "dataProvider": "data/ui-expected-values.json",
+          "cases": 5,
+          "tags": ["@validation", "@modal", "@B2C", "@P1"],
+          "estimatedTime": "30s",
+          "status": "implemented",
+          "lastRun": "2026-04-22",
+          "validations": ["Ausencia texto anterior", "Nuevo título", "Nuevo subtítulo", "Imagen SVG", "Contenido bullets"],
+          "notes": "Valida modal instructivo rediseñado en instrucción onboarding B2C"
+        },
+        {
+          "id": "VAL-MODAL-FP-001",
+          "name": "Validaciones Modal Error FacePhi",
+          "priority": "P1",
+          "file": "tests/validations/modal/validateModalErrorFacePhi.spec.ts",
+          "dataProvider": "data/ui-expected-values.json",
+          "cases": 4,
+          "tags": ["@validation", "@modal", "@B2C", "@P1"],
+          "estimatedTime": "30s",
+          "status": "implemented",
+          "lastRun": "2026-04-22",
+          "validations": ["Título ¡Lo sentimos!", "Texto cuerpo", "Texto botón ¡Listo!", "Redirección"],
+          "notes": "Valida modal de error FacePhi por dispositivo incompatible"
+        },
+        {
+          "id": "VAL-UI-LOGIN2-001",
+          "name": "Validaciones Login Actualizado Parte 2",
+          "priority": "P1",
+          "file": "tests/validations/ui/validateLoginActualizadoB2C.spec.ts",
+          "dataProvider": "data/ui-expected-values.json",
+          "cases": 11,
+          "tags": ["@validation", "@ui", "@B2C", "@P1"],
+          "estimatedTime": "45s",
+          "status": "implemented",
+          "lastRun": "2026-04-22",
+          "validations": ["Alfanumérico", "Truncamiento 60 chars", "Email", "CUI", "Estados CSS", "Label/placeholder", "Alfabéticos", "Numéricos", "Un dígito", "Más de 6 dígitos", "Campo requerido"],
+          "notes": "Valida input de login actualizado que acepta email o CUI"
+        },
+        {
+          "id": "VAL-UI-LAYOUT-001",
+          "name": "Validaciones Layout Negocio Propio",
+          "priority": "P2",
+          "file": "tests/validations/ui/validateLayoutNegocioPropio.spec.ts",
+          "dataProvider": "data/ui-expected-values.json",
+          "cases": 1,
+          "tags": ["@validation", "@ui", "@B2C", "@P2"],
+          "estimatedTime": "30s",
+          "status": "implemented",
+          "lastRun": "2026-04-22",
+          "validations": ["Posición vertical fecha inscripción y nombre comercial"],
+          "notes": "Valida layout del formulario negocio propio - campos en mismo renglón"
+        },
+        {
+          "id": "VAL-REG-SELPHI-001",
+          "name": "Regresión Selphi 5.51",
+          "priority": "P0",
+          "file": "tests/validations/regression/regresionSelphi551.spec.ts",
+          "dataProvider": "data/data_new_client.json:Marcos",
+          "cases": 1,
+          "tags": ["@validation", "@regression", "@B2C", "@P0"],
+          "estimatedTime": "120s",
+          "status": "implemented",
+          "lastRun": "2026-04-22",
+          "validations": ["Flujo onboarding completo sin errores"],
+          "notes": "Test de regresión para verificar que onboarding funciona después de actualización Selphi 5.51"
         }
       ]
     }
   },
 
   "summary": {
-    "totalScenarios": 4,
-    "implemented": 4,
+    "totalScenarios": 14,
+    "implemented": 14,
     "pending": 0,
     "byPriority": {
-      "P0": 2,
-      "P1": 2,
-      "P2": 0,
+      "P0": 3,
+      "P1": 10,
+      "P2": 1,
       "P3": 0
     },
     "byType": {
       "e2e-flows": 2,
-      "validations": 2
+      "validations": 12
     },
     "estimatedTimes": {
-      "smoke": "5.5 min (P0 only)",
-      "regression": "6.75 min (P0 + P1)",
-      "full": "6.75 min (all scenarios)"
+      "smoke": "8 min (P0 only)",
+      "regression": "13.5 min (P0 + P1)",
+      "full": "14 min (all scenarios)"
     }
   },
 

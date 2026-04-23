@@ -1,0 +1,32 @@
+{
+  "description": "Casos de prueba para validaciones del campo teléfono en datos generales B2C",
+  "field": "Teléfono",
+  "page": "formulario-precalificacion",
+  "telefonoCases": [
+    {
+      "name": "Teléfono válido - 8 dígitos",
+      "testId": "TEL-VAL-001",
+      "input": "55551234",
+      "shouldFail": false,
+      "priority": "P1"
+    },
+    {
+      "name": "Teléfono inválido - menos de 8 dígitos",
+      "testId": "TEL-VAL-002",
+      "input": "1234",
+      "expectedError": "El número de celular no es válido.",
+      "errorTestId": "general-information-form-phone-number-error",
+      "shouldFail": true,
+      "priority": "P1"
+    },
+    {
+      "name": "Teléfono vacío",
+      "testId": "TEL-VAL-003",
+      "input": "",
+      "expectedError": "Este campo es obligatorio.",
+      "errorTestId": "general-information-form-phone-number-required-error",
+      "shouldFail": true,
+      "priority": "P0"
+    }
+  ]
+}

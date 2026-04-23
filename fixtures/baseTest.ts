@@ -3,7 +3,7 @@ import { HomePage } from '../pages/home.page';
 import { HomePageBusiness } from '../pages/B2C/home.page';
 import { DashboardPageBusiness } from '../pages/B2C/dashboard.page';
 import { InicioFlujoPage } from '../pages/inicioFlujo.page';
-import { seleccionTc } from '../pages/seleccionTc.page';
+import { SeleccionTcPage } from '../pages/seleccionTc.page';
 import { DatosGeneralesPage } from '../pages/datosGenerales.page';
 import { OnboardingPage } from '../pages/onboarding.page';
 import { InstruccionOnboardingPage } from '../pages/instruccionOnboarding.page';
@@ -21,7 +21,9 @@ import { InstruccionOnboardingBusinessPage } from '../pages/B2C/instruccionOnboa
 import { OnboardingBusinessPage } from '../pages/B2C/onboardingBusiness.page';
 import { ColoresPage } from '../pages/TCJ/colores.page';
 import { EmpresaIngresosPage } from '../pages/empresaIngresos.page';
+import { NegocioPropioPage } from '../pages/negocioPropio.page';
 import { CreacionBelPage } from '../pages/creacionBel.page';
+import { ModalErrorFacePhiPage } from '../pages/B2C/modalErrorFacePhi.page';
 
 /**
  * Fixtures personalizados para inyectar automáticamente las páginas
@@ -41,7 +43,7 @@ type CustomFixtures = {
   dashboardPageBusiness: DashboardPageBusiness;
   formDatosGeneralesPage: FormDatosGeneralesPage;
   inicioPage: InicioFlujoPage;
-  seleccionPage: seleccionTc;
+  seleccionPage: SeleccionTcPage;
   datosGeneralesPage: DatosGeneralesPage;
   onboardingPage: OnboardingPage;
   instruccionOnboardingPage: InstruccionOnboardingPage;
@@ -58,7 +60,9 @@ type CustomFixtures = {
   onboardingBusinessPage: OnboardingBusinessPage;
   colorsPage: ColoresPage;
   empresaIngresosPage: EmpresaIngresosPage;
+  negocioPropioPage: NegocioPropioPage;
   creacionBelPage: CreacionBelPage;
+  modalErrorFacePhiPage: ModalErrorFacePhiPage;
 };
 
 export const test = base.extend<CustomFixtures>({
@@ -80,7 +84,7 @@ export const test = base.extend<CustomFixtures>({
   },
   
   seleccionPage: async ({ page }, use) => {
-    await use(new seleccionTc(page));
+    await use(new SeleccionTcPage(page));
   },
   
   datosGeneralesPage: async ({ page }, use) => {
@@ -144,9 +148,15 @@ export const test = base.extend<CustomFixtures>({
   empresaIngresosPage: async ({ page }, use) => {
     await use(new EmpresaIngresosPage(page));
   },
+  negocioPropioPage: async ({ page }, use) => {
+    await use(new NegocioPropioPage(page));
+  },
   creacionBelPage: async ({ page }, use) => {
     await use(new CreacionBelPage(page));
-  }
+  },
+  modalErrorFacePhiPage: async ({ page }, use) => {
+    await use(new ModalErrorFacePhiPage(page));
+  },
 
 });
 

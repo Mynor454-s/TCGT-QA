@@ -1,0 +1,32 @@
+{
+  "description": "Casos de prueba para validaciones del campo email en datos generales B2C",
+  "field": "Email",
+  "page": "formulario-precalificacion",
+  "emailCases": [
+    {
+      "name": "Email válido",
+      "testId": "EMAIL-VAL-001",
+      "input": "usuario@dominio.com",
+      "shouldFail": false,
+      "priority": "P1"
+    },
+    {
+      "name": "Email inválido - sin arroba",
+      "testId": "EMAIL-VAL-002",
+      "input": "correo-invalido",
+      "expectedError": "El correo electrónico no es válido.",
+      "errorTestId": "general-information-form-email-error",
+      "shouldFail": true,
+      "priority": "P1"
+    },
+    {
+      "name": "Email vacío",
+      "testId": "EMAIL-VAL-003",
+      "input": "",
+      "expectedError": "Este campo es obligatorio.",
+      "errorTestId": "general-information-form-email-required-error",
+      "shouldFail": true,
+      "priority": "P0"
+    }
+  ]
+}

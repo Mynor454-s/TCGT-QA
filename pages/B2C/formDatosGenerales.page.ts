@@ -51,4 +51,43 @@ export class FormDatosGeneralesPage {
         await btn.waitFor({ state: 'visible', timeout: 10000 });
         await btn.click();
     }
+
+    async obtenerPlaceholderEmail(): Promise<string | null> {
+        const input = this.page.getByTestId('general-information-form-email');
+        return await input.getAttribute('placeholder');
+    }
+
+    async obtenerPlaceholderNit(): Promise<string | null> {
+        const input = this.page.getByTestId('general-information-form-nit');
+        return await input.getAttribute('placeholder');
+    }
+
+    async obtenerPlaceholderTelefono(): Promise<string | null> {
+        const input = this.page.getByTestId('general-information-form-phone-number');
+        return await input.getAttribute('placeholder');
+    }
+
+    async llenarEmail(email: string): Promise<void> {
+        const input = this.page.getByTestId('general-information-form-email');
+        await input.waitFor({ state: 'visible', timeout: 10000 });
+        await input.fill(email);
+    }
+
+    async llenarNit(nit: string): Promise<void> {
+        const input = this.page.getByTestId('general-information-form-nit');
+        await input.waitFor({ state: 'visible', timeout: 10000 });
+        await input.fill(nit);
+    }
+
+    async llenarTelefono(telefono: string): Promise<void> {
+        const input = this.page.getByTestId('general-information-form-phone-number');
+        await input.waitFor({ state: 'visible', timeout: 10000 });
+        await input.fill(telefono);
+    }
+
+    async limpiarCampo(testId: string): Promise<void> {
+        const input = this.page.getByTestId(testId);
+        await input.waitFor({ state: 'visible', timeout: 10000 });
+        await input.clear();
+    }
 }

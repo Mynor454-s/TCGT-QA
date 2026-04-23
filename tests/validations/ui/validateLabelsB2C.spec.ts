@@ -160,4 +160,26 @@ test.describe('Validación de Labels y Placeholders - Login B2C @validation @ui 
     // Tomar screenshot
     await ScreenshotHelper.takeAndAttach(page, testInfo, 'Error - Usuario Máximo 30 Caracteres');
   });
+
+  test('VAL-UI-B2C-008: Validar aceptación de texto alfanumérico en campo usuario @P1', async ({ page }, testInfo) => {
+    const expectedData = uiExpectedValues.loginB2C.usuario;
+    
+    // Ingresar texto alfanumérico en el campo usuario
+    const usuarioInput = page.getByTestId(expectedData.testId);
+    await usuarioInput.waitFor({ state: 'visible', timeout: 10000 });
+    await usuarioInput.fill('usuario123');
+    
+    // Verificar que el campo acepta la entrada sin error
+    const inputValue = await usuarioInput.inputValue();
+    expect(inputValue).toBe('usuario123');
+    
+    // Verificar que NO aparezcan mensajes de error
+    const errorRequired = page.getByTestId(expectedData.errorTestId);
+    const errorInvalid = page.getByTestId(expectedData.invalidErrorTestId);
+    await expect(errorRequired).not.toBeVisible();
+    await expect(errorInvalid).not.toBeVisible();
+
+    // Tomar screenshot
+    await ScreenshotHelper.takeAndAttach(page, testInfo, 'Usuario - Aceptación Alfanumérica');
+  });
 });
