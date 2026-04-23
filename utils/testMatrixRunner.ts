@@ -96,9 +96,15 @@ export function loadTestData(dataProvider: string): any {
  * Obtiene todos los datasets configurados para un escenario
  * Permite ejecutar el mismo test con múltiples conjuntos de datos
  * @param scenarioId - ID del escenario (E2E-001, VAL-001, etc.)
- * @returns Array de objetos con nombre y datos
+ * @returns Array de objetos con nombre y datos tipados según T
+ * 
+ * Uso con tipo:
+ *   getTestDatasets<ClienteTestData>('E2E-001')
+ * 
+ * Uso sin tipo (retorna any, backward-compatible):
+ *   getTestDatasets('E2E-001')
  */
-export function getTestDatasets(scenarioId: string): Array<{ name: string, data: any }> {
+export function getTestDatasets<T = any>(scenarioId: string): Array<{ name: string, data: T }> {
   const scenario = getScenarioById(scenarioId);
   
   if (!scenario) {
@@ -106,7 +112,7 @@ export function getTestDatasets(scenarioId: string): Array<{ name: string, data:
   }
   
   if (!scenario.dataProvider) {
-    return [{ name: 'default', data: {} }];
+    return [{ name: 'default', data: {} as T }];
   }
   
   // Si el dataProvider usa *, cargar todos los datasets del archivo

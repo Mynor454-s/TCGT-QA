@@ -2,24 +2,8 @@ import { test, expect } from '../../../fixtures/baseTest';
 import { request } from '@playwright/test';
 import { ScreenshotHelper } from '../../../fixtures/testHelpers';
 import datos from '../../../data/data_new_client.json';
-import { updateJiraTestStatus } from '../../../utils/jiraHelper';
 import { resolveOnboardingVideoUrl } from '../../../utils/s3SignedUrl';
-
-// Configuración de Jira desde variables de entorno
-const JIRA_TEST_RUN_ID = process.env.JIRA_TEST_RUN_ID || '';
-const JIRA_URL = process.env.JIRA_URL || '';
-const JIRA_AUTH_TOKEN = process.env.JIRA_AUTH_TOKEN || '';
-
-// test.afterEach(async ({}, testInfo) => {
-//   Actualizar estado en Jira basado en el resultado del test
-//   if (testInfo.status === 'passed') {
-//     await updateJiraTestStatus(JIRA_TEST_RUN_ID, 'PASSED', JIRA_URL, JIRA_AUTH_TOKEN);
-//   } else if (testInfo.status === 'failed') {
-//     await updateJiraTestStatus(JIRA_TEST_RUN_ID, 'FAILED', JIRA_URL, JIRA_AUTH_TOKEN);
-//   } else if (testInfo.status === 'timedOut') {
-//     await updateJiraTestStatus(JIRA_TEST_RUN_ID, 'ABORTED', JIRA_URL, JIRA_AUTH_TOKEN);
-//   }
-// });
+import { ClienteTestData, OFERTA_URL } from '../../../utils/testConfig';
 
 test('flujo completo Cliente Existente @smoke @e2e @P0', async ({ 
   page, 
@@ -39,18 +23,12 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   encuestaSatisfaccionPage,
   footerComponent
 }, testInfo) => {
-  const clienteData: any =
-    (datos as any).Monther || (datos as any).cliente1 || Object.values(datos as any)[0];
+  const clienteData = datos.Monther;
 
-  // Actualizar estado a EXECUTING al iniciar
-  // await updateJiraTestStatus(JIRA_TEST_RUN_ID, 'EXECUTING', JIRA_URL, JIRA_AUTH_TOKEN);
-  
   // Variables para onboarding
-  const templateRawPath = clienteData?.assets?.templateRaw;
-  const bestImageTokenizedPath = clienteData?.assets?.bestImageTokenized;
-  const bestImagePath = clienteData?.assets?.bestImage;
-  const ofertaUrl = process.env.OFFER_FORM_URL ||
-    'https://qa-tarjetadigital.incubadorabi.com/cliente-digital/oferta';
+  const templateRawPath = clienteData.assets.templateRaw;
+  const bestImageTokenizedPath = clienteData.assets.bestImageTokenized;
+  const bestImagePath = clienteData.assets.bestImage;
 
   const urlVideo = await resolveOnboardingVideoUrl({
     videoS3: clienteData?.assets?.videoS3,
@@ -111,7 +89,7 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
       email: clienteData.email,
       numeroCelular: clienteData.numeroCelular,
       nit: clienteData.nit,
-      fecha: clienteData.fechaInicioTrabajo || clienteData.fecha,
+      fecha: clienteData.fechaInicioTrabajo,
     });
     await datosGeneralesPage.clickContinuar();
     await datosGeneralesPage.validarRedireccionFormulario();
@@ -134,7 +112,7 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
       bestImagePath,
       apiRequestContext
     );
-    await onboardingPage.irAFormularioOferta(ofertaUrl);
+    await onboardingPage.irAFormularioOferta(OFERTA_URL);
     await footerComponent.validateVisible();
     await ScreenshotHelper.takeAndAttach(page, testInfo, 'Onboarding biométrico completado');
   });
@@ -190,7 +168,6 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
     await ScreenshotHelper.takeAndAttach(page, testInfo, 'Datos de envío confirmados');
   });
 
-  await page.pause();
   await test.step('14. Completar encuesta de satisfacción', async () => {
     await encuestaSatisfaccionPage.clickOmitirFinalizar();
     await page.waitForTimeout(2000);

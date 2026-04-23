@@ -1,6 +1,6 @@
 import { Page, expect } from "@playwright/test";
 
-export class seleccionTc {
+export class SeleccionTcPage {
     readonly page: Page;
 
     constructor(page: Page) {

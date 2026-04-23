@@ -3,6 +3,7 @@ import { request } from '@playwright/test';
 import { ScreenshotHelper } from '../../../../fixtures/testHelpers';
 import { getTestDatasets } from '../../../../utils/testMatrixRunner';
 import { resolveOnboardingVideoUrl } from '../../../../utils/s3SignedUrl';
+import { ClienteTestData, OFERTA_URL } from '../../../../utils/testConfig';
 
 /**
  * Test data-driven usando test-matrix.json
@@ -15,7 +16,7 @@ import { resolveOnboardingVideoUrl } from '../../../../utils/s3SignedUrl';
  */
 
 // Obtener todos los datasets configurados para E2E-001
-const datasets = getTestDatasets('E2E-002');
+const datasets = getTestDatasets<ClienteTestData>('E2E-002');
 
 // Permite que cada dataset (cada test generado) se ejecute en paralelo dentro de este archivo.
 
@@ -38,14 +39,13 @@ datasets.forEach(({ name, data }) => {
     encuestaSatisfaccionPage,
     footerComponent,
     colorsPage,
-    empresaIngresosPage
+    empresaIngresosPage,
+    negocioPropioPage
   }, testInfo) => {
     // Variables para onboarding
     const templateRawPath = data.assets?.templateRaw ;
     const bestImageTokenizedPath = data.assets?.bestImageTokenized ;
     const bestImagePath = data.assets?.bestImage ;
-    const ofertaUrl = process.env.OFFER_FORM_URL ||
-      'https://qa-tarjetadigital.incubadorabi.com/cliente-digital/oferta';
 
     const urlVideo = await resolveOnboardingVideoUrl({
       videoS3: data.assets?.videoS3,
@@ -135,7 +135,7 @@ datasets.forEach(({ name, data }) => {
         bestImagePath,
         apiRequestContext
       );
-      await onboardingPage.irAFormularioOferta(ofertaUrl);
+      await onboardingPage.irAFormularioOferta(OFERTA_URL);
       await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Onboarding completado`);
     });
 
@@ -146,13 +146,13 @@ datasets.forEach(({ name, data }) => {
     });
 
     await test.step('9. Personalizar tarjeta', async () => {
-      await colorsPage.seleccionarColor(data.cardColor);
+      await colorsPage.seleccionarColor(data.cardColor!);
       await colorsPage.clickSiguienteColor();
       await colorsPage.llenarAlias(data.Alias);
       await colorsPage.clickSiguienteAlias();
-      await colorsPage.seleccionarOpcionPorTexto(data.opcionLealtad)
+      await colorsPage.seleccionarOpcionPorTexto(data.opcionLealtad!)
       await colorsPage.clickSiguienteLealtad();
-      await colorsPage.seleccionarCategorias(data.categorias);
+      await colorsPage.seleccionarCategorias(data.categorias!);
       await colorsPage.clickSiguienteBeneficios();
       await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Tarjeta personalizada`);
     });
@@ -172,29 +172,26 @@ datasets.forEach(({ name, data }) => {
     await test.step('11. Ingresar datos económicos', async () => {
       await datosEconomicosPage.ingresosMensuales(data.IngresoMensual);
       await datosEconomicosPage.gastosMensuales(data.GastoMensual);
-      await datosEconomicosPage.seleccionarCheckboxes(data.economicCheckboxes);
+      await datosEconomicosPage.seleccionarCheckboxes(data.economicCheckboxes ?? []);
       await datosEconomicosPage.clickGuardarContinuar();
       await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Datos económicos`);
     });
 
-    // 12. dependiendo del tipo de cliente rellenamos el formulario correspondiente
+    // 12. Llenar formularios según fuentes de ingreso seleccionadas
     if (data.empresa) {
-      await test.step('12. Datos de empresa', async () => {
-        const e = data.empresa;
+      await test.step('12a. Datos de empresa', async () => {
+        const e = data.empresa!;
         await empresaIngresosPage.llenarNombreEmpresa(e.nombre);
         await empresaIngresosPage.llenarNumeroEmpresa(e.numero);
         await empresaIngresosPage.llenarPuesto(e.puesto);
-        // dropdowns ahora requieren el label del campo para ser únicos
         await empresaIngresosPage.seleccionarCatalogo('Giro de negocio de la empresa', e.tipoEmpresa);
         await empresaIngresosPage.llenarActividadEmpresa(e.actividad);
-        // zona y dirección son campos de texto simples
         if (e.zona) {
           await empresaIngresosPage.llenarZona(e.zona);
         }
         if (e.direccion) {
           await empresaIngresosPage.llenarDireccion(e.direccion);
         }
-        // campos de ubicación (departamento/municipio) siguen usando el helper
         if (e.departamento) {
           await empresaIngresosPage.seleccionarCatalogo('Departamento', e.departamento);
         }
@@ -204,9 +201,37 @@ datasets.forEach(({ name, data }) => {
         await empresaIngresosPage.clickGuardarEmpresa();
         await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Datos empresa`);
       });
-    } else if (data.otrosIngresos) {
-      await test.step('12. Ingresar otros ingresos', async () => {
-        const fuente = data.otrosIngresos.fuente || 'Actividades profesionales';
+    }
+
+    if (data.negocioPropio) {
+      await test.step('12b. Datos de negocio propio', async () => {
+        const n = data.negocioPropio!;
+        await negocioPropioPage.llenarNombreComercial(n.nombreComercial);
+        if (n.fechaInscripcion) {
+          await negocioPropioPage.llenarFechaInscripcion(n.fechaInscripcion);
+        }
+        await negocioPropioPage.seleccionarCatalogo('Giro de negocio de la empresa', n.giroNegocio);
+        await negocioPropioPage.llenarActividad(n.actividad);
+        if (n.departamento) {
+          await negocioPropioPage.seleccionarCatalogo('Departamento', n.departamento);
+        }
+        if (n.municipio) {
+          await negocioPropioPage.seleccionarCatalogo('Municipio', n.municipio);
+        }
+        if (n.zona) {
+          await negocioPropioPage.llenarZona(n.zona);
+        }
+        if (n.direccion) {
+          await negocioPropioPage.llenarDireccion(n.direccion);
+        }
+        await negocioPropioPage.clickGuardarContinuar();
+        await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Negocio propio`);
+      });
+    }
+
+    if (data.otrosIngresos) {
+      await test.step('12c. Ingresar otros ingresos', async () => {
+        const fuente = data.otrosIngresos!.fuente || 'Actividades profesionales';
         await datosEconomicosOtrosIngresosPage.tipoDeFuenteOtros(fuente);
         await datosEconomicosOtrosIngresosPage.clickGuardarOtrosIngresos();
         await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Otros ingresos`);
@@ -219,7 +244,6 @@ datasets.forEach(({ name, data }) => {
     });
 
     await test.step('14. Completar encuesta de satisfacción', async () => {
-      await page.pause();
       await encuestaSatisfaccionPage.clickOmitirFinalizar();
       await page.waitForTimeout(2000);
       await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Encuesta completada`);
