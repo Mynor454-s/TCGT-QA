@@ -70,6 +70,8 @@ datasets.forEach(({ name, data }) => {
     await test.step('1. Navegar a página de inicio', async () => {
       await homePage.goto();
       await homePage.setAppMaintenance('1');
+      await homePage.setSessionStorageItem ('utm', '"utm"')
+      await homePage.setSourceChannel('"UTM_INCORRECTA"')
       await homePage.validarPortal();
       await homePage.esperarHeroCargado();
       await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Página de inicio`);
