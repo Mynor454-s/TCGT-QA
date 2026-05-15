@@ -1,27 +1,26 @@
 {
-  "Ana": {
+  "Marcos": {
     "UsuarioB2C": "2933870952212",
     "PasswordB2C": "21.Digital24.",
-    "dpi": "2815822111201",
-    "tipoTarjeta": "TCJ",
-    "email": "test23@bi.com.gt",
-    "numeroCelular": "41111133",
-    "nit": "116601884",
-    "fechaInicioTrabajo": "01/01/2015",
-    "Alias": "Anacleto",
+    "dpi": "3926861471412",
+        "tipoTarjeta": "TCJ",
+
+    "email": "test7@bi.com.gt",
+    "numeroCelular": "41111117",
+    "nit": "107821567",
+    "fechaInicioTrabajo": "20/06/2015",
+    "Alias": "Marcos",
     "IngresoMensual": "4500",
     "GastoMensual": "1500",
-    "economicCheckboxes": [
-      "Trabajo en una empresa"
-    ],
+    "economicCheckboxes": ["Trabajo en una empresa", "Tengo negocio propio", "Percibo otros ingresos"],
     "cardColor": "rgb(204, 211, 213)",
-    "opcionLealtad": "Reembolso",
+    "opcionLealtad": "Puntos",
     "categorias": [
       "Ropa y accesorios",
       "Supermercados"
     ],
     "empresa": {
-      "nombre": "Banco Industrial S.A.",
+      "nombre": "Banco indsutrial S.A.",
       "numero": "2222 - 3333",
       "puesto": "Analista de sistemas",
       "tipoEmpresa": "Comercio y servicios",
@@ -31,15 +30,32 @@
       "zona": "2",
       "direccion": "Av. Reforma 9-60 zona 10"
     },
+    "negocioPropio": {
+      "nombreComercial": "Tienda Marcos",
+      "fechaInscripcion": "15/03/2018",
+      "giroNegocio": "Comercio y servicios",
+      "actividad": "Venta de productos varios",
+      "departamento": "Guatemala",
+      "municipio": "Guatemala",
+      "zona": "1",
+      "direccion": "4ta Avenida 12-30 zona 1"
+    },
+    "otrosIngresos": {
+      "fuente": "Actividades profesionales"
+    },
     "assets": {
-      "templateRaw": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/TemplateRaw.txt",
-      "bestImageTokenized": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/BestImageTokenized.txt",
-      "bestImage": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/BestImage.jpeg",
+      "templateRaw": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/2933870952212/TemplateRaw.txt",
+      "bestImageTokenized": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/2933870952212/BestImageTokenized.txt",
+      "bestImage": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/2933870952212/BestImage.jpeg",
       "videoS3": {
         "bucket": "storage-tdcgt-test",
-        "key": "TestDocument/Biometric/PassiveLiveness.mp4"
+        "key": "TestDocument/Biometric/2933870952212/PassiveLiveness.mp4"
       },
-      "urlVideo": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/PassiveLiveness.mp4"
+      "urlVideo": "https://storage-tdcgt-test.s3.us-east-1.amazonaws.com/TestDocument/Biometric/2933870952212/PassiveLiveness.mp4"
+    },
+    "bel": {
+      "username": "marcos",
+      "compania": "Tigo"
     }
   }
 }

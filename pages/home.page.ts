@@ -25,6 +25,11 @@ export class HomePage {
   async setAppMaintenance(value: '0' | '1' = '1') {
     await this.setSessionStorageItem('app-maintenance', value);
   }
+
+  async setSourceChannel(value: string)
+  {
+    await this.setSessionStorageItem ('utm-source', value);
+  }
     async setAppLive(value: '0' | '1' | string = '1') {
     await this.setSessionStorageItem('tc-liv', value);
   }

@@ -40,7 +40,8 @@ datasets.forEach(({ name, data }) => {
     footerComponent,
     colorsPage,
     empresaIngresosPage,
-    negocioPropioPage
+    negocioPropioPage,
+    creacionBelPage
   }, testInfo) => {
     // Variables para onboarding
     const templateRawPath = data.assets?.templateRaw ;
@@ -73,6 +74,8 @@ datasets.forEach(({ name, data }) => {
       await homePage.goto();
       await homePage.setAppLive('"1154a4fbd048b28cf989da1e155cc27a031310a8ccc35d8fa4e6fe702d3d2bfd"');
       await homePage.validarPortal();
+      await homePage.setSessionStorageItem ('utm', '"utm"')
+      await homePage.setSourceChannel('"utm_incorrecta"')
       await homePage.esperarHeroCargado();
       await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Página de inicio`);
     });
@@ -242,6 +245,16 @@ datasets.forEach(({ name, data }) => {
       await datosEnviosPage.clickContinuarEnvio();
       await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Datos de envío`);
     });
+
+        // Paso condicional: aparece solo para algunos clientes
+    if (await creacionBelPage.estaVisible()) {
+      await test.step('13b. Crear usuario Bi en línea (BEL)', async () => {
+        const belUsername = data.bel?.username ?? `usuario${Date.now()}`;
+        const belCompania: 'Tigo' | 'Claro' = data.bel?.compania ?? 'Tigo';
+        await creacionBelPage.llenarFormulario(belUsername, belCompania);
+        await ScreenshotHelper.takeAndAttach(page, testInfo, `[${name}] Usuario BEL creado`);
+      });
+    }
 
     await test.step('14. Completar encuesta de satisfacción', async () => {
       await encuestaSatisfaccionPage.clickOmitirFinalizar();
