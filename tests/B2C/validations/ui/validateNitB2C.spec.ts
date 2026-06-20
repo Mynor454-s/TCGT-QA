@@ -1,19 +1,19 @@
 import { test, expect } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
-import { ScreenshotHelper } from '../../../fixtures/testHelpers';
+import { ScreenshotHelper } from '../../../../fixtures/testHelpers';
 
 // Cargar los valores esperados
 const uiExpectedValues = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '../../../data/ui-expected-values.json'), 'utf-8')
+  fs.readFileSync(path.resolve(__dirname, '../../../../data/ui-expected-values.json'), 'utf-8')
 );
 
-// Cargar los casos de validación de email
-const emailValidations = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '../../../data/validations/email-validations.json'), 'utf-8')
+// Cargar los casos de validación de NIT
+const nitValidations = JSON.parse(
+  fs.readFileSync(path.resolve(__dirname, '../../../../data/validations/nit-validations.json'), 'utf-8')
 );
 
-test.describe('Validación de Email - Datos Generales B2C @validation @ui @B2C @P1', () => {
+test.describe('Validación de NIT - Datos Generales B2C @validation @ui @B2C @P1', () => {
   test.beforeEach(async ({ page }) => {
     const urlBase = process.env.BASE_URL || 'https://qa-url.com';
     await page.goto(`${urlBase}/comercio/sitio/inicio-sesion`);
@@ -52,19 +52,19 @@ test.describe('Validación de Email - Datos Generales B2C @validation @ui @B2C @
     await page.waitForURL(/.*\/comercio\/panel\/formulario-precalificacion/, { timeout: 15000 });
   });
 
-  test('VAL-UI-EMAIL-001: Validar label y placeholder del campo email @P1', async ({ page }, testInfo) => {
-    const expectedData = uiExpectedValues.datosGenerales.email;
+  test('VAL-UI-NIT-001: Validar label y placeholder del campo NIT @P1', async ({ page }, testInfo) => {
+    const expectedData = uiExpectedValues.datosGenerales.nit;
 
-    // Obtener el input de email
-    const emailInput = page.getByTestId(expectedData.testId);
-    await emailInput.waitFor({ state: 'visible', timeout: 10000 });
+    // Obtener el input de NIT
+    const nitInput = page.getByTestId(expectedData.testId);
+    await nitInput.waitFor({ state: 'visible', timeout: 10000 });
 
     // Validar placeholder
-    const placeholder = await emailInput.getAttribute('placeholder');
+    const placeholder = await nitInput.getAttribute('placeholder');
     expect(placeholder).toBe(expectedData.placeholder);
 
     // Validar label (buscar el label asociado al input)
-    const inputId = await emailInput.getAttribute('id');
+    const inputId = await nitInput.getAttribute('id');
     if (inputId) {
       const label = page.locator(`label[for="${inputId}"]`);
       if (await label.count() > 0) {
@@ -74,17 +74,17 @@ test.describe('Validación de Email - Datos Generales B2C @validation @ui @B2C @
     }
 
     // Tomar screenshot
-    await ScreenshotHelper.takeAndAttach(page, testInfo, 'Email - Label y Placeholder');
+    await ScreenshotHelper.takeAndAttach(page, testInfo, 'NIT - Label y Placeholder');
   });
 
-  test('VAL-UI-EMAIL-002: Validar email válido sin errores @P1', async ({ page }, testInfo) => {
-    const expectedData = uiExpectedValues.datosGenerales.email;
-    const validCase = emailValidations.emailCases.find((c: any) => c.testId === 'EMAIL-VAL-001');
+  test('VAL-UI-NIT-002: Validar NIT válido sin errores @P1', async ({ page }, testInfo) => {
+    const expectedData = uiExpectedValues.datosGenerales.nit;
+    const validCase = nitValidations.nitCases.find((c: any) => c.testId === 'NIT-VAL-001');
 
-    // Obtener el input de email y llenar con email válido
-    const emailInput = page.getByTestId(expectedData.testId);
-    await emailInput.waitFor({ state: 'visible', timeout: 10000 });
-    await emailInput.fill(validCase.input);
+    // Obtener el input de NIT y llenar con NIT válido
+    const nitInput = page.getByTestId(expectedData.testId);
+    await nitInput.waitFor({ state: 'visible', timeout: 10000 });
+    await nitInput.fill(validCase.input);
 
     // Verificar que NO aparezcan mensajes de error
     const errorRequired = page.getByTestId(expectedData.errorTestId);
@@ -94,17 +94,17 @@ test.describe('Validación de Email - Datos Generales B2C @validation @ui @B2C @
     await expect(errorInvalid).not.toBeVisible();
 
     // Tomar screenshot
-    await ScreenshotHelper.takeAndAttach(page, testInfo, 'Email Válido - Sin Errores');
+    await ScreenshotHelper.takeAndAttach(page, testInfo, 'NIT Válido - Sin Errores');
   });
 
-  test('VAL-UI-EMAIL-003: Validar email inválido con mensaje de error @P1', async ({ page }, testInfo) => {
-    const expectedData = uiExpectedValues.datosGenerales.email;
-    const invalidCase = emailValidations.emailCases.find((c: any) => c.testId === 'EMAIL-VAL-002');
+  test('VAL-UI-NIT-003: Validar NIT inválido con mensaje de error @P1', async ({ page }, testInfo) => {
+    const expectedData = uiExpectedValues.datosGenerales.nit;
+    const invalidCase = nitValidations.nitCases.find((c: any) => c.testId === 'NIT-VAL-002');
 
-    // Obtener el input de email y llenar con email inválido
-    const emailInput = page.getByTestId(expectedData.testId);
-    await emailInput.waitFor({ state: 'visible', timeout: 10000 });
-    await emailInput.fill(invalidCase.input);
+    // Obtener el input de NIT y llenar con NIT inválido
+    const nitInput = page.getByTestId(expectedData.testId);
+    await nitInput.waitFor({ state: 'visible', timeout: 10000 });
+    await nitInput.fill(invalidCase.input);
 
     // Hacer blur (click en otro campo) para disparar validación
     await page.locator('body').click({ position: { x: 10, y: 10 } });
@@ -118,14 +118,14 @@ test.describe('Validación de Email - Datos Generales B2C @validation @ui @B2C @
     expect(errorText?.trim()).toBe(invalidCase.expectedError);
 
     // Tomar screenshot
-    await ScreenshotHelper.takeAndAttach(page, testInfo, 'Email Inválido - Mensaje de Error');
+    await ScreenshotHelper.takeAndAttach(page, testInfo, 'NIT Inválido - Mensaje de Error');
   });
 
-  test('VAL-UI-EMAIL-004: Validar campo requerido @P1', async ({ page }, testInfo) => {
-    const expectedData = uiExpectedValues.datosGenerales.email;
-    const emptyCase = emailValidations.emailCases.find((c: any) => c.testId === 'EMAIL-VAL-003');
+  test('VAL-UI-NIT-004: Validar campo requerido @P1', async ({ page }, testInfo) => {
+    const expectedData = uiExpectedValues.datosGenerales.nit;
+    const emptyCase = nitValidations.nitCases.find((c: any) => c.testId === 'NIT-VAL-003');
 
-    // Dejar el campo email vacío y hacer click en continuar para disparar validación
+    // Dejar el campo NIT vacío y hacer click en continuar para disparar validación
     const submitBtn = page.getByTestId('general-information-form-submit');
     await submitBtn.waitFor({ state: 'visible', timeout: 10000 });
     await submitBtn.click();
@@ -138,6 +138,6 @@ test.describe('Validación de Email - Datos Generales B2C @validation @ui @B2C @
     expect(errorText?.trim()).toBe(emptyCase.expectedError);
 
     // Tomar screenshot
-    await ScreenshotHelper.takeAndAttach(page, testInfo, 'Email - Campo Requerido');
+    await ScreenshotHelper.takeAndAttach(page, testInfo, 'NIT - Campo Requerido');
   });
 });

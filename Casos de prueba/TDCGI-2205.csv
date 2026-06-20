@@ -1,0 +1,153 @@
+Issue ID,Summary,Action,Data,Expected Result
+TDCGI-2205,E2E-003: error 422401 muestra solo modal de mala interaccion,"1. Navegar a /cliente-digital/inicio
+2. Hacer clic en ""Empezar solicitud""
+3. Ingresar DPI y hacer clic en Continuar
+4. Seleccionar Mastercard y hacer clic en Siguiente
+5. Llenar datos generales (email, celular, NIT, fecha inicio trabajo) y hacer clic en Continuar
+6. Configurar interceptor HTTP: POST **/biometric/onboarding responde 422 con errorCode 422401
+7. Hacer clic en ""Iniciar escaneo"" y completar escaneo biométrico con cámara
+8. Esperar aparición de modal","DPI: 1803009890909
+Email: test7@bi.com.gt
+Celular: 41111117
+NIT: 107821567
+Fecha inicio trabajo: 20/06/2015
+Tarjeta: Mastercard
+Error Code interceptado: 422401
+Response body: {""errors"":[""Mala interacción""],""errorCode"":422401,""statusCode"":422}","1. Solo aparece 1 modal con aria-modal='true'
+2. La modal visible contiene el título ""¡Ups!"" y el texto ""Tuvimos un inconveniente.""
+3. La modal genérica de FacePhi (""¡Oh no!"") NO es visible
+4. El botón con id e2e_id_btn_facephi_reintento_E3 NO es visible
+5. Al cerrar la modal con el botón X, el conteo de modales queda en 0"
+TDCGI-2205,E2E-003: error 422402 muestra solo modal de mala interaccion,"1. Navegar a /cliente-digital/inicio
+2. Hacer clic en ""Empezar solicitud""
+3. Ingresar DPI y hacer clic en Continuar
+4. Seleccionar Mastercard y hacer clic en Siguiente
+5. Llenar datos generales (email, celular, NIT, fecha inicio trabajo) y hacer clic en Continuar
+6. Configurar interceptor HTTP: POST **/biometric/onboarding responde 422 con errorCode 422402
+7. Hacer clic en ""Iniciar escaneo"" y completar escaneo biométrico con cámara
+8. Esperar aparición de modal","DPI: 1803009890909
+Email: test7@bi.com.gt
+Celular: 41111117
+NIT: 107821567
+Fecha inicio trabajo: 20/06/2015
+Tarjeta: Mastercard
+Error Code interceptado: 422402
+Response body: {""errors"":[""Mala interacción""],""errorCode"":422402,""statusCode"":422}","1. Solo aparece 1 modal con aria-modal='true'
+2. La modal visible contiene el título ""¡Ups!"" y el texto ""Tuvimos un inconveniente.""
+3. La modal genérica de FacePhi (""¡Oh no!"") NO es visible
+4. El botón con id e2e_id_btn_facephi_reintento_E3 NO es visible
+5. Al cerrar la modal con el botón X, el conteo de modales queda en 0"
+TDCGI-2205,E2E-003: error 422403 muestra solo modal de mala interaccion,"1. Navegar a /cliente-digital/inicio
+2. Hacer clic en ""Empezar solicitud""
+3. Ingresar DPI y hacer clic en Continuar
+4. Seleccionar Mastercard y hacer clic en Siguiente
+5. Llenar datos generales (email, celular, NIT, fecha inicio trabajo) y hacer clic en Continuar
+6. Configurar interceptor HTTP: POST **/biometric/onboarding responde 422 con errorCode 422403
+7. Hacer clic en ""Iniciar escaneo"" y completar escaneo biométrico con cámara
+8. Esperar aparición de modal","DPI: 1803009890909
+Email: test7@bi.com.gt
+Celular: 41111117
+NIT: 107821567
+Fecha inicio trabajo: 20/06/2015
+Tarjeta: Mastercard
+Error Code interceptado: 422403
+Response body: {""errors"":[""Mala interacción""],""errorCode"":422403,""statusCode"":422}","1. Solo aparece 1 modal con aria-modal='true'
+2. La modal visible contiene el título ""¡Ups!"" y el texto ""Tuvimos un inconveniente.""
+3. La modal genérica de FacePhi (""¡Oh no!"") NO es visible
+4. El botón con id e2e_id_btn_facephi_reintento_E3 NO es visible
+5. Al cerrar la modal con el botón X, el conteo de modales queda en 0"
+TDCGI-2205,E2E-003: error 422404 muestra solo modal de mala interaccion,"1. Navegar a /cliente-digital/inicio
+2. Hacer clic en ""Empezar solicitud""
+3. Ingresar DPI y hacer clic en Continuar
+4. Seleccionar Mastercard y hacer clic en Siguiente
+5. Llenar datos generales (email, celular, NIT, fecha inicio trabajo) y hacer clic en Continuar
+6. Configurar interceptor HTTP: POST **/biometric/onboarding responde 422 con errorCode 422404
+7. Hacer clic en ""Iniciar escaneo"" y completar escaneo biométrico con cámara
+8. Esperar aparición de modal","DPI: 1803009890909
+Email: test7@bi.com.gt
+Celular: 41111117
+NIT: 107821567
+Fecha inicio trabajo: 20/06/2015
+Tarjeta: Mastercard
+Error Code interceptado: 422404
+Response body: {""errors"":[""Mala interacción""],""errorCode"":422404,""statusCode"":422}","1. Solo aparece 1 modal con aria-modal='true'
+2. La modal visible contiene el título ""¡Ups!"" y el texto ""Tuvimos un inconveniente.""
+3. La modal genérica de FacePhi (""¡Oh no!"") NO es visible
+4. El botón con id e2e_id_btn_facephi_reintento_E3 NO es visible
+5. Al cerrar la modal con el botón X, el conteo de modales queda en 0"
+TDCGI-2205,E2E-003: error 422405 muestra solo modal de mala interaccion,"1. Navegar a /cliente-digital/inicio
+2. Hacer clic en ""Empezar solicitud""
+3. Ingresar DPI y hacer clic en Continuar
+4. Seleccionar Mastercard y hacer clic en Siguiente
+5. Llenar datos generales (email, celular, NIT, fecha inicio trabajo) y hacer clic en Continuar
+6. Configurar interceptor HTTP: POST **/biometric/onboarding responde 422 con errorCode 422405
+7. Hacer clic en ""Iniciar escaneo"" y completar escaneo biométrico con cámara
+8. Esperar aparición de modal","DPI: 1803009890909
+Email: test7@bi.com.gt
+Celular: 41111117
+NIT: 107821567
+Fecha inicio trabajo: 20/06/2015
+Tarjeta: Mastercard
+Error Code interceptado: 422405
+Response body: {""errors"":[""Mala interacción""],""errorCode"":422405,""statusCode"":422}","1. Solo aparece 1 modal con aria-modal='true'
+2. La modal visible contiene el título ""¡Ups!"" y el texto ""Tuvimos un inconveniente.""
+3. La modal genérica de FacePhi (""¡Oh no!"") NO es visible
+4. El botón con id e2e_id_btn_facephi_reintento_E3 NO es visible
+5. Al cerrar la modal con el botón X, el conteo de modales queda en 0"
+TDCGI-2205,E2E-003: error 422406 muestra solo modal de mala interaccion,"1. Navegar a /cliente-digital/inicio
+2. Hacer clic en ""Empezar solicitud""
+3. Ingresar DPI y hacer clic en Continuar
+4. Seleccionar Mastercard y hacer clic en Siguiente
+5. Llenar datos generales (email, celular, NIT, fecha inicio trabajo) y hacer clic en Continuar
+6. Configurar interceptor HTTP: POST **/biometric/onboarding responde 422 con errorCode 422406
+7. Hacer clic en ""Iniciar escaneo"" y completar escaneo biométrico con cámara
+8. Esperar aparición de modal","DPI: 1803009890909
+Email: test7@bi.com.gt
+Celular: 41111117
+NIT: 107821567
+Fecha inicio trabajo: 20/06/2015
+Tarjeta: Mastercard
+Error Code interceptado: 422406
+Response body: {""errors"":[""Mala interacción""],""errorCode"":422406,""statusCode"":422}","1. Solo aparece 1 modal con aria-modal='true'
+2. La modal visible contiene el título ""¡Ups!"" y el texto ""Tuvimos un inconveniente.""
+3. La modal genérica de FacePhi (""¡Oh no!"") NO es visible
+4. El botón con id e2e_id_btn_facephi_reintento_E3 NO es visible
+5. Al cerrar la modal con el botón X, el conteo de modales queda en 0"
+TDCGI-2205,E2E-003: error 422407 muestra solo modal de mala interaccion,"1. Navegar a /cliente-digital/inicio
+2. Hacer clic en ""Empezar solicitud""
+3. Ingresar DPI y hacer clic en Continuar
+4. Seleccionar Mastercard y hacer clic en Siguiente
+5. Llenar datos generales (email, celular, NIT, fecha inicio trabajo) y hacer clic en Continuar
+6. Configurar interceptor HTTP: POST **/biometric/onboarding responde 422 con errorCode 422407
+7. Hacer clic en ""Iniciar escaneo"" y completar escaneo biométrico con cámara
+8. Esperar aparición de modal","DPI: 1803009890909
+Email: test7@bi.com.gt
+Celular: 41111117
+NIT: 107821567
+Fecha inicio trabajo: 20/06/2015
+Tarjeta: Mastercard
+Error Code interceptado: 422407
+Response body: {""errors"":[""Mala interacción""],""errorCode"":422407,""statusCode"":422}","1. Solo aparece 1 modal con aria-modal='true'
+2. La modal visible contiene el título ""¡Ups!"" y el texto ""Tuvimos un inconveniente.""
+3. La modal genérica de FacePhi (""¡Oh no!"") NO es visible
+4. El botón con id e2e_id_btn_facephi_reintento_E3 NO es visible
+5. Al cerrar la modal con el botón X, el conteo de modales queda en 0"
+TDCGI-2205,E2E-003: error 422408 muestra solo modal de mala interaccion,"1. Navegar a /cliente-digital/inicio
+2. Hacer clic en ""Empezar solicitud""
+3. Ingresar DPI y hacer clic en Continuar
+4. Seleccionar Mastercard y hacer clic en Siguiente
+5. Llenar datos generales (email, celular, NIT, fecha inicio trabajo) y hacer clic en Continuar
+6. Configurar interceptor HTTP: POST **/biometric/onboarding responde 422 con errorCode 422408
+7. Hacer clic en ""Iniciar escaneo"" y completar escaneo biométrico con cámara
+8. Esperar aparición de modal","DPI: 1803009890909
+Email: test7@bi.com.gt
+Celular: 41111117
+NIT: 107821567
+Fecha inicio trabajo: 20/06/2015
+Tarjeta: Mastercard
+Error Code interceptado: 422408
+Response body: {""errors"":[""Mala interacción""],""errorCode"":422408,""statusCode"":422}","1. Solo aparece 1 modal con aria-modal='true'
+2. La modal visible contiene el título ""¡Ups!"" y el texto ""Tuvimos un inconveniente.""
+3. La modal genérica de FacePhi (""¡Oh no!"") NO es visible
+4. El botón con id e2e_id_btn_facephi_reintento_E3 NO es visible
+5. Al cerrar la modal con el botón X, el conteo de modales queda en 0"

@@ -16,8 +16,9 @@ import { test, expect } from '@playwright/test';
 
 ## Page Objects
 
-- One class per application screen, in `pages/`.
-- B2C pages go in `pages/B2C/`, TCJ in `pages/TCJ/`.
+- One class per application screen.
+- E2E (B2B) pages go in `pages/E2E/`, TCJ variant in `pages/E2E/TCJ/`.
+- B2C pages go in `pages/B2C/`.
 - Class names use PascalCase with `Page` suffix: `DatosGeneralesPage`, `SeleccionTcPage`.
 - File names use camelCase with `.page.ts` suffix: `datosGenerales.page.ts`.
 - Constructor receives `Page` (and `BrowserContext` if needed).
@@ -32,8 +33,9 @@ import { test, expect } from '@playwright/test';
 ## Test Files
 
 - File names use camelCase with `.spec.ts` suffix.
-- E2E flows go in `tests/flows/happypath/` (and subdirectories per flow type).
-- Validation tests go in `tests/validations/`.
+- Regression tests go in `tests/{E2E|B2C}/regression/`.
+- Story-specific tests go in `tests/{E2E|B2C}/stories/` named by story ID (e.g., `TDCGI-2205.spec.ts`).
+- Validation tests go in `tests/{E2E|B2C}/validations/`.
 
 ## Test Structure
 
@@ -48,9 +50,11 @@ Every test must include at minimum:
 - A type tag: `@e2e`, `@validation`, or `@smoke`
 - A flow tag when applicable: `@B2B`, `@B2C`
 - A scenario ID for matrix-driven tests: `@E2E-001`, `@E2E-B2C-001`
+- A story ID for story tests: `@TDCGI-2205`
 
 ```typescript
 test('flujo completo @smoke @e2e @P0 @B2B', async ({ ... }) => { });
+test('TDCGI-2205: validación modal @e2e @B2B @P1 @TDCGI-2205', async ({ ... }) => { });
 ```
 
 ## Data-Driven Testing
@@ -86,3 +90,8 @@ test('flujo completo @smoke @e2e @P0 @B2B', async ({ ... }) => { });
 - Environment-specific values come from `.env.*` files via `process.env`.
 - Shared constants (like fallback URLs) should be defined once, not repeated across spec files.
 - Never commit secrets or credentials. The `.env.*` files are gitignored; keep it that way.
+
+## Operational Rule (Copilot)
+
+- Before implementing any code, config, data, or test change, validate the request against `.kiro/steering/product.md`, `.kiro/steering/conventions.md`, `.kiro/steering/structure.md`, `.kiro/steering/tech.md`, and `.kiro/steering/panel-integration.md`.
+- If there is any conflict, prioritize steering files and explicitly state the adjustment before applying edits.

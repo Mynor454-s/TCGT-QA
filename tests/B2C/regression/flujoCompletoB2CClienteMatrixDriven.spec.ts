@@ -1,7 +1,7 @@
-import { test, expect } from '../../../../fixtures/baseTest';
+import { test, expect } from '../../../fixtures/baseTest';
 import { request } from '@playwright/test';
-import { ScreenshotHelper } from '../../../../fixtures/testHelpers';
-import { getTestDatasets } from '../../../../utils/testMatrixRunner';
+import { ScreenshotHelper } from '../../../fixtures/testHelpers';
+import { getTestDatasets } from '../../../utils/testMatrixRunner';
 
 /**
  * Test B2C data-driven usando test-matrix.json

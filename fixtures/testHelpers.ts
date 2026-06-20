@@ -1,8 +1,8 @@
 import { Page } from '@playwright/test';
-import { HomePage } from '../pages/home.page';
-import { InicioFlujoPage } from '../pages/inicioFlujo.page';
-import { SeleccionTcPage } from '../pages/seleccionTc.page';
-import { DatosGeneralesPage } from '../pages/datosGenerales.page';
+import { HomePage } from '../pages/E2E/home.page';
+import { InicioFlujoPage } from '../pages/E2E/inicioFlujo.page';
+import { SeleccionTcPage } from '../pages/E2E/seleccionTc.page';
+import { DatosGeneralesPage } from '../pages/E2E/datosGenerales.page';
 import datos from '../data/data_new_client.json';
 
 /**
@@ -108,9 +108,17 @@ export class TestSetup {
  */
 export class ScreenshotHelper {
   /**
-   * Tomar y adjuntar screenshot con nombre descriptivo
+   * Tomar y adjuntar screenshot con nombre descriptivo.
+   *
+   * Espera a que el loader global (app-loader) desaparezca antes de capturar,
+   * evitando capturas con el overlay de blur activo entre transiciones de página.
    */
   static async takeAndAttach(page: Page, testInfo: any, name: string) {
+    // Esperar a que el loader desaparezca si está presente
+    await page.locator('[data-testid="app-loader"]')
+      .waitFor({ state: 'hidden', timeout: 30000 })
+      .catch(() => { /* si no existe o ya desapareció, continuar */ });
+
     const screenshot = await page.screenshot({ fullPage: true });
     await testInfo.attach(name, { 
       body: screenshot, 

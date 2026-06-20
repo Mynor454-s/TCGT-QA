@@ -17,7 +17,7 @@ interface TestItem {
 function parsePlaywrightList(): TestItem[] {
   try {
     const projectRoot = path.resolve(__dirname, '../..');
-    const output = execSync('npx playwright test --list 2>/dev/null', {
+    const output = execSync('npx playwright test --list', {
       cwd: projectRoot,
       encoding: 'utf-8',
       timeout: 30000,
@@ -78,15 +78,30 @@ function parsePlaywrightList(): TestItem[] {
   }
 }
 
+// Cache for test list (invalidated every 60 seconds)
+let cachedTests: TestItem[] | null = null;
+let cacheTimestamp = 0;
+const CACHE_TTL = 60_000; // 60 seconds
+
+function getTests(): TestItem[] {
+  const now = Date.now();
+  if (cachedTests && (now - cacheTimestamp) < CACHE_TTL) {
+    return cachedTests;
+  }
+  cachedTests = parsePlaywrightList();
+  cacheTimestamp = now;
+  return cachedTests;
+}
+
 // GET /api/tests
 testsRouter.get('/', (_req, res) => {
-  const tests = parsePlaywrightList();
+  const tests = getTests();
   res.json(tests);
 });
 
 // GET /api/tests/tags
 testsRouter.get('/tags', (_req, res) => {
-  const tests = parsePlaywrightList();
+  const tests = getTests();
   const tags = new Set<string>();
   tests.forEach(t => t.tags.forEach(tag => tags.add(tag)));
   res.json(Array.from(tags).sort());
@@ -94,7 +109,7 @@ testsRouter.get('/tags', (_req, res) => {
 
 // GET /api/tests/files
 testsRouter.get('/files', (_req, res) => {
-  const tests = parsePlaywrightList();
+  const tests = getTests();
   const files = new Set<string>();
   tests.forEach(t => files.add(t.file));
   res.json(Array.from(files).sort());
@@ -102,7 +117,7 @@ testsRouter.get('/files', (_req, res) => {
 
 // GET /api/tests/:id
 testsRouter.get('/:id', (req, res) => {
-  const tests = parsePlaywrightList();
+  const tests = getTests();
   const test = tests.find(t => t.id === req.params.id);
   if (!test) return res.status(404).json({ error: 'Test not found' });
   res.json(test);

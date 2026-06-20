@@ -27,6 +27,7 @@ El panel ejecuta `npx playwright test --list` en el directorio de TCGT-QA y pars
 - Tags (@smoke, @e2e, @P0, @B2B, etc.)
 - Prioridad (extraída del tag @P0-@P3)
 - Flujo (extraído del tag @B2B/@B2C o ruta del archivo)
+- Categoría (extraída de la ruta: regression, stories, validations)
 
 ### Requisitos para que el Panel Detecte Tests Correctamente
 
@@ -40,12 +41,18 @@ El panel ejecuta `npx playwright test --list` en el directorio de TCGT-QA y pars
 El panel construye comandos de Playwright basados en la selección del usuario:
 
 ```bash
+# Por categoría (nueva estructura)
+npx playwright test tests/E2E/regression/
+npx playwright test tests/B2C/regression/
+npx playwright test tests/E2E/stories/
+
 # Por archivo
-npx playwright test flujoCompletoCliente.spec.ts
+npx playwright test TDCGI-2205.spec.ts
 
 # Por tag
 npx playwright test --grep "@smoke"
 npx playwright test --grep "@P0|@P1"
+npx playwright test --grep "@TDCGI-2205"
 
 # Con ambiente
 ENV=stg npx playwright test --grep "@smoke"
@@ -96,6 +103,7 @@ El panel lee directamente los archivos JSON de `data/`:
 1. Incluir tags completos en el título: `test('descripción @tipo @prioridad @flujo', ...)`
 2. Registrar en `test-matrix.json` si es data-driven
 3. Usar datasets existentes o crear nuevos en `data/`
+4. Colocar en la carpeta correcta según propósito: `regression/`, `stories/`, o `validations/`
 
 ### Al Modificar Data Providers
 1. Mantener la estructura de objeto plano por key
@@ -103,10 +111,15 @@ El panel lee directamente los archivos JSON de `data/`:
 3. Nuevos campos son aditivos (no rompen compatibilidad)
 
 ### Al Agregar Nuevos Flujos
-1. Crear directorio en `tests/flows/happypath/NuevoFlujo/`
-2. Crear page objects en `pages/NuevoFlujo/`
+1. Crear page objects en `pages/E2E/NuevoFlujo/` o `pages/B2C/`
+2. Crear tests en `tests/{E2E|B2C}/regression/` o `stories/`
 3. Usar un tag de flujo nuevo (ej: `@NuevoFlujo`)
 4. El panel detectará automáticamente el nuevo tag
+
+### Al Trabajar con Stories (Sprint Activo)
+1. Crear test en `tests/{E2E|B2C}/stories/` con nombre del ID de historia
+2. Al cerrar sprint: promover a `regression/` o eliminar
+3. El panel puede filtrar stories por tag de release: `--grep "@R15"`
 
 ## Reportes
 

@@ -1,5 +1,5 @@
 import {   expect, Page } from '@playwright/test';
-import datos from '../data/data_new_client.json';
+import datos from '../../data/data_new_client.json';
 export class PersonalizacionTcPage {
     readonly page: Page;
     constructor(page: Page) {

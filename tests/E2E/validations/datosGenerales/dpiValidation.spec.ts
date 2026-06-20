@@ -1,6 +1,6 @@
-import { test, expect } from '../../../fixtures/baseTest';
-import { TestSetup, ValidationHelper } from '../../../fixtures/testHelpers';
-import validations from '../../../data/validations/dpi-validations.json';
+import { test, expect } from '../../../../fixtures/baseTest';
+import { TestSetup, ValidationHelper } from '../../../../fixtures/testHelpers';
+import validations from '../../../../data/validations/dpi-validations.json';
 
 /**
  * Tests de validaciones del campo DPI

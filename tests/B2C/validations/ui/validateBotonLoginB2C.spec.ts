@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
-import { ScreenshotHelper } from '../../../fixtures/testHelpers';
-import datos from '../../../data/data_new_client.json';
+import { ScreenshotHelper } from '../../../../fixtures/testHelpers';
+import datos from '../../../../data/data_new_client.json';
 
 // Cargar los valores esperados
 const uiExpectedValues = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '../../../data/ui-expected-values.json'), 'utf-8')
+  fs.readFileSync(path.resolve(__dirname, '../../../../data/ui-expected-values.json'), 'utf-8')
 );
 
 test.describe('Validación de Botón Login - B2C @validation @ui @B2C', () => {

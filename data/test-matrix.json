@@ -51,8 +51,8 @@
   "scenarios": {
     "e2e-flows": {
       "description": "Flujos completos de extremo a extremo",
-      "total": 2,
-      "implemented": 2,
+      "total": 4,
+      "implemented": 4,
       "scenarios": [
         {
           "id": "E2E-001",
@@ -92,6 +92,19 @@
           "status": "implemented",
           "lastRun": "2026-01-22",
           "notes": "Test principal B2C - Login comercio, formulario datos generales y onboarding biométrico"
+        },
+        {
+          "id": "E2E-003",
+          "name": "E2E B2B - Modal única por error de interacción (TDCGI-2205)",
+          "priority": "P1",
+          "file": "tests/flows/happypath/flujoE2EErrorInteraccionTDCGI2205.spec.ts",
+          "dataProvider": "data/ui-expected-values.json:modalMalaInteraccionTDCGI2205",
+          "tags": ["@e2e", "@B2B", "@P1", "@E2E-003", "@TDCGI-2205"],
+          "estimatedTime": "90s",
+          "browsers": ["chrome"],
+          "status": "implemented",
+          "lastRun": "2026-05-28",
+          "notes": "Cubre la historia TDCGI-2205 en flujo E2E B2B validando que para los códigos 422401-422408 se muestre solo una modal"
         }
       ]
     },
@@ -288,17 +301,17 @@
   },
 
   "summary": {
-    "totalScenarios": 14,
-    "implemented": 14,
+    "totalScenarios": 15,
+    "implemented": 15,
     "pending": 0,
     "byPriority": {
       "P0": 3,
-      "P1": 10,
+      "P1": 11,
       "P2": 1,
       "P3": 0
     },
     "byType": {
-      "e2e-flows": 2,
+      "e2e-flows": 4,
       "validations": 12
     },
     "estimatedTimes": {
