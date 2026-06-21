@@ -1,6 +1,6 @@
 import { Page, expect } from "@playwright/test";
 import fs from 'fs';
-import { buildPresignedVideoUrl } from '../utils/s3SignedUrl';
+import { buildPresignedVideoUrl } from '../../utils/s3SignedUrl';
 
 export class ocrPage {
   readonly page: Page;

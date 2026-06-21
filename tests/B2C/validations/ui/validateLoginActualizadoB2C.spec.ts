@@ -1,17 +1,17 @@
 import { test, expect } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
-import { ScreenshotHelper } from '../../../fixtures/testHelpers';
-import { HomePageBusiness } from '../../../pages/B2C/home.page';
+import { ScreenshotHelper } from '../../../../fixtures/testHelpers';
+import { HomePageBusiness } from '../../../../pages/B2C/home.page';
 
 // Cargar los valores esperados
 const uiExpectedValues = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '../../../data/ui-expected-values.json'), 'utf-8')
+  fs.readFileSync(path.resolve(__dirname, '../../../../data/ui-expected-values.json'), 'utf-8')
 );
 
 // Cargar datos de validación de login
 const loginValidations = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '../../../data/validations/login-validations.json'), 'utf-8')
+  fs.readFileSync(path.resolve(__dirname, '../../../../data/validations/login-validations.json'), 'utf-8')
 );
 
 test.describe('Validación de Login Actualizado (Parte 2) - Email o CUI @validation @ui @B2C', () => {

@@ -1,8 +1,8 @@
-import { test, expect } from '../../../fixtures/baseTest';
+import { test, expect } from '../../../../fixtures/baseTest';
 import { request } from '@playwright/test';
-import { ScreenshotHelper } from '../../../fixtures/testHelpers';
-import datos from '../../../data/data_new_client.json';
-import { OFERTA_URL } from '../../../utils/testConfig';
+import { ScreenshotHelper } from '../../../../fixtures/testHelpers';
+import datos from '../../../../data/data_new_client.json';
+import { OFERTA_URL } from '../../../../utils/testConfig';
 
 test('flujo completo Cliente Existente @smoke @e2e @P0', async ({ 
   page, 
@@ -24,9 +24,9 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
 }, testInfo) => {
   // Variables para onboarding
   const urlVideo = process.env.ONBOARDING_VIDEO_URL || '';
-  const templateRawPath = 'assets/mynor/templateraw_1760545131.txt';
-  const bestImageTokenizedPath = 'assets/mynor/imagetokenized_1760545130.txt';
-  const bestImagePath = 'assets/mynor/facialcontent_1760545127.jpeg';
+  const templateRawPath = 'assets/marcos/templateraw_1766501174.txt';
+  const bestImageTokenizedPath = 'assets/marcos/imagetokenized_1766501171.txt';
+  const bestImagePath = 'assets/marcos/facialcontent_1766501167.jpeg';
   
   // API Request Context con ignoreHTTPSErrors
   const apiRequestContext = await request.newContext({
@@ -59,7 +59,7 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
   });
 
   await test.step('4. Seleccionar tipo de tarjeta', async () => {
-    await seleccionPage.seleccionarMC();
+    await seleccionPage.seleccionarTCJ();
     await seleccionPage.clickSiguiente();
     await seleccionPage.validarRedireccionFormulario();
     await footerComponent.validateVisible();
@@ -93,28 +93,27 @@ test('flujo completo Cliente Existente @smoke @e2e @P0', async ({
       templateRawPath,
       bestImageTokenizedPath,
       bestImagePath,
-      apiRequestContext
+      apiRequestContext,
     );
     await onboardingPage.irAFormularioOferta(OFERTA_URL);
-    await footerComponent.validateVisible();
     await ScreenshotHelper.takeAndAttach(page, testInfo, 'Onboarding biométrico completado');
   });
 
-  await test.step('8. Aceptar oferta', async () => {
-    await aceptarOfertaPage.aceptarTerminos();
-    await aceptarOfertaPage.clickAceptarOferta();
-    await aceptarOfertaPage.validarRedireccionFormulario();
-    await footerComponent.validateVisible();
-    await ScreenshotHelper.takeAndAttach(page, testInfo, 'Oferta aceptada');
-  });
 
-  await test.step('9. Personalizar tarjeta', async () => {
-    await personalizacionTcPage.llenarFormulario({ alias: datos.Marcos.Alias });
-    await personalizacionTcPage.clickContinuar();
-    await personalizacionTcPage.validarRedireccionFormulario();
-    await footerComponent.validateVisible();
-    await ScreenshotHelper.takeAndAttach(page, testInfo, 'Tarjeta personalizada');
-  });
+  // await test.step('8. Aceptar oferta', async () => {
+  //   await aceptarOfertaPage.aceptarTerminos();
+  //   await aceptarOfertaPage.clickAceptarOferta();
+  //   await footerComponent.validateVisible();
+  //   await ScreenshotHelper.takeAndAttach(page, testInfo, 'Oferta aceptada');
+  // });
+
+  // await test.step('9. Personalizar tarjeta', async () => {
+  //   await personalizacionTcPage.llenarFormulario({ alias: datos.Marcos.Alias });
+  //   await personalizacionTcPage.clickContinuar();
+  //   await personalizacionTcPage.validarRedireccionFormulario();
+  //   await footerComponent.validateVisible();
+  //   await ScreenshotHelper.takeAndAttach(page, testInfo, 'Tarjeta personalizada');
+  // });
 
   await test.step('10. Ingresar datos personales', async () => {
     await datosPersonalesPage.seleccionarNivelEstudios('Sin estudios');

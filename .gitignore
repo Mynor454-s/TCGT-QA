@@ -55,3 +55,6 @@ coverage/
 
 # TypeScript
 *.tsbuildinfo
+
+# Playwright MCP temporary files
+.playwright-mcp/

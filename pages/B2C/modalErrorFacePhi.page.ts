@@ -35,4 +35,14 @@ export class ModalErrorFacePhiPage {
         const titulo = this.page.getByTestId('facephi-error-modal-title');
         return await titulo.isVisible();
     }
+
+    async obtenerCantidadTitulosVisibles(): Promise<number> {
+        const titulos = this.page.getByTestId('facephi-error-modal-title');
+        return await titulos.count();
+    }
+
+    async obtenerCantidadDialogosVisibles(): Promise<number> {
+        const dialogosVisibles = this.page.locator('[role="dialog"]:visible');
+        return await dialogosVisibles.count();
+    }
 }

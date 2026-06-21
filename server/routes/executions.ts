@@ -37,24 +37,22 @@ executionsRouter.post('/', (req, res) => {
 
   const id = randomUUID();
   const projectRoot = path.resolve(__dirname, '../..');
-  const resultsDir = path.join(projectRoot, 'test-results', id);
 
   // Build playwright command args
   const args: string[] = ['playwright', 'test'];
   if (grep) args.push('--grep', grep);
   if (file) {
-    // Support multiple files separated by space
-    const files = file.split(' ').filter((f: string) => f.trim());
+    // Support multiple files separated by space, normalize Windows backslashes
+    const files = file.split(' ')
+      .filter((f: string) => f.trim())
+      .map((f: string) => f.replace(/\\/g, '/'));
     args.push(...files);
   }
   if (workers) args.push('--workers', String(workers));
-  args.push('--reporter', `json,html`);
-  args.push('--output', resultsDir);
 
   const env = {
     ...process.env,
     ENV: environment,
-    PLAYWRIGHT_JSON_OUTPUT_NAME: path.join(resultsDir, 'results.json'),
   };
 
   const run: ExecutionRun = {
@@ -66,20 +64,18 @@ executionsRouter.post('/', (req, res) => {
 
   executions.set(id, run);
 
-  // Ensure results directory exists
-  fs.mkdirSync(resultsDir, { recursive: true });
-
   // Spawn playwright process
-  const command = mode === 'browserstack' ? 'npx' : 'npx';
   const fullArgs = mode === 'browserstack'
     ? ['browserstack-node-sdk', 'playwright', 'test', ...(grep ? ['--grep', grep] : []), ...(file ? [file] : [])]
     : args;
 
-  const child = spawn(command, fullArgs, {
+  // Build command as single string to avoid DEP0190 warning
+  const cmdString = `npx ${fullArgs.join(' ')}`;
+  const child = spawn(cmdString, [], {
     cwd: projectRoot,
     env,
     stdio: ['ignore', 'pipe', 'pipe'],
-    detached: true,
+    shell: true,
   });
 
   run.pid = child.pid;
@@ -98,29 +94,32 @@ executionsRouter.post('/', (req, res) => {
   let stderr = '';
 
   child.stdout.on('data', (data) => { stdout += data.toString(); });
-  child.stderr.on('data', (data) => { stderr += data.toString(); });
+  child.stderr.on('data', (data) => { 
+    stderr += data.toString();
+    console.log('[EXEC STDERR]:', data.toString().trim());
+  });
 
   child.on('close', (code) => {
     clearTimeout(timeout);
+    console.log(`[EXEC] Process exited with code: ${code}`);
+    console.log(`[EXEC STDOUT]:`, stdout.slice(-500));
+    if (stderr) console.log(`[EXEC STDERR FULL]:`, stderr.slice(-500));
     run.completedAt = new Date().toISOString();
     run.status = code === 0 ? 'completed' : 'failed';
     run.pid = undefined;
 
-    // Parse stdout for quick results if no JSON file
-    if (!fs.existsSync(path.join(resultsDir, 'results.json'))) {
-      // Try to extract pass/fail counts from stdout
-      const passMatch = stdout.match(/(\d+) passed/);
-      const failMatch = stdout.match(/(\d+) failed/);
-      if (passMatch || failMatch) {
-        const passed = passMatch ? parseInt(passMatch[1]) : 0;
-        const failed = failMatch ? parseInt(failMatch[1]) : 0;
-        const duration = new Date(run.completedAt).getTime() - new Date(run.startedAt).getTime();
-        run.results = { total: passed + failed, passed, failed, skipped: 0, duration };
-      }
+    // Try to extract pass/fail counts from stdout
+    const passMatch = stdout.match(/(\d+) passed/);
+    const failMatch = stdout.match(/(\d+) failed/);
+    if (passMatch || failMatch) {
+      const passed = passMatch ? parseInt(passMatch[1]) : 0;
+      const failed = failMatch ? parseInt(failMatch[1]) : 0;
+      const duration = new Date(run.completedAt).getTime() - new Date(run.startedAt).getTime();
+      run.results = { total: passed + failed, passed, failed, skipped: 0, duration };
     }
 
-    // Try to parse results
-    const resultsFile = path.join(resultsDir, 'results.json');
+    // Try to parse results from default location
+    const resultsFile = path.join(projectRoot, 'test-results', 'results.json');
     if (fs.existsSync(resultsFile)) {
       try {
         const rawResults = JSON.parse(fs.readFileSync(resultsFile, 'utf-8'));
@@ -144,7 +143,6 @@ executionsRouter.post('/', (req, res) => {
 
         suites.forEach(countSpecs);
         const duration = new Date(run.completedAt).getTime() - new Date(run.startedAt).getTime();
-
         run.results = { total, passed, failed, skipped, duration };
       } catch (e) {
         console.error('Error parsing results:', e);
@@ -179,11 +177,8 @@ executionsRouter.post('/:id/cancel', (req, res) => {
 
   if (run.pid) {
     try {
-      // Kill entire process tree (playwright + chrome)
-      process.kill(-run.pid, 'SIGKILL');
-    } catch {
-      try { process.kill(run.pid, 'SIGKILL'); } catch {}
-    }
+      process.kill(run.pid, 'SIGTERM');
+    } catch {}
   }
   run.status = 'cancelled';
   run.completedAt = new Date().toISOString();

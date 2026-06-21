@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
 import * as fs from 'fs';
 import * as path from 'path';
-import { ScreenshotHelper } from '../../../fixtures/testHelpers';
+import { ScreenshotHelper } from '../../../../fixtures/testHelpers';
 
 // Cargar los valores esperados
 const uiExpectedValues = JSON.parse(
-  fs.readFileSync(path.resolve(__dirname, '../../../data/ui-expected-values.json'), 'utf-8')
+  fs.readFileSync(path.resolve(__dirname, '../../../../data/ui-expected-values.json'), 'utf-8')
 );
 
 test.describe('Validación de Modal Instructivo - Instrucción Onboarding B2C @validation @modal @B2C @P1', () => {

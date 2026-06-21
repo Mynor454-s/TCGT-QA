@@ -44,6 +44,7 @@ export default defineConfig({
         : undefined,
 
     ignoreHTTPSErrors: true,
+    permissions: ['camera'],
   },
 
   projects: [

@@ -144,6 +144,25 @@
         },
         "redirectPattern": "/comercio/sitio/inicio-sesion"
     },
+    "modalMalaInteraccionTDCGI2205": {
+        "modalMalaInteraccionTitle": "¡Ups!",
+        "modalMalaInteraccionBody": "Tuvimos un inconveniente.",
+        "modalFacePhiGenericTitle": "¡Oh no!",
+        "modalFacePhiGenericBody": "Ocurrió un error, intenta nuevamente",
+        "modalFacePhiGenericRetryId": "e2e_id_btn_facephi_reintento_E3",
+        "ariaModalSelector": "div[aria-modal='true']",
+        "errorCodes": [
+            "422401",
+            "422402",
+            "422403",
+            "422404",
+            "422405",
+            "422406",
+            "422407",
+            "422408"
+        ],
+        "targetEndpoint": "**/biometric/onboarding"
+    },
     "negocioPropio": {
         "nombreComercial": {
             "testId": "negocio-propio-nombre-comercial",
